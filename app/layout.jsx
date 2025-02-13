@@ -1,3 +1,5 @@
+import Bootstrap from "@/components/library/bootstrap";
+
 export const metadata = {
   title: "PBL Academy",
   description:
@@ -7,6 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Bootstrap />
       <body>{children}</body>
     </html>
   );

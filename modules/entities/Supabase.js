@@ -7,6 +7,7 @@ export class Supabase {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpueWpwcGZzb25iamJkcnNqZGtuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc1NjEyNDAsImV4cCI6MjA1MzEzNzI0MH0.5KqzOEPPODuJ7CrQJQXS7cHODb50X4rNGS06vGe5E9o";
     this.client = createClient(supabaseUrl, supabaseKey);
   }
+  
   async saveNewUser(authData) {
     console.log("Saving userdata to user table");
     let { data, error } = await this.client

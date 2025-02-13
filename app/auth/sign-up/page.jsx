@@ -1,18 +1,10 @@
 "use client";
 import { User } from "@/modules/entities/User";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 function SignUp() {
-  // This useEffect is given seperately for login and signup because if given as a layout file, it will cause infinite reload in login page
-  useEffect(() => {
-    async function exec() {
-      await User.checkLogin(1, "/dashboard");
-    }
-
-    exec();
-  }, []);
-
   async function signUphandler(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -26,11 +18,14 @@ function SignUp() {
     const { data, error } = await User.signUp(email, password);
 
     if (error) {
-      window.confirm("Error during sign up:", error.message);
+      console.log("Error during sign up: ", error);
+
+      const errorMessage = error.message || "An error occurred during sign up";
+      console.log(error.message);
+      window.confirm(errorMessage);
     } else {
-      window.confirm(
-        "Confirm your email address to complete the sign-up process"
-      );
+      window.confirm("redirecting to login page in 5 seconds");
+      window.setTimeout(() => redirect("/auth/login/"), 5000);
     }
   }
 

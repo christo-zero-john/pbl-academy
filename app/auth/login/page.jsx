@@ -1,24 +1,10 @@
 "use client";
+
 import { User } from "@/modules/entities/User";
+import { redirect } from "next/navigation";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 function LoginToAccount() {
-  // This useEffect is given seperately for login and signup because if given as a layout file, it will cause infinite reload in login page
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  async function checkAuth() {
-    let loginStatus = await User.checkLogin(0, "");
-    console.log(loginStatus);
-    if (loginStatus.status == 1) {
-      window.location.href = "/dashboard";
-    }
-  }
-  
   async function loginHandler(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -35,11 +21,12 @@ function LoginToAccount() {
     console.log(data, error);
 
     if (error) {
-      window.confirm("Error during login: " + error.message);
       console.log("Error during login:", error.message);
+      const errorMessage = error.message || "An error occurred during sign up";
+      window.confirm(errorMessage);
     } else {
       console.log("User logged in successfully");
-      window.location.href = "/dashboard";
+      redirect("/dashboard");
     }
   }
 

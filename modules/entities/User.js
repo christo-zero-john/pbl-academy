@@ -22,9 +22,15 @@ export class User {
     // This method is used to save the user data to the user table
     const supabase = new Supabase();
     console.log("Saving userdata to user table");
+    let loginStatus = await this.checkLogin();
+    console.log(loginStatus);
+    let user = null;
+    if ((await loginStatus).status == 1) {
+      user = loginStatus.user;
+    }
     let { data, error } = await supabase.client
       .from("users")
-      .insert({ role: "user" });
+      .insert({ id: user.id, role: "user", email: user.email });
 
     return { data, error };
   }

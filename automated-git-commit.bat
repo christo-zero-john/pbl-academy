@@ -29,11 +29,11 @@ for /f "tokens=*" %%f in ('git ls-files --others --exclude-standard') do (
     git commit -m "Found new file,  %%f. Committing Via Global Bash Script:git-status-automated.bat"
 )
 
-@REM After commiting push to origin
+@REM After commiting dont push to origin
 
 echo .
-echo Starting push to Origin
-echo .
-echo .
+echo "Changes Won't be pushed to origin..."
+echo "Operation Ended"
+@REM echo .
 
-git push
+@REM git push

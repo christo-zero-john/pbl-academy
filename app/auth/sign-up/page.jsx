@@ -1,10 +1,11 @@
 "use client";
 import { User } from "@/modules/entities/User";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 function SignUp() {
+  const router = useRouter();
+
   async function signUphandler(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -24,8 +25,12 @@ function SignUp() {
       console.log(error.message);
       window.confirm(errorMessage);
     } else {
-      window.confirm("redirecting to login page in 5 seconds");
-      window.setTimeout(() => redirect("/auth/login/"), 5000);
+      window.confirm("Account Created Successfully. Login to continue");
+      const params = new URLSearchParams({
+        email: encodeURIComponent(email),
+        password: encodeURIComponent(password),
+      });
+      router.push(`/auth/sign-up/confirm-signup?${params}`);
     }
   }
 

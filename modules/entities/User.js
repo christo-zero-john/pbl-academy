@@ -2,18 +2,35 @@ import { Supabase } from "@/modules/entities/Supabase";
 import { redirect } from "next/navigation";
 
 export class User {
-  constructor() {}
+  // This class is used to handle all user related functionalities
+  constructor() {
+    let loginStatus = this.checkLogin();
+    this.user = loginStatus.user;
+  }
 
   static async signUp(email, password) {
+    // This method is used to create a new user account with email and password
     const supabase = new Supabase();
-    let { data, error } = await supabase.client.auth.signUp({
+    const { data, error } = await supabase.client.auth.signUp({
       email,
       password,
     });
     return { data, error };
   }
 
+  static async saveUser() {
+    // This method is used to save the user data to the user table
+    const supabase = new Supabase();
+    console.log("Saving userdata to user table");
+    let { data, error } = await supabase.client
+      .from("users")
+      .insert({ role: "user" });
+
+    return { data, error };
+  }
+
   static async login(email, password) {
+    // This method is used to login a user with email and password
     const supabase = new Supabase();
     try {
       let { data, error } = await supabase.client.auth.signInWithPassword({
@@ -27,6 +44,7 @@ export class User {
   }
 
   static async checkLogin() {
+    // This method checks whether a user is logged in or not
     const supabase = new Supabase();
     const {
       data: { session },
@@ -47,6 +65,7 @@ export class User {
   }
 
   static async checkAuth() {
+    // This method checks for the login status of a user and if not logged in redirects to the login page
     const authStatus = await this.checkLogin();
 
     if (authStatus.error) {

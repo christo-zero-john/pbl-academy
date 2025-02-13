@@ -1,4 +1,5 @@
 import { Supabase } from "@/modules/entities/Supabase";
+import { redirect } from "next/navigation";
 
 export class User {
   constructor() {}
@@ -25,7 +26,7 @@ export class User {
     }
   }
 
-  static async checkLogin(ctx) {
+  static async checkLogin() {
     const supabase = new Supabase();
     const {
       data: { session },
@@ -34,23 +35,28 @@ export class User {
 
     if (error) {
       console.error("Error checking login status:", error.message);
-      return { status: 0, error };
+      return { status: null, error: error };
     }
 
     if (session) {
       console.log("User logged in");
-      if (ctx === 0) {
-        return { status: 1, user: session.user };
-      }
       return { status: 1, user: session.user };
     }
 
-    console.log("User not logged in");
-    if (ctx != 0) {
-      window.location.href = "/auth/login";
-    }
-    
     return { status: 0, user: null };
   }
-}
 
+  static async checkAuth() {
+    const authStatus = await this.checkLogin();
+
+    if (authStatus.error) {
+      console.log("Error checking login status:", authStatus.error);
+      window.confirm("Error checking login status:" + error.message);
+    } else if (authStatus.status === 0) {
+      redirect("/auth/login/");
+    } else if (authStatus.status === 1) {
+      console.log("User is logged in");
+      return { status: authStatus.status, user: authStatus.user };
+    }
+  }
+}

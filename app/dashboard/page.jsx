@@ -4,13 +4,13 @@ import { useEffect } from "react";
 
 function UserDashboard() {
   useEffect(() => {
-    checkAuth();
+    async function execPromise() {
+      let loginStatus = await User.checkAuth();
+      console.log("Login Status: ", loginStatus);
+    }
+    execPromise();
   }, []);
 
-  async function checkAuth() {
-    await User.checkLogin(1, "/auth/login");
-  }
-  
   return <div>UserDashboard</div>;
 }
 

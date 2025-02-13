@@ -11,7 +11,7 @@ for /f "tokens=*" %%f in ('git ls-files -m') do (
     git commit -m "Found modified or deleted file,  %%f. Committing Via Global Bash Script:git-status-automated.bat"
 )
 
-echo .
+echo "Checking for new Changes"
 echo .
 echo .
 

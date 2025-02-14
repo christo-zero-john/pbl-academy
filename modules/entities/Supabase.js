@@ -1,3 +1,7 @@
+/**
+ * Used to create a sup[abase instance and handle some general functionalities. This is used to store supabase auth tokens and things
+ */
+
 import { createClient } from "@supabase/supabase-js";
 
 export class Supabase {

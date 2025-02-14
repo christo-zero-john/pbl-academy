@@ -1,3 +1,7 @@
+/**
+ * Layout for the entire application, or Root Layout.
+ */
+
 import Bootstrap from "@/components/library/bootstrap";
 
 export const metadata = {

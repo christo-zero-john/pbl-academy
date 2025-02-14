@@ -1,3 +1,7 @@
+/**
+ * Home page or the Root Page of the Application
+ */
+
 import Link from "next/link";
 
 function HomePage() {

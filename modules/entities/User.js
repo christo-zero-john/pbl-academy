@@ -18,6 +18,17 @@ export class User {
     return { data, error };
   }
 
+  static async getAllUsers() {
+    const supabase = new Supabase();
+    console.log("Reading all users from users table");
+    const { data, error } = await supabase.client.from("users").select("*");
+    if (error) {
+      return { status: 0, error: error };
+    } else {
+      return { status: 1, data: data };
+    }
+  }
+
   static async saveUser() {
     // This method is used to save the user data to the user table
     const supabase = new Supabase();
@@ -25,27 +36,69 @@ export class User {
     let loginStatus = await this.checkLogin();
     console.log(loginStatus);
     let user = null;
-    if ((await loginStatus).status == 1) {
+    if (loginStatus.status == 1) {
       user = loginStatus.user;
     }
-    let { data, error } = await supabase.client
+    console.log(`Creating new user with: id:${user.id}, email: ${user.email}`);
+    const { data, error } = await supabase.client
       .from("users")
-      .insert({ id: user.id, role: "user", email: user.email });
+      .insert({ id: user.id, role: "user" });
 
-    return { data, error };
+    console.log(data, error);
+    if (error) {
+      return { status: 0, error: error };
+    } else {
+      return { status: 1, data: data };
+    }
   }
 
   static async login(email, password) {
     // This method is used to login a user with email and password
     const supabase = new Supabase();
-    try {
-      let { data, error } = await supabase.client.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
-      return { data, error };
-    } catch (error) {
-      return { data, error };
+
+    const { data, error } = await supabase.client.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    return { data, error };
+  }
+
+  static async getUserData(user_id) {
+    // This method is used to fetch the user data from the user table
+    const supabase = new Supabase();
+    console.log("Fetching user data from db for user with id: ", user_id);
+    const { data, error } = await supabase.client
+      .from("users")
+      .select("*")
+      .eq("id", user_id)
+      .single();
+
+    if (error) {
+      if (error.code == "PGRST116") {
+        return { status: 2, data: null };
+      } else {
+        return { status: 0, error: error };
+      }
+    } else {
+      return { status: 1, data: data };
+    }
+  }
+
+  static async checkSavedUser(user_id) {
+    // This method checks whether the user data is saved in the user table or not
+
+    const getUserDataStatus = await this.getUserData(user_id);
+    console.log(getUserDataStatus);
+
+    if (getUserDataStatus.status == 2) {
+      console.log("User not saved yet... Saving user to Db");
+      const saveUserStatus = await this.saveUser();
+      console.log(saveUserStatus);
+    } else if (getUserDataStatus.status == 1) {
+      console.log("User already saved in the db");
+    } else {
+      console.log("Some error occurred");
+      return { status: 0, error: getUserDataStatus.error };
     }
   }
 

@@ -25,8 +25,9 @@ function LoginToAccount() {
       const errorMessage = error.message || "An error occurred during sign up";
       window.confirm(errorMessage);
     } else {
-      console.log("User logged in successfully");
-      redirect("/dashboard");
+      console.log("User logged in successfully: ", data);
+      await User.checkSavedUser(data.user.id);
+      // redirect("/dashboard");
     }
   }
 

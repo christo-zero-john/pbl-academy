@@ -17,22 +17,22 @@ function ConfirmSignupPage() {
         const loginStatus = await User.checkLogin();
         console.log(loginStatus);
 
-        setTimeout(async () => {
-          const { data, error } = await User.saveUser();
-          if (error) {
-            console.log("Error confirming sign up: ", error);
-
-            const errorMessage =
-              error.message || "An error occurred while confirming sign up";
-            console.log(error.message);
-            window.confirm(errorMessage);
-          } else {
-            console.log(
-              "Account Created and confirmed Successfully. Redirecting to dashboard..."
-            );
-            redirect("/dashboard");
-          }
-        }, 5000);
+        // Remove the setTimeout and just save the user once
+        const { data: userData, error: saveError } = await User.saveUser();
+        if (saveError) {
+          console.log("Error confirming sign up: ", saveError);
+          const errorMessage =
+            saveError.message || "An error occurred while confirming sign up";
+          console.log(saveError.message);
+          window.confirm(errorMessage);
+        } else {
+          console.log(
+            "Account Created and confirmed Successfully. Redirecting to dashboard..."
+          );
+          redirect("/dashboard");
+        }
+      } else {
+        console.log("Error logging in: ", error);
       }
     }
 

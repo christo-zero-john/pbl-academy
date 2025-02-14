@@ -1,3 +1,9 @@
+/**
+ * We must check whether a user is logged in or not to avoid logging in of multiple times.
+ * If a user is logged in, then there is no need for them to login again.
+ * The system should redirect them to their dashboard.
+ */
+
 "use client";
 
 import { User } from "@/modules/entities/User";

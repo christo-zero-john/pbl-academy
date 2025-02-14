@@ -1,3 +1,7 @@
+/**
+ * The @var User is used to handle all user related functions in the system. It contains various methods to handle different functionalities of normal users.
+ */
+
 import { Supabase } from "@/modules/entities/Supabase";
 import { redirect } from "next/navigation";
 
@@ -16,17 +20,6 @@ export class User {
       password,
     });
     return { data, error };
-  }
-
-  static async getAllUsers() {
-    const supabase = new Supabase();
-    console.log("Reading all users from users table");
-    const { data, error } = await supabase.client.from("users").select("*");
-    if (error) {
-      return { status: 0, error: error };
-    } else {
-      return { status: 1, data: data };
-    }
   }
 
   static async saveUser() {
@@ -64,7 +57,7 @@ export class User {
   }
 
   static async getUserData(user_id) {
-    // This method is used to fetch the user data from the user table
+    // This method is used to fetch the data of a user from the users table
     const supabase = new Supabase();
     console.log("Fetching user data from db for user with id: ", user_id);
     const { data, error } = await supabase.client
@@ -94,8 +87,10 @@ export class User {
       console.log("User not saved yet... Saving user to Db");
       const saveUserStatus = await this.saveUser();
       console.log(saveUserStatus);
+      return { status: 1, data: saveUserStatus.data };
     } else if (getUserDataStatus.status == 1) {
       console.log("User already saved in the db");
+      return { status: 1, data: getUserDataStatus.data };
     } else {
       console.log("Some error occurred");
       return { status: 0, error: getUserDataStatus.error };
@@ -137,4 +132,18 @@ export class User {
       return { status: authStatus.status, user: authStatus.user };
     }
   }
+
+  /*
+      static async getAllUsers() {
+        // This method is used to fetch all users from database
+        const supabase = new Supabase();
+        console.log("Reading all users from users table");
+        const { data, error } = await supabase.client.from("users").select("*");
+        if (error) {
+          return { status: 0, error: error };
+        } else {
+          return { status: 1, data: data };
+        }
+      }
+  */
 }

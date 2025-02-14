@@ -1,3 +1,8 @@
+/**
+ * A user can create account using mail id or password
+ * When a user account is created, they should confirm their mail id to get access to their user account
+ */
+
 "use client";
 import { User } from "@/modules/entities/User";
 import Link from "next/link";

@@ -1,3 +1,8 @@
+/**
+ * Layout for login and signup pages.
+ * Layout for Authentication paths in general
+ */
+
 import CheckLogin from "./check-login";
 
 export const metadata = {
@@ -10,8 +15,7 @@ export default function AuthenticationLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
-        {/* <CheckLogin></CheckLogin> */}
+        <CheckLogin>{children}</CheckLogin>
       </body>
     </html>
   );

@@ -1,3 +1,12 @@
+/**
+ * When a user tries to login, we will first verifies the login credentials and creates session for user (by supabase)
+ * After that we will check whether there is an entry with this users user id in the public.users table of supabase
+ * If there is no entry, we will create an entry.
+ * If there is an entry we do nothing.
+ * If everything works well, the user is logged in to the system.
+ * If there s an error, it is console, logged
+ */
+
 "use client";
 
 import { User } from "@/modules/entities/User";
@@ -26,8 +35,15 @@ function LoginToAccount() {
       window.confirm(errorMessage);
     } else {
       console.log("User logged in successfully: ", data);
-      await User.checkSavedUser(data.user.id);
-      // redirect("/dashboard");
+      const savedUserStats = await User.checkSavedUser(data.user.id);
+      console.log(savedUserStats);
+      if (savedUserStats.status == 1) {
+        window.confirm("Logged in successfully. Go to your dashboard");
+      } else if (savedUserStats.status == 0) {
+        window.confirm("Some error during login. Check console for details");
+        console.log("Error during login:", savedUserStats.error);
+      }
+      redirect("/dashboard");
     }
   }
 

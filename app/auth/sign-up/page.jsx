@@ -16,6 +16,7 @@ function SignUp() {
       window.confirm("Email or password is missing");
       return;
     }
+
     const { data, error } = await User.signUp(email, password);
 
     if (error) {
@@ -30,7 +31,7 @@ function SignUp() {
         email: encodeURIComponent(email),
         password: encodeURIComponent(password),
       });
-      router.push(`/auth/sign-up/confirm-signup?${params}`);
+      router.push(`/auth/login?${params}`);
     }
   }
 

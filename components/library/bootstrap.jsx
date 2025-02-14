@@ -1,3 +1,7 @@
+/**
+ * This component is used to import bootstrap CSS and JS files into the application. 
+*/
+
 "use client";
 import "bootstrap/dist/css/bootstrap.min.css";
 

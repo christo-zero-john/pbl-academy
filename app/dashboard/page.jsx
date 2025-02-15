@@ -4,6 +4,7 @@
 
 "use client";
 import { User } from "@/modules/entities/User";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function UserDashboard() {
@@ -28,17 +29,27 @@ function UserDashboard() {
     execPromise();
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <div>
       <h1 className="text-center">User Dashboard</h1>
       <p className="fs-3">Welcome to PBL Academy</p>
       <p className="">Enroll in some course to start learning</p>
       <div className="profile">
-        <h2>Profile</h2>
+        <h2 className="">Profile</h2>
+        <p className="">
+          <span className="">{user.first_name}</span> &nbsp;
+          <span className="">{user.last_name}</span>
+        </p>
+        <p className="">
+          <span className="me-2">{user.email}</span>
+          <span className="">
+            {(user.email_verified && "Email Verified") || "Email Not Verified"}
+          </span>
+        </p>
+        <p className="">{user.role}</p>
+        {user.role.includes("admin") && (
+          <Link href="/admin/dashboard/">Admin Dashboard</Link>
+        )}
       </div>
     </div>
   );

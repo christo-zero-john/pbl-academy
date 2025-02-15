@@ -58,13 +58,17 @@ export class User {
     // This method checks whether the user data is saved in the user table or not
 
     const getUserDataStatus = await this.getUserData(user_id);
-    console.log(getUserDataStatus);
 
     if (getUserDataStatus.status == 2) {
       console.log("User not saved yet... Saving user to Db");
       const saveUserStatus = await this.saveUserToDb();
-      console.log(saveUserStatus);
-      return { status: 1, data: saveUserStatus.data };
+      if (saveUserStatus.status == 1) {
+        console.log("Successfully saved user to Database");
+        return { status: 1, data: saveUserStatus.data };
+      } else {
+        console.log("Failed to save user to Database");
+        return { status: 0, error: saveUserStatus.error };
+      }
     } else if (getUserDataStatus.status == 1) {
       console.log("User already saved in the db");
       return { status: 1, data: getUserDataStatus.data };
@@ -88,12 +92,30 @@ export class User {
     const { data, error } = await supabase.client
       .from("users")
       .insert({ id: user.id, role: "user" });
-
-    console.log(data, error);
     if (error) {
       return { status: 0, error: error };
     } else {
       return { status: 1, data: data };
+    }
+  }
+
+  static async saveUserToSession() {
+    // This method is used to add the user data from user table to the user data in supabase login session.
+    const supabase = new Supabase();
+    const {
+      data: { session },
+      error,
+    } = await supabase.client.auth.getSession();
+
+    if (error) {
+      console.error("Error checking login status:", error.message);
+      return { status: null, error: error };
+    }
+
+    if (session) {
+      console.log("User logged in");
+      console.log(session.user);
+      const userdata = await this.getUserData(session.user.id);
     }
   }
 

@@ -20,7 +20,7 @@ function LoginToAccount() {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    console.log("Logging User In with:", email, password);
+    console.log("Logging User In with email and password");
 
     if (!email || !password) {
       window.confirm("Email or password is missing");

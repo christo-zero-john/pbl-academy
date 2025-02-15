@@ -22,9 +22,5 @@ export default function CheckAdmin({ children }) {
     execPromise();
   }, []);
 
-  useEffect(() => {
-    console.log(isAdmin);
-  }, [isAdmin]);
-
   return !isAdmin ? <h1>Entry Prohibited</h1> : <>{children}</>;
 }

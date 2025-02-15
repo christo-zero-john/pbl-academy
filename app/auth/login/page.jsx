@@ -40,7 +40,25 @@ function LoginToAccount() {
       if (savedUserStats.status == 1) {
         window.confirm("Logged in successfully. Saving userdata to session");
         const saveUserToSessionStatus = await User.saveUserToSession();
-        redirect("/dashboard");
+        if (saveUserToSessionStatus.status == 0) {
+          console.log(
+            "Error saving usedata to session: ",
+            saveUserToSessionStatus.error
+          );
+          window.confirm(
+            "Error saving usedata to session: ",
+            saveUserToSessionStatus.error.message
+          );
+        } else {
+          console.log(
+            "Successfully saved userdata to session: ",
+            saveUserToSessionStatus.data
+          );
+          window.confirm(
+            "Successfully saved userdata to session. Redirecting to dashboard..."
+          );
+          redirect("/dashboard");
+        }
       } else if (savedUserStats.status == 0) {
         window.confirm("Some error during login. Check console for details");
         console.log("Error during login:", savedUserStats.error);

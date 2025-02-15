@@ -7,7 +7,9 @@ import Link from "next/link";
 function HomePage() {
   return (
     <div>
-      <Link href="/auth/sign-up">Create Account</Link>
+      <Link href="/auth/sign-up">Signup/Login</Link>
+      <br />
+      <Link href="/dashboard">Dashboard</Link>
     </div>
   );
 }

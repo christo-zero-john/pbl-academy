@@ -11,6 +11,8 @@ function UserDashboard() {
     async function execPromise() {
       let loginStatus = await User.checkAuth();
       console.log("Login Status: ", loginStatus);
+      const saveUserToSessionStatus = await User.saveUserToSession();
+      console.log(saveUserToSessionStatus);
     }
     execPromise();
   }, []);
@@ -19,7 +21,6 @@ function UserDashboard() {
     <div>
       <h1 className="text-center">Welcome to PBL Academy</h1>
       <p className="">Enroll in some course to start learning</p>
-
     </div>
   );
 }

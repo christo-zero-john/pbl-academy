@@ -15,7 +15,13 @@ function UserDashboard() {
     execPromise();
   }, []);
 
-  return <div>UserDashboard</div>;
+  return (
+    <div>
+      <h1 className="text-center">Welcome to PBL Academy</h1>
+      <p className="">Enroll in some course to start learning</p>
+
+    </div>
+  );
 }
 
 export default UserDashboard;

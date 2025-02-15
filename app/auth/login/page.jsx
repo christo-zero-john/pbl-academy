@@ -38,12 +38,13 @@ function LoginToAccount() {
       const savedUserStats = await User.checkSavedUser(data.user.id);
       console.log(savedUserStats);
       if (savedUserStats.status == 1) {
-        window.confirm("Logged in successfully. Go to your dashboard");
+        window.confirm("Logged in successfully. Saving userdata to session");
+        const saveUserToSessionStatus = await User.saveUserToSession();
+        redirect("/dashboard");
       } else if (savedUserStats.status == 0) {
         window.confirm("Some error during login. Check console for details");
         console.log("Error during login:", savedUserStats.error);
       }
-      redirect("/dashboard");
     }
   }
 

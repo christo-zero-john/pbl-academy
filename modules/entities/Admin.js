@@ -1,4 +1,5 @@
 import { Mentor } from "./Mentor";
+import { Supabase } from "./Supabase";
 import { User } from "./User";
 
 export class Admin extends Mentor {
@@ -17,6 +18,20 @@ export class Admin extends Mentor {
         console.log("User is not an admin");
         return { status: 2, data: null };
       }
+    }
+  }
+
+  static async getAllUsers() {
+    const supabase = new Supabase();
+    const { data: users, error } = await supabase.client
+      .from("users")
+      .select("*");
+
+    if (error) {
+      console.error("Error getting users:", error.message);
+      return { status: 0, error: error };
+    } else {
+      return { status: 1, data: users };
     }
   }
 }

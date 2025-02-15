@@ -22,29 +22,6 @@ export class User {
     return { data, error };
   }
 
-  static async saveUser() {
-    // This method is used to save the user data to the user table
-    const supabase = new Supabase();
-    console.log("Saving userdata to user table");
-    let loginStatus = await this.checkLogin();
-    console.log(loginStatus);
-    let user = null;
-    if (loginStatus.status == 1) {
-      user = loginStatus.user;
-    }
-    console.log(`Creating new user with: id:${user.id}, email: ${user.email}`);
-    const { data, error } = await supabase.client
-      .from("users")
-      .insert({ id: user.id, role: "user" });
-
-    console.log(data, error);
-    if (error) {
-      return { status: 0, error: error };
-    } else {
-      return { status: 1, data: data };
-    }
-  }
-
   static async login(email, password) {
     // This method is used to login a user with email and password
     const supabase = new Supabase();
@@ -85,7 +62,7 @@ export class User {
 
     if (getUserDataStatus.status == 2) {
       console.log("User not saved yet... Saving user to Db");
-      const saveUserStatus = await this.saveUser();
+      const saveUserStatus = await this.saveUserToDb();
       console.log(saveUserStatus);
       return { status: 1, data: saveUserStatus.data };
     } else if (getUserDataStatus.status == 1) {
@@ -94,6 +71,29 @@ export class User {
     } else {
       console.log("Some error occurred");
       return { status: 0, error: getUserDataStatus.error };
+    }
+  }
+
+  static async saveUserToDb() {
+    // This method is used to save the user data to the user table
+    const supabase = new Supabase();
+    console.log("Saving userdata to user table");
+    let loginStatus = await this.checkLogin();
+    console.log(loginStatus);
+    let user = null;
+    if (loginStatus.status == 1) {
+      user = loginStatus.user;
+    }
+    console.log(`Creating new user with: id:${user.id}, email: ${user.email}`);
+    const { data, error } = await supabase.client
+      .from("users")
+      .insert({ id: user.id, role: "user" });
+
+    console.log(data, error);
+    if (error) {
+      return { status: 0, error: error };
+    } else {
+      return { status: 1, data: data };
     }
   }
 

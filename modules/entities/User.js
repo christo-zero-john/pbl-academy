@@ -102,7 +102,10 @@ export class User {
   static async saveUserToSession() {
     // This method is used to add the user data from user table to the user data in supabase login session.
     const supabase = new Supabase();
-    const { data: { session }, error } = await supabase.client.auth.getSession();
+    const {
+      data: { session },
+      error,
+    } = await supabase.client.auth.getSession();
 
     if (error) {
       console.error("Error checking login status:", error.message);
@@ -121,14 +124,15 @@ export class User {
       console.log("User data from DB:", userData);
 
       // Update the user metadata using updateUser instead of setSession
-      const { data: updateData, error: updateError } = await supabase.client.auth.updateUser({
-        data: {
-          role: userData.role,
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-          username: userData.username,
-        }
-      });
+      const { data: updateData, error: updateError } =
+        await supabase.client.auth.updateUser({
+          data: {
+            role: userData.role,
+            first_name: userData.first_name,
+            last_name: userData.last_name,
+            username: userData.username,
+          },
+        });
 
       if (updateError) {
         return { status: 0, error: updateError };

@@ -102,10 +102,7 @@ export class User {
   static async saveUserToSession() {
     // This method is used to add the user data from user table to the user data in supabase login session.
     const supabase = new Supabase();
-    const {
-      data: { session },
-      error,
-    } = await supabase.client.auth.getSession();
+    const { data: { session }, error } = await supabase.client.auth.getSession();
 
     if (error) {
       console.error("Error checking login status:", error.message);
@@ -114,9 +111,33 @@ export class User {
 
     if (session) {
       console.log("User logged in");
-      console.log(session.user);
-      const userdata = await this.getUserData(session.user.id);
+      const getUserDataStatus = await this.getUserData(session.user.id);
+      if (getUserDataStatus.status == 0) {
+        console.log("Error fetching user data");
+        return { status: 0, error: getUserDataStatus.error };
+      }
+
+      const userData = getUserDataStatus.data;
+      console.log("User data from DB:", userData);
+
+      // Update the user metadata using updateUser instead of setSession
+      const { data: updateData, error: updateError } = await supabase.client.auth.updateUser({
+        data: {
+          role: userData.role,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          username: userData.username,
+        }
+      });
+
+      if (updateError) {
+        return { status: 0, error: updateError };
+      }
+
+      return { status: 1, data: updateData };
     }
+
+    return { status: 0, error: "No active session" };
   }
 
   static async checkLogin() {
@@ -150,7 +171,6 @@ export class User {
     } else if (authStatus.status === 0) {
       redirect("/auth/login/");
     } else if (authStatus.status === 1) {
-      console.log("User is logged in");
       return { status: authStatus.status, user: authStatus.user };
     }
   }

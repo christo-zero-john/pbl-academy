@@ -25,7 +25,7 @@ function SignUp() {
     const { data, error } = await User.signUp(email, password);
 
     if (error) {
-      console.log("Error during sign up: ", error);
+      console.log("Error during sign up: ", error.message);
 
       const errorMessage = error.message || "An error occurred during sign up";
       console.log(error.message);

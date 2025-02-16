@@ -19,5 +19,11 @@ export default function ManageUsersPage() {
   useEffect(() => {
     console.log(users);
   }, [users]);
-  return <div>ManageUsersPage</div>;
+  return (
+    <div>
+      {users.map((user, index) => {
+        return <div key={index}>{user.id}</div>;
+      })}
+    </div>
+  );
 }

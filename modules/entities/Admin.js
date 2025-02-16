@@ -25,7 +25,7 @@ export class Admin extends Mentor {
     const supabase = new Supabase();
     const { data: users, error } = await supabase.client
       .from("users")
-      .select("*");
+      .select(`*`);
 
     if (error) {
       console.error("Error getting users:", error.message);

@@ -1,6 +1,6 @@
 "use client";
 
-import { Admin } from "@/modules/entities/Admin";
+import { Admin } from "@/frontend/modules/entities/Admin";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 

@@ -2,7 +2,7 @@
  * Layout for the entire application, or Root Layout.
  */
 
-import Bootstrap from "@/components/library/bootstrap";
+import Bootstrap from "@/frontend/components/library/bootstrap";
 
 export const metadata = {
   title: "PBL Academy",

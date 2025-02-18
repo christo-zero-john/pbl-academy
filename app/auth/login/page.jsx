@@ -9,7 +9,7 @@
 
 "use client";
 
-import { User } from "@/modules/entities/User";
+import { User } from "@/frontend/modules/entities/User";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 

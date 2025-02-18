@@ -1,6 +1,6 @@
 "use client";
 
-import { Admin } from "@/modules/entities/Admin";
+import { Admin } from "@/frontend/modules/entities/Admin";
 import { useEffect, useState } from "react";
 
 export default function ManageUsersPage() {

@@ -3,7 +3,7 @@
  */
 
 "use client";
-import { User } from "@/modules/entities/User";
+import { User } from "@/frontend/modules/entities/User";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

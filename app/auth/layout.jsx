@@ -15,7 +15,8 @@ export default function AuthenticationLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <CheckLogin>{children}</CheckLogin>
+        {children}
+        {/* <CheckLogin></CheckLogin> */}
       </body>
     </html>
   );

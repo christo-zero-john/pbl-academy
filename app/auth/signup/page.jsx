@@ -4,6 +4,9 @@ import { useState } from "react";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const [signupSuccess, setSignupSuccess] = useState(false);
+
   async function signuphandler(event) {
     event.preventDefault();
     console.log(formData);
@@ -19,8 +22,24 @@ export default function SignUp() {
     fetch("/api/user/signup", request)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (!data.success) {
+          console.log(data.error);
+          window.confirm(data.error.message);
+        } else {
+          setSignupSuccess(true);
+        }
       });
+  }
+
+  if (signupSuccess) {
+    return (
+      <>
+        <p className="">
+          Successfully Created new account. Check your mail and Confirm your
+          account to login
+        </p>
+      </>
+    );
   }
 
   return (

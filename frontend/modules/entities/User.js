@@ -12,16 +12,6 @@ export class User {
     this.user = loginStatus.user;
   }
 
-  static async signUp(email, password) {
-    // This method is used to create a new user account with email and password
-    const supabase = new Supabase();
-    const { data, error } = await supabase.client.auth.signUp({
-      email,
-      password,
-    });
-    return { data, error };
-  }
-
   static async login(email, password) {
     // This method is used to login a user with email and password
     const supabase = new Supabase();

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUp() {
@@ -33,14 +34,7 @@ export default function SignUp() {
   }
 
   if (signupSuccess) {
-    return (
-      <>
-        <p className="">
-          Successfully Created new account.{" "}
-          <Link href="/auth/login">Login to your account</Link>
-        </p>
-      </>
-    );
+    redirect("/auth/login");
   }
 
   return (

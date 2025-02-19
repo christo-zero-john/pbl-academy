@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import Supabase from "../../modules/entities/Supabase";
 import User from "../../modules/entities/User";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { email, password } = body;
+    const requestData = await req.json();
+    const email = requestData.email;
+    const password = requestData.password;
 
     console.log(
       `Start Creating new user account with email:${email} and password: ${password}`

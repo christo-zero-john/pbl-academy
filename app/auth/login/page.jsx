@@ -1,15 +1,15 @@
 "use client";
 
+import Supabase from "@/app/api/modules/entities/Supabase";
 import Link from "next/link";
-import { useState } from "react";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function LoginToAccount() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   function loginHandler(event) {
     event.preventDefault();
-    const email = formData.email;
-    const password = formData.password;
     console.log(formData);
 
     const request = {
@@ -24,8 +24,21 @@ export default function LoginToAccount() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (!data.success) {
+          window.confirm(data.error);
+        } else {
+          if (data.session) {
+            console.log("Login success. Setting session");
+            Supabase.auth.setSession(data.session).then(redirect("/dashboard"));
+          } else {
+            window.confirm(
+              "Failed to fetch user session. Contact support if this issue persists"
+            );
+          }
+        }
       });
   }
+
   return (
     <div>
       <form onSubmit={loginHandler} className="">

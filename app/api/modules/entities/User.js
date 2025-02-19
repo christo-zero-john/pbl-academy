@@ -1,4 +1,13 @@
-export class User {
+import Supabase from "./Supabase";
+
+class User {
   constructor() {}
-  signup(email, password) {}
+
+  async signup(email, password) {
+    const { data, error } = await Supabase.auth.signUp({ email, password });
+
+    return { data, error };
+  }
 }
+
+export default new User();

@@ -8,6 +8,15 @@ class User {
 
     return { data, error };
   }
+
+  async login(email, password) {
+    const { data, error } = await Supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    return { data, error };
+  }
 }
 
 export default new User();

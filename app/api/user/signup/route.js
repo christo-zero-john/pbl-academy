@@ -11,10 +11,16 @@ export async function POST(req) {
 
     const { data, error } = await Supabase.auth.signUp({ email, password });
 
-    if (error) {
+    if (error) { 
       // Invalid data sent to supabase (weak password, user already signed up etc...). 400: Bad Request
       return Response.json(
-        { success: false, error: error.code },
+        {
+          success: false,
+          error: {
+            code: error.code,
+            message: error.message,
+          },
+        },
         { status: 400 }
       );
     } else {
@@ -29,12 +35,16 @@ export async function POST(req) {
       );
     }
   } catch (error) {
-    // Soem unexpected error occurred. 500: Internal Server Error
+    // Some unexpected error occurred. 500: Internal Server Error
     console.log("Internal Error: ", error);
     return Response.json(
       {
-        error:
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        success: false,
+        error: {
+          code: 500,
+          message:
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       },
       { status: 500 }
     );

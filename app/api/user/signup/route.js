@@ -1,3 +1,5 @@
+import Supabase from "../../modules/entities/Supabase";
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -28,6 +30,7 @@ export async function POST(req) {
     }
   } catch (error) {
     // Soem unexpected error occurred. 500: Internal Server Error
+    console.log("Internal Error: ", error);
     return Response.json(
       {
         error:

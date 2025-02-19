@@ -9,7 +9,7 @@ export default function SignUp() {
 
   async function signuphandler(event) {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
 
     let request = {
       method: "POST",
@@ -19,12 +19,13 @@ export default function SignUp() {
       body: JSON.stringify(formData),
     };
 
-    fetch("/api/user/signup", request)
+    fetch("/api/auth/signup", request)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (!data.success) {
           console.log(data.error);
-          window.confirm(data.error.message);
+          window.confirm(data.error);
         } else {
           setSignupSuccess(true);
         }
@@ -35,8 +36,8 @@ export default function SignUp() {
     return (
       <>
         <p className="">
-          Successfully Created new account. Check your mail and Confirm your
-          account to login
+          Successfully Created new account.{" "}
+          <Link href="/auth/login">Login to your account</Link>
         </p>
       </>
     );

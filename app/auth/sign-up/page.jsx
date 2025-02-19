@@ -4,7 +4,6 @@
  */
 
 "use client";
-import { signup } from "@/app/api/form-actions/signup";
 import SubmitBtn from "@/frontend/components/common/submit-btn";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -46,8 +45,35 @@ function SignUp() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await signup(null, formData);
-    
+    try {
+      const request = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      };
+
+      fetch("/api/user/signup", request)
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error("Error response:", errorText);
+            throw new Error("Failed to create account");
+          }
+          return response.json();
+        })
+        .then((result) => {
+          console.log(result);
+          // Handle successful signup (e.g., redirect or show a success message)
+        })
+        .catch((error) => {
+          console.error("Error during signup:", error);
+          // Handle error (e.g., show an error message to the user)
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

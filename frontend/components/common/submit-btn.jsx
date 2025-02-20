@@ -1,16 +1,19 @@
 import React from "react";
-import { useFormStatus } from "react-dom"; // Import useFormStatus
+import { useFormStatus } from "react-dom";
 
 export default function SubmitBtn({
   className = "btn-success m-2",
   btnText = "Submit",
-  loadingText = "Submitting...",
+  loadingText = "Submitting",
 }) {
-  const { pending } = useFormStatus(); // Get the pending status from useFormStatus
+  const status = useFormStatus();
+  console.log(status);
 
   return (
-    <button className={className} disabled={pending} type="submit">
-      {pending ? loadingText : btnText} {/* Change button text based on pending state */}
-    </button>
+    <>
+      <button className={className} disabled={status.pending}>
+        {!status.pending ? btnText : loadingText}
+      </button>
+    </>
   );
 }

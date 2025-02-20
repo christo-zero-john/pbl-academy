@@ -1,4 +1,5 @@
 "use client";
+import SubmitBtn from "@/frontend/components/common/submit-btn";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -10,7 +11,7 @@ export default function SignUp() {
 
   async function signuphandler(event) {
     event.preventDefault();
-    // console.log(formData);
+    console.log("Sending request to Create Account");
 
     let request = {
       method: "POST",
@@ -66,9 +67,10 @@ export default function SignUp() {
             placeholder="Enter Password"
           />
         </label>
-        <button className="" type="submit">
-          Create Account
-        </button>
+        <SubmitBtn
+          btnText="Create Account"
+          loadingText="Creating Account"
+        ></SubmitBtn>
         <p className="">
           Already have an account?
           <Link href="/auth/login">Login</Link>

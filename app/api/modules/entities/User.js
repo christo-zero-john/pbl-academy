@@ -32,7 +32,15 @@ class User {
           const getUserStatus = await this.getUserFromDb(data.user.id);
 
           if (getUserStatus.success) {
-            console.log("data", getUserStatus.data);
+            let loginData = {
+              ...data,
+              ...this.joinUserMetadata(data, getUserStatus.data),
+              session: {
+                ...data.session,
+                ...this.joinUserMetadata(data.session, getUserStatus.data),
+              },
+            };
+            return { success: true, data: loginData };
           }
         }
       } else {
@@ -46,6 +54,12 @@ class User {
     }
   }
 
+  /**
+   * Method to fetch user form public.schemas table.
+   * If user does not exists, registers the user and returns the data.
+   * @param {*} userId ID of user to be fetched
+   * @returns an object(row) of user data with the same user ID.
+   */
   async getUserFromDb(userId) {
     console.log("Fetching from database, User data of user with Id: ", userId);
 
@@ -56,13 +70,16 @@ class User {
       return { success: false, error: error };
     } else if (data.length == 1) {
       console.log("User Already Registered");
-      return { success: true, data: data };
+      return { success: true, data: data[0] };
     } else if (data.length == 0) {
+      // User Not Registered yet
       let response = await this.registerUserToDb();
       if (response.success) {
-        console.log("Registered User: ", response.data);
+        console.log("Registered User Successfully.");
+        return { success: true, data: response.data[0] };
       }
     } else {
+      // Unexpected error. Either multiple records returned or something else.
       return {
         success: false,
         error: new Error("500: Unexpected Error occured."),
@@ -91,20 +108,32 @@ class User {
         return { success: false, error: response.error };
       } else {
         console.log("Sucessfully registered user: ", data.user.email);
-        let resData = {
-          ...data,
-          user: {
-            ...data.user,
-            user_metadata: {
-              ...data.user.user_metadata,
-              ...response.data[0],
-            },
-          },
-        };
-        return { success: true, data: resData };
+
+        return { success: true, data: response.data[0] };
       }
     }
+  }
+
+  /**
+   * @description This method Joins the user data from the public.users table with the user data returned by supabase
+   * @param {*} data The original User data returned by supabase
+   * @param {*} metaData The data returned from public.users table.
+   * @returns
+   */
+  joinUserMetadata(data, metaData) {
+    return {
+      ...data,
+      user: {
+        ...data.user,
+        user_metadata: {
+          ...data.user.user_metadata,
+          ...metaData,
+        },
+      },
+    };
   }
 }
 
 export default new User();
+
+// let resData =

@@ -56,7 +56,7 @@ class User {
   async registerUserToDb() {
     console.log("User yet to be registered. Registering/Saving User to DB...");
     const { data, error } = await Supabase.auth.getUser();
-    
+
     if (error) {
       return { succes: false, error: error };
     } else {
@@ -68,12 +68,12 @@ class User {
             role: "user",
           },
         ])
-        .select("*");
       if (response.error) {
         console.log("Failed to insert record:", response.error.message);
         return { success: false, error: response.error };
       } else {
         console.log("Sucessfully registered user: ", data.user.email);
+        return { success: true, data: data };
       }
     }
   }

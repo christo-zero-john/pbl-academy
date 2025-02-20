@@ -5,7 +5,12 @@
 import Supabase from "./Supabase";
 
 class User {
-  constructor() {}
+  constructor() {
+    if (!User.instance) {
+      User.instance = this;
+    }
+    return User.instance;
+  }
 
   async signup(email, password) {
     const { data, error } = await Supabase.auth.signUp({ email, password });
@@ -21,8 +26,11 @@ class User {
       });
 
       if (!error) {
-        console.log(data);
-        const userData = await this.getUserData(data.user.id);
+        console.log("Login success", data.user.id);
+
+        if (!data.user.user_metadata.role) {
+          const registerStatus = await this.registerUserToDb();
+        }
       }
 
       return { data, error };
@@ -33,7 +41,34 @@ class User {
   }
 
   async getUserData(userId) {
-    console.log("Fetching from database, User data of user with Id: ", id);
+    console.log("Fetching from database, User data of user with Id: ", userId);
+
+    const { data, error } = await Supabase.from("users")
+      .select("*")
+      .eq("id", userId);
+    if (error) {
+      return { success: false, error: error };
+    } else {
+      return { success: true, data: data };
+    }
+  }
+
+  async registerUserToDb() {
+    console.log("User yet to be registered. Registering/Saving User to DB...");
+    const { data, error } = await Supabase.auth.getUser();
+
+    console.log(data);
+    if (error) {
+      return { succes: false, error: error };
+    } else {
+      const userId = data.user.id;
+      const { data, error } = await Supabase.from("users").insert([
+        {
+          id: userId,
+          role: "user",
+        },
+      ]);
+    }
   }
 }
 

@@ -3,7 +3,7 @@
 import Supabase from "@/app/api/modules/entities/Supabase";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function LoginToAccount() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -29,7 +29,7 @@ export default function LoginToAccount() {
         } else {
           if (data.session) {
             console.log("Login success. Setting session");
-            Supabase.auth.setSession(data.session).then(redirect("/dashboard"));
+            // Supabase.auth.setSession(data.session).then(redirect("/dashboard"));
           } else {
             window.confirm(
               "Failed to fetch user session. Contact support if this issue persists"

@@ -11,7 +11,7 @@ function CheckLogin({ children }) {
   useEffect(() => {
     (async () => {
       const { data, error } = await Supabase.auth.getSession();
-      consoel.log("Checking session: ", data, error);
+      console.log("Checking session: ", data, error);
       if (data?.session?.user) {
         setIsloggedIn(true);
       }

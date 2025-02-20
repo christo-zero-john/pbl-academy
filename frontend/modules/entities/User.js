@@ -1,5 +1,7 @@
 import Supabase from "@/app/api/modules/entities/Supabase";
 
+// User in frontend
+
 class User {
   constructor() {}
 

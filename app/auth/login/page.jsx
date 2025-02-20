@@ -29,7 +29,7 @@ export default function LoginToAccount() {
         } else {
           if (data.session) {
             console.log("Login success. Setting session");
-            // Supabase.auth.setSession(data.session).then(redirect("/dashboard"));
+            Supabase.auth.setSession(data.session).then(redirect("/dashboard"));
           } else {
             window.confirm(
               "Failed to fetch user session. Contact support if this issue persists"

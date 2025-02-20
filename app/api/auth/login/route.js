@@ -27,6 +27,7 @@ export async function POST(request) {
         { status: 400 }
       );
     } else {
+      console.log("Session Data: ", data.session);
       return NextResponse.json({
         success: true,
         session: data.session,

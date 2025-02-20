@@ -1,6 +1,8 @@
-import Supabase from "./Supabase";
+/**
+ * User in backend
+ */
 
-// User in backend
+import Supabase from "./Supabase";
 
 class User {
   constructor() {}
@@ -19,6 +21,7 @@ class User {
       });
 
       if (!error) {
+        console.log(data);
         const userData = await this.getUserData(data.user.id);
       }
 

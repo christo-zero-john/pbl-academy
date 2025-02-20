@@ -26,15 +26,17 @@ class User {
       });
 
       if (!error) {
-        console.log("Login success", data.user.id);
+        console.log("Login success");
 
         if (!data.user.user_metadata.role) {
-          const registerStatus = await this.registerUserToDb();
+          const getUserStatus = await this.getUserFromDb(data.user.id);
 
-          if (registerStatus.success) {
-            console.log(registerStatus.data);
+          if (getUserStatus.success) {
+            console.log("data", getUserStatus.data);
           }
         }
+      } else {
+        console.log(data.user);
       }
 
       return { data, error };
@@ -44,7 +46,7 @@ class User {
     }
   }
 
-  async getUserDataFromDb(userId) {
+  async getUserFromDb(userId) {
     console.log("Fetching from database, User data of user with Id: ", userId);
 
     const { data, error } = await Supabase.from("users")
@@ -52,8 +54,19 @@ class User {
       .eq("id", userId);
     if (error) {
       return { success: false, error: error };
-    } else {
+    } else if (data.length == 1) {
+      console.log("User Already Registered");
       return { success: true, data: data };
+    } else if (data.length == 0) {
+      let response = await this.registerUserToDb();
+      if (response.success) {
+        console.log("Registered User: ", response.data);
+      }
+    } else {
+      return {
+        success: false,
+        error: new Error("500: Unexpected Error occured."),
+      };
     }
   }
 
@@ -78,8 +91,17 @@ class User {
         return { success: false, error: response.error };
       } else {
         console.log("Sucessfully registered user: ", data.user.email);
-
-        return { success: true, data: response.data };
+        let resData = {
+          ...data,
+          user: {
+            ...data.user,
+            user_metadata: {
+              ...data.user.user_metadata,
+              ...response.data[0],
+            },
+          },
+        };
+        return { success: true, data: resData };
       }
     }
   }

@@ -30,6 +30,10 @@ class User {
 
         if (!data.user.user_metadata.role) {
           const registerStatus = await this.registerUserToDb();
+
+          if (registerStatus.success) {
+            console.log(registerStatus.data);
+          }
         }
       }
 
@@ -40,7 +44,7 @@ class User {
     }
   }
 
-  async getUserData(userId) {
+  async getUserDataFromDb(userId) {
     console.log("Fetching from database, User data of user with Id: ", userId);
 
     const { data, error } = await Supabase.from("users")
@@ -68,12 +72,14 @@ class User {
             role: "user",
           },
         ])
+        .select("*");
       if (response.error) {
         console.log("Failed to insert record:", response.error.message);
         return { success: false, error: response.error };
       } else {
         console.log("Sucessfully registered user: ", data.user.email);
-        return { success: true, data: data };
+
+        return { success: true, data: response.data };
       }
     }
   }

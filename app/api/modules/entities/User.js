@@ -36,13 +36,25 @@ class User {
             data: data,
             userData: getUserStatus.data,
           };
+        } else {
+          console.log("Some unexpected error occurred: ", getUserStatus.error);
+          return {
+            success: false,
+            error: getUserStatus.error,
+          };
         }
+      } else {
+        return {
+          success: false,
+          error: error,
+        };
       }
-
-      return { data, error };
     } catch (error) {
-      console.log("Internal Server Error: ", error);
-      throw new Error(error.message);
+      console.log("500: Internal Server Error: ", error);
+      return {
+        success: false,
+        error: error.message,
+      };
     }
   }
 
@@ -61,14 +73,20 @@ class User {
     if (error) {
       return { success: false, error: error };
     } else if (data.length == 1) {
-      console.log("User Already Registered");
-      return { success: true, data: data[0] };
+      console.log("User Already Registered: ", data[0]);
+      return { 
+        success: true, 
+        data: data[0] 
+      };
     } else if (data.length == 0) {
       // User Not Registered yet
       let response = await this.registerUserToDb();
       if (response.success) {
-        console.log("Registered User Successfully.");
-        return { success: true, data: response.data[0] };
+        console.log("Registered User Successfully: ", response.data[0]);
+        return { 
+          success: true, 
+          data: response.data[0] 
+        };
       }
     } else {
       // Unexpected error. Either multiple records returned or something else.

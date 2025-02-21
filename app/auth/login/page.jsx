@@ -32,14 +32,9 @@ export default function LoginToAccount() {
             Supabase.auth
               .setSession(data.session)
               .then(async () => {
-                const userData = {
-                  first_name: data.session.user.user_metadata.first_name,
-                  last_name: data.session.user.user_metadata.last_name,
-                  username: data.session.user.user_metadata.username,
-                  role: data.session.user.user_metadata.role,
-                };
+                console.log("user data: ", data.userData);
                 await Supabase.auth.updateUser({
-                  data: { userData },
+                  data: data.userData,
                 });
                 Supabase.auth.refreshSession();
               })
@@ -60,6 +55,7 @@ export default function LoginToAccount() {
         <h1>Login</h1>
         <label className="">
           <input
+            autocomplete="on"
             type="email"
             className=""
             name="email"
@@ -75,6 +71,7 @@ export default function LoginToAccount() {
         </label>
         <label className="">
           <input
+            autocomplete="on"
             type="text"
             className=""
             name="password"

@@ -4,7 +4,7 @@ import User from "../../modules/entities/User";
 export async function POST(request) {
   try {
     const requestData = await request.json();
-    console.log(requestData);
+    console.log("Data Recieved in Request", requestData);
     const email = requestData.email;
     const password = requestData.password;
 
@@ -16,21 +16,23 @@ export async function POST(request) {
       `Initiating user login with email:${email} and password: ${password}`
     );
 
-    const { data, error } = await User.login(email, password);
+    const loginStatus = await User.login(email, password);
+    console.log(loginStatus);
 
-    if (error) {
+    if (!loginStatus.success) {
       return NextResponse.json(
         {
           success: false,
-          error: error.message,
+          error: loginStatus.error.message,
         },
         { status: 400 }
       );
     } else {
-      console.log("Session Data: ", data.session);
+      console.log("Session Data retireved");
       return NextResponse.json({
         success: true,
-        session: data.session,
+        session: loginStatus.data.session,
+        userData: loginStatus.userData,
       });
     }
   } catch (error) {

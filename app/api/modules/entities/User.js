@@ -28,23 +28,19 @@ class User {
       if (!error) {
         console.log("Login success");
 
-        if (!data.user.user_metadata.role) {
-          const getUserStatus = await this.getUserFromDb(data.user.id);
+        const getUserStatus = await this.getUserFromDb(data.user.id);
 
-          if (getUserStatus.success) {
-            let loginData = {
-              ...data,
-              ...this.joinUserMetadata(data, getUserStatus.data),
-              session: {
-                ...data.session,
-                ...this.joinUserMetadata(data.session, getUserStatus.data),
-              },
-            };
-            return { success: true, data: loginData };
-          }
+        if (getUserStatus.success) {
+          let loginData = {
+            ...data,
+            ...this.joinUserMetadata(data, getUserStatus.data),
+            session: {
+              ...data.session,
+              ...this.joinUserMetadata(data.session, getUserStatus.data),
+            },
+          };
+          return { success: true, data: loginData };
         }
-      } else {
-        console.log(data.user);
       }
 
       return { data, error };

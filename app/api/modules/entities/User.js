@@ -31,15 +31,11 @@ class User {
         const getUserStatus = await this.getUserFromDb(data.user.id);
 
         if (getUserStatus.success) {
-          let loginData = {
-            ...data,
-            ...this.joinUserMetadata(data, getUserStatus.data),
-            session: {
-              ...data.session,
-              ...this.joinUserMetadata(data.session, getUserStatus.data),
-            },
+          return {
+            success: true,
+            data: data,
+            userData: getUserStatus.data,
           };
-          return { success: true, data: loginData };
         }
       }
 

@@ -74,18 +74,18 @@ class User {
       return { success: false, error: error };
     } else if (data.length == 1) {
       console.log("User Already Registered: ", data[0]);
-      return { 
-        success: true, 
-        data: data[0] 
+      return {
+        success: true,
+        data: data[0],
       };
     } else if (data.length == 0) {
       // User Not Registered yet
       let response = await this.registerUserToDb();
       if (response.success) {
         console.log("Registered User Successfully: ", response.data[0]);
-        return { 
-          success: true, 
-          data: response.data[0] 
+        return {
+          success: true,
+          data: response.data[0],
         };
       }
     } else {
@@ -102,7 +102,10 @@ class User {
     const { data, error } = await Supabase.auth.getUser();
 
     if (error) {
-      return { succes: false, error: error };
+      return {
+        succes: false,
+        error: error,
+      };
     } else {
       const userId = data.user.id;
       const response = await Supabase.from("users")
@@ -115,11 +118,17 @@ class User {
         .select("*");
       if (response.error) {
         console.log("Failed to insert record:", response.error.message);
-        return { success: false, error: response.error };
+        return {
+          success: false,
+          error: response.error,
+        };
       } else {
         console.log("Sucessfully registered user: ", data.user.email);
 
-        return { success: true, data: response.data[0] };
+        return {
+          success: true,
+          data: response.data,
+        };
       }
     }
   }

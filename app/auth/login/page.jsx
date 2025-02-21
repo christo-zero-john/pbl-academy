@@ -29,7 +29,21 @@ export default function LoginToAccount() {
         } else {
           if (data.session) {
             console.log("Login success. Setting session");
-            Supabase.auth.setSession(data.session).then(redirect("/dashboard"));
+            Supabase.auth
+              .setSession(data.session)
+              .then(async () => {
+                const userData = {
+                  first_name: data.session.user.user_metadata.first_name,
+                  last_name: data.session.user.user_metadata.last_name,
+                  username: data.session.user.user_metadata.username,
+                  role: data.session.user.user_metadata.role,
+                };
+                await Supabase.auth.updateUser({
+                  data: { userData },
+                });
+                Supabase.auth.refreshSession();
+              })
+              .then(redirect("/dashboard"));
           } else {
             window.confirm(
               "Failed to fetch user session. Contact support if this issue persists"

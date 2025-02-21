@@ -12,8 +12,16 @@ function CheckLogin({ children }) {
     (async () => {
       const { data, error } = await Supabase.auth.getSession();
       console.log("Checking session: ", data, error);
-      if (data?.session?.user) {
+      if (error) {
+        console.log("Error while checking for login: ", error);
+      } else if (data?.session?.user) {
         setIsloggedIn(true);
+      } else {
+        console.log(
+          "Unexpected error occurred. No error, No user found in session either: ",
+          data,
+          error
+        );
       }
     })();
   }, []);

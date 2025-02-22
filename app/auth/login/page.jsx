@@ -1,12 +1,17 @@
 "use client";
 
 import Supabase from "@/app/api/modules/entities/Supabase";
+import User from "@/frontend/modules/entities/User";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginToAccount() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+
+  useEffect(()=>{
+    console.log(User.user)
+  },[])
 
   function loginHandler(event) {
     event.preventDefault();

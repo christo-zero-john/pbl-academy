@@ -3,6 +3,7 @@
  */
 
 import Bootstrap from "@/frontend/components/Bootstrap";
+import "@/frontend/styles/defaults.css";
 
 export const metadata = {
   title: "PBL Academy",

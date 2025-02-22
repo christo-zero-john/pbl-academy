@@ -1,3 +1,5 @@
+import User from "./User";
+
 class Mentor {
   constructor() {
     if (!Mentor.instance) {
@@ -8,13 +10,22 @@ class Mentor {
 
   async createCourse(course) {
     console.log("Sending request to create new course");
+    course.created_by = User.user.id;
+    course.published = false;
+    console.log(course);
     const request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(course),
     };
+
+    fetch("/api/mentor/courses/create", request)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   }
 }
 

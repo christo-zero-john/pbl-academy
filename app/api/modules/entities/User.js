@@ -1,5 +1,5 @@
 /**
- * User in backend
+ * User object in backend
  */
 
 import Supabase from "./Supabase";

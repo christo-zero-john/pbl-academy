@@ -4,7 +4,7 @@
 
 `21-02-2025`
 
-- [ ] A form to create a new course with fields for title, description, and tool name.
+- [x] A form to create a new course with fields for title and description.
 - [ ] After course creation, redirect to create tasks page.
 
 `22-02-2025`

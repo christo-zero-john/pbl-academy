@@ -3,7 +3,15 @@ import Supabase from "@/app/api/modules/entities/Supabase";
 // User in frontend
 
 class User {
-  constructor() {}
+  constructor() {
+    (async () => {
+      this.user = (await this.getUser()).user || null;
+      if (!User.instance) {
+        this.instance = this;
+      }
+      return User.instance;
+    })();
+  }
 
   async setSession(session) {
     try {
@@ -35,7 +43,7 @@ class User {
       if (error) {
         return { success: false, error: error };
       }
-      return { success: true, user: data };
+      return { success: true, user: data.user };
     } catch (error) {
       return { success: false, error: error };
     }

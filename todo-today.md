@@ -45,4 +45,4 @@ overdue
 
 - [ ] Once a student is enrolled in a course ther will appear a progressbar and a mark a s completed button in all tasks of that course along with option to submit proof of work
 - [ ] Once a task is completed students could submit their proof of work to the mentor.
-- [ ] Mentors can choose either to approve or reject proof of work with sufficcient comment/message/feedback
+

@@ -2,6 +2,7 @@
 
 import TextEditor from "@/frontend/components/text-editor/text-editor";
 import Mentor from "@/frontend/modules/entities/Mentor";
+import User from "@/frontend/modules/entities/User";
 import React, { useEffect, useState } from "react";
 
 export default function CreateCourse() {
@@ -11,7 +12,9 @@ export default function CreateCourse() {
     description: description,
   });
 
-  // Update course description in formData when user enters description in text editor.
+  /**
+   * Update course description in formData when user enters description in text editor.
+   */
   useEffect(() => {
     setFormData({
       ...formData,
@@ -21,6 +24,7 @@ export default function CreateCourse() {
 
   async function createCourceHandler(event) {
     event.preventDefault();
+    console.log(formData);
     await Mentor.createCourse(formData);
   }
 
@@ -35,6 +39,8 @@ export default function CreateCourse() {
             id="title"
             className="d-block"
             name="title"
+            required
+            minLength={3}
             onChange={(event) =>
               setFormData({
                 ...formData,

@@ -12,7 +12,7 @@ export async function POST(request) {
     if (userAuthStatus.error) {
       return NextResponse.json({
         success: false,
-        error: new Error("Unauthorized: " + userAuthStatus.error.message),
+        error: "Unauthorized: " + userAuthStatus.error.message,
       });
     } else {
       const courseData = await request.json();

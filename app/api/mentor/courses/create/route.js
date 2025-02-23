@@ -1,36 +1,49 @@
 import Mentor from "@/app/api/modules/entities/Mentor";
+import Supabase from "@/app/api/modules/entities/Supabase";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const courseData = await request.json();
-    console.log("Recieved Data: ", courseData);
+    const authHeader = request.headers.get("Authorization");
+    const userToken = authHeader.split(" ")[1];
 
-    console.log(
-      "Initializing create new course for user: ",
-      courseData.created_by
-    );
+    const userAuthStatus = await Supabase.auth.getUser(userToken);
 
-    const createCourseStatus = await Mentor.createCourse(courseData);
-
-    if (createCourseStatus.success) {
-      console.log("Successfully created new course");
-      return NextResponse.json(
-        {
-          success: true,
-          data: createCourseStatus.data,
-        },
-        { status: 200 }
-      );
+    if (userAuthStatus.error) {
+      return NextResponse.json({
+        success: false,
+        error: new Error("Unauthorized: " + userAuthStatus.error.message),
+      });
     } else {
-      console.log("Error while creating course");
-      return NextResponse.json(
-        {
-          success: false,
-          error: createCourseStatus.error,
-        },
-        { status: 400 }
+      const courseData = await request.json();
+      console.log("Recieved Data: ", courseData);
+
+      console.log(
+        "Initializing create new course for user: ",
+        courseData.created_by
       );
+
+      const createCourseStatus = await Mentor.createCourse(courseData);
+
+      if (createCourseStatus.success) {
+        console.log("Successfully created new course");
+        return NextResponse.json(
+          {
+            success: true,
+            data: createCourseStatus.data,
+          },
+          { status: 200 }
+        );
+      } else {
+        console.log("Error while creating course");
+        return NextResponse.json(
+          {
+            success: false,
+            error: createCourseStatus.error,
+          },
+          { status: 400 }
+        );
+      }
     }
   } catch (error) {
     console.log("Internal Server Error: ", error);

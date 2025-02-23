@@ -13,7 +13,7 @@ class Mentor {
   }
 
   async createCourse(course) {
-    console.log(await Supabase.auth.getUser())
+    console.log(await Supabase.auth.getUser());
     const { data, error } = await Supabase.from("courses")
       .insert([
         {
@@ -23,9 +23,15 @@ class Mentor {
       .select("*");
 
     if (error) {
-      return { success: false, error: error };
+      return {
+        success: false,
+        error: error,
+      };
     } else {
-      return { success: true, data: data };
+      return {
+        success: true,
+        data: data[0],
+      };
     }
   }
 }

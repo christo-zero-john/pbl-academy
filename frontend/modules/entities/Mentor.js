@@ -12,14 +12,16 @@ class Mentor {
     console.log("Sending request to create new course");
     course.created_by = User.user.id;
     course.published = false;
-    console.log(course);
     const request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${User.user.session_token}`,
       },
       body: JSON.stringify(course),
     };
+
+    console.log("Request: ", request);
 
     fetch("/api/mentor/courses/create", request)
       .then((res) => res.json())

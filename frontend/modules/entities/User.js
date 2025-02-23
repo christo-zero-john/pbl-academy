@@ -6,6 +6,7 @@ class User {
   constructor() {
     (async () => {
       this.user = (await this.getUser()).user || null;
+      this.user.session_token = (await this.getSession()).session.access_token;
       if (!User.instance) {
         this.instance = this;
       }
@@ -27,13 +28,24 @@ class User {
 
   async getSession() {
     try {
-      const { data, error } = await Supabase.auth.getSession(session);
+      const { data, error } = await Supabase.auth.getSession();
+      console.log("get session: ", data, error);
       if (error) {
-        return { success: false, error: error };
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          session: data.session,
+        };
       }
-      return { success: true, session: data };
     } catch (error) {
-      return { success: false, error: error };
+      return {
+        success: false,
+        error: error,
+      };
     }
   }
 

@@ -2,15 +2,16 @@
 
 ## Course Creation and management
 
-`21-02-2025`
+`23-02-2025`
 
 - [x] A form to create a new course with fields for title and description.
 - [ ] After course creation, redirect to create tasks page.
-
-`22-02-2025`
-
-- [ ] In the mentors dashboard, `my courses` is displayed.
+- [ ] In the mentors dashboard, `my courses` are displayed.
 - [ ] Mentors can edit, update and delete their own courses.
+
+`24-02-2025`
+
+- [ ] Mentors can add tasks to their courses.
 - [ ] After Adding tasks, course can be submited for admin approval (Atleast 1 task is required to submit for approval)
 - [ ] Admins can view all courses including approval needed courses. They can choose to approve or reject with a message/report.
 - [ ] Once the admin approves it, mentors can publish the course for public access.

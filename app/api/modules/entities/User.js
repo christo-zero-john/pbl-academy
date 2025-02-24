@@ -85,7 +85,7 @@ class User {
         console.log("Registered User Successfully: ", response.data[0]);
         return {
           success: true,
-          data: response.data[0],
+          data: null,
         };
       }
     } else {

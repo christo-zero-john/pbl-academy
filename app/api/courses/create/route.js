@@ -1,6 +1,9 @@
 import Mentor from "@/app/api/modules/entities/Mentor";
 import { NextResponse } from "next/server";
 
+/**
+ * API Route to create a course
+ */
 export async function POST(request) {
   try {
     const courseData = await request.json();

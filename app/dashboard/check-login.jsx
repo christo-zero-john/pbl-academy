@@ -31,7 +31,8 @@ function CheckLogin({ children }) {
       <>
         <p className="">
           You are not logged in.{" "}
-          <Link href="/auth/login">Login to continue</Link>
+          <Link href="/auth/login">Login to continue</Link> or wait for a few
+          seconds and check your network connection speed...
         </p>
       </>
     );

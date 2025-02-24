@@ -6,7 +6,11 @@ class User {
   constructor() {
     (async () => {
       this.user = (await this.getUser()).user || null;
-      this.user.session_token = (await this.getSession()).session.access_token;
+      if (this.user) {
+        this.user.session_token = (
+          await this.getSession()
+        ).session.access_token;
+      }
       if (!User.instance) {
         this.instance = this;
       }

@@ -25,7 +25,7 @@ class Course {
               role
             )`
         )
-        .eq("id", "485e2dfb-5810-42d6-b711-c06e219f13f0");
+        .match(filters);
       if (error) {
         return {
           success: false,

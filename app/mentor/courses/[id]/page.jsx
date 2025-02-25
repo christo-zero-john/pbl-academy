@@ -1,6 +1,7 @@
 "use client";
 
 import Course from "@/frontend/modules/entities/Course";
+import User from "@/frontend/modules/entities/User";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -43,7 +44,14 @@ export default function CourseItemPage() {
 
   return (
     <div className="">
-      <h1 className="">{course.title}</h1>
+      <div className="header">
+        <h1 className="">{course.title}</h1>
+        {User.user.id == course.created_by.id ? (
+          <button className="">Edit</button>
+        ) : (
+          ""
+        )}
+      </div>
       <div>
         <p
           className=""

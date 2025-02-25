@@ -18,6 +18,55 @@ class User {
     })();
   }
 
+  async login(formData) {
+    try {
+      const request = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      };
+
+      const response = await fetch("/api/auth/login", request);
+      const data = await response.json();
+      console.log(data);
+
+      if (!data.success) {
+        return {
+          success: false,
+          error: data.error,
+        };
+      } else {
+        if (data.session) {
+          console.log("Login success. Setting session");
+          await Supabase.auth.setSession(data.session);
+          console.log("user data: ", data.userData);
+          await Supabase.auth.updateUser({
+            data: data.userData,
+          });
+          await Supabase.auth.refreshSession();
+          return {
+            success: true,
+            data: "User logged in successfully",
+          };
+        } else {
+          return {
+            success: false,
+            error: new Error(
+              "Failed to fetch user session. Try again or contact support if this issue persists"
+            ),
+          };
+        }
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: error,
+      };
+    }
+  }
+
   async setSession(session) {
     try {
       const { data, error } = await Supabase.auth.setSession(session);
@@ -40,6 +89,10 @@ class User {
           error: error,
         };
       } else {
+        if (!this.user) {
+          this.user = data.session.user;
+          this.user.session_token = data.session.access_token;
+        }
         return {
           success: true,
           session: data.session,
@@ -79,3 +132,4 @@ class User {
 }
 
 export default new User();
+// User object in frontend

@@ -8,6 +8,7 @@
   - [ ] And in the client side, user session is refreshed only when user_metadata does not have those data that is the response has a userData object.
   - [ ] Maybe we should also fetch and refresh userData after the user updates their details too.
 
-- [ ] In the check login, when it is checking login display a message "Checking user info", and display not logged in only if the user is not logges in. It requires connection to the internet to check for session. So getSession may return null if there is no network connection.
+- [x] In the check login, when it is checking login display a message "Checking user info", and display not logged in only if the user is not logged in. It requires connection to the internet to check for session. So getSession may return null if there is no network connection.
+      -- Fixed it by displaying user not logged in or no internet conection in checkLogin page, then when getSession is true, set User.user as the returned user, so that the user is available for further operations
 
 -[ ] In the create course backend route, change the insert to be only allowed to authenticated users. Currently anyone could insert into public.courses

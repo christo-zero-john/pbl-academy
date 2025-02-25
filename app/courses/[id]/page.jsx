@@ -2,7 +2,7 @@
 
 import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
-import { notFound, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**

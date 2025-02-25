@@ -1,6 +1,5 @@
 "use client";
 
-import Supabase from "@/app/api/modules/entities/Supabase";
 import User from "@/frontend/modules/entities/User";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -9,48 +8,24 @@ import { useEffect, useState } from "react";
 export default function LoginToAccount() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
-  useEffect(()=>{
-    console.log(User.user)
-  },[])
+  // useEffect(() => {
+  //   console.log(User.user);
+  // }, []);
 
-  function loginHandler(event) {
+  async function loginHandler(event) {
     event.preventDefault();
     console.log(formData);
 
-    const request = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    };
+    const loginStatus = await User.login(formData);
 
-    fetch("/api/auth/login", request)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (!data.success) {
-          window.confirm(data.error);
-        } else {
-          if (data.session) {
-            console.log("Login success. Setting session");
-            Supabase.auth
-              .setSession(data.session)
-              .then(async () => {
-                console.log("user data: ", data.userData);
-                await Supabase.auth.updateUser({
-                  data: data.userData,
-                });
-                Supabase.auth.refreshSession();
-              })
-              .then(redirect("/dashboard"));
-          } else {
-            window.confirm(
-              "Failed to fetch user session. Contact support if this issue persists"
-            );
-          }
-        }
-      });
+    console.log(loginStatus);
+
+    if (loginStatus.success) {
+      redirect("/dashboard");
+    } else {
+      console.log("Error while loggin in: ", loginStatus.error);
+      window.confirm(loginStatus.error.message);
+    }
   }
 
   return (

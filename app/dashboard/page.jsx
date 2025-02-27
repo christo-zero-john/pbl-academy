@@ -17,9 +17,24 @@ export default function UserDashboard() {
 
   return (
     <div>
+      <h1 className="">
+        Welcome, <span className="">{User.user.user_metadata.first_name}</span>
+        &nbsp;
+        <span className="">{User.user.user_metadata.last_name}</span>
+      </h1>
       <button className="" onClick={logoutHandler}>
         Logout
       </button>
+
+      {User.user.user_metadata.role.includes("mentor") ? (
+        <button className="">
+          <a href="/mentor" className="">
+            Mentor Dashboard
+          </a>
+        </button>
+      ) : (
+        "Not Mentor"
+      )}
     </div>
   );
 }

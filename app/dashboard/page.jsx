@@ -2,8 +2,15 @@
 
 import User from "@/frontend/modules/entities/User";
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function UserDashboard() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(User.user);
+  }, []);
+
   async function logoutHandler() {
     const response = await User.logout();
     console.log(response);
@@ -18,15 +25,15 @@ export default function UserDashboard() {
   return (
     <div>
       <h1 className="">
-        Welcome, <span className="">{User.user.user_metadata.first_name}</span>
+        Welcome, <span className="">{user.user_metadata.first_name}</span>
         &nbsp;
-        <span className="">{User.user.user_metadata.last_name}</span>
+        <span className="">{user.user_metadata.last_name}</span>
       </h1>
       <button className="" onClick={logoutHandler}>
         Logout
       </button>
 
-      {User.user.user_metadata.role.includes("mentor") ? (
+      {user.user_metadata.role.includes("mentor") ? (
         <button className="">
           <a href="/mentor" className="">
             Mentor Dashboard

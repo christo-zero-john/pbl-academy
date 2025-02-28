@@ -1,4 +1,4 @@
-import Supabase from "@/app/api/modules/entities/Supabase";
+import Supabase from "./Supabase";
 
 // User in frontend
 

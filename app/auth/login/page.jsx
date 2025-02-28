@@ -35,7 +35,7 @@ export default function LoginToAccount() {
         <h1>Login</h1>
         <label className="">
           <input
-            autocomplete="on"
+            autoComplete="on"
             type="email"
             className=""
             name="email"
@@ -51,7 +51,7 @@ export default function LoginToAccount() {
         </label>
         <label className="">
           <input
-            autocomplete="on"
+            autoComplete="on"
             type="text"
             className=""
             name="password"

@@ -47,6 +47,7 @@ export default function SignUp() {
             type="email"
             className=""
             name="email"
+            autoComplete="on"
             onChange={(event) =>
               setFormData({ ...formData, email: event.target.value })
             }
@@ -61,6 +62,7 @@ export default function SignUp() {
             name="password"
             required
             minLength={8}
+            autoComplete="on"
             onChange={(event) =>
               setFormData({ ...formData, password: event.target.value })
             }

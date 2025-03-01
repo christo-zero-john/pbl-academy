@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import User from "@/frontend/modules/entities/User";
 
 function CheckLogin({ children }) {
   const [isLoggedIn, setIsloggedIn] = useState(false);
+  
+
 
   useEffect(() => {
     // console.log(User.user);
@@ -15,7 +17,7 @@ function CheckLogin({ children }) {
   }, []);
 
   if (isLoggedIn) {
-    redirect("/dashboard");
+    router.push("/dashboard");
     return (
       <>
         <p className="">

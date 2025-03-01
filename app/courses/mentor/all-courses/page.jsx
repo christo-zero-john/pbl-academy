@@ -2,7 +2,7 @@
 
 import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function AllCoursesOfMentor() {
@@ -27,7 +27,7 @@ function AllCoursesOfMentor() {
   }, []);
 
   function viewCourseHandler(event) {
-    redirect(`/courses/${event.target.id}`);
+    Router.push(`/courses/${event.target.id}`);
   }
 
   if (courses == null) {

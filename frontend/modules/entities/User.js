@@ -38,12 +38,13 @@ class User {
           console.log("Login success. Setting session");
           await Supabase.auth.setSession(data.session);
           console.log("user data: ", data.userData);
+          console.log("Updating user");
           await Supabase.auth.updateUser({
             data: data.userData,
           });
+          console.log("Refreshing user session");
           await Supabase.auth.refreshSession();
-          this.user = data.session.user;
-          this.user.access_token = data.session.access_token;
+          this.setUser();
           return {
             success: true,
             data: "User logged in successfully",

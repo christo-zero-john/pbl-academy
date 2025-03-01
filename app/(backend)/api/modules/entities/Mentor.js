@@ -15,7 +15,7 @@ class Mentor {
   async createCourse(course) {
     const Supabase = await createClient();
     const userSession = await Supabase.auth.getSession();
-    console.log(userSession.session.user);
+    console.log(userSession.data.session.user);
     const { data, error } = await Supabase.from("courses")
       .insert([
         {

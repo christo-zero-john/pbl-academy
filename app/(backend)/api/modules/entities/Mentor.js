@@ -2,7 +2,7 @@
  * Mentor object in Backend
  */
 
-import Supabase from "./Supabase";
+import { createClient } from "./Supabase";
 
 class Mentor {
   constructor() {
@@ -13,7 +13,9 @@ class Mentor {
   }
 
   async createCourse(course) {
-    console.log(await Supabase.auth.getUser());
+    const Supabase = await createClient();
+    const userSession = await Supabase.auth.getSession();
+    console.log(userSession.session.user);
     const { data, error } = await Supabase.from("courses")
       .insert([
         {

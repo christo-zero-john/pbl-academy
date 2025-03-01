@@ -57,7 +57,7 @@ export default function UserDashboard() {
 
       {user?.user_metadata?.role.includes("mentor") ? (
         <button className="">
-          <a href="/mentor" className="">
+          <a href="/courses/mentor" className="">
             Mentor Dashboard
           </a>
         </button>

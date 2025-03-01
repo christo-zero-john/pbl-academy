@@ -44,8 +44,6 @@ export default function CourseItemPage() {
     })();
   }, []);
 
-  function editCourseHandler(event) {}
-
   if (course == null) {
     return <div>Fetching Course...</div>;
   }
@@ -57,12 +55,15 @@ export default function CourseItemPage() {
 
         {
           // Display an edit button if the course is viewed by the course creator.
-          User.user.id == course.created_by.id ? (
-            <button className="" onClick={editCourseHandler}>
+          User.user.id == course.created_by.id && (
+            <button
+              className=""
+              onClick={(event) =>
+                router.push(`/courses/mentor/edit-course/${course.id}`)
+              }
+            >
               Edit
             </button>
-          ) : (
-            ""
           )
         }
       </div>

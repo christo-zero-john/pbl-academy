@@ -2,6 +2,7 @@
 
 import TextEditor from "@/frontend/components/text-editor/text-editor";
 import Mentor from "@/frontend/modules/entities/Mentor";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
  * @description Display course creation form if the user is a mentor
  */
 export default function CreateCourse() {
+  const router = useRouter();
   const [description, setDescription] = useState("");
   const [formData, setFormData] = useState({
     title: "",
@@ -28,7 +30,16 @@ export default function CreateCourse() {
   async function createCourceHandler(event) {
     event.preventDefault();
     console.log(formData);
-    await Mentor.createCourse(formData);
+    const createCourseStatus = await Mentor.createCourse(formData);
+    if (!createCourseStatus.success) {
+      window.confirm(
+        "Error Creating Course: ",
+        createCourseStatus.error.message
+      );
+    } else {
+      console.log("Succesfully created new course");
+      router.push(`/courses/${response.data.id}`);
+    }
   }
 
   return (

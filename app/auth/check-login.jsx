@@ -1,19 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Supabase from "@/frontend/modules/entities/Supabase";
 import { redirect } from "next/navigation";
+import User from "@/frontend/modules/entities/User";
 
 function CheckLogin({ children }) {
   const [isLoggedIn, setIsloggedIn] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const { data, error } = await Supabase.auth.getSession();
-      if (data?.session?.user) {
-        setIsloggedIn(true);
-      }
-    })();
+    console.log(User.user);
+    if (User.user) {
+      setIsloggedIn(true);
+    }
   }, []);
 
   if (isLoggedIn) {

@@ -8,7 +8,7 @@ function CheckLogin({ children }) {
   const [isLoggedIn, setIsloggedIn] = useState(false);
 
   useEffect(() => {
-    console.log(User.user);
+    // console.log(User.user);
     if (User.user) {
       setIsloggedIn(true);
     }

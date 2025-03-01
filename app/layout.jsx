@@ -4,7 +4,6 @@
 
 import Bootstrap from "@/frontend/components/Bootstrap";
 import "@/frontend/styles/defaults.css";
-import { revalidatePath } from "next/cache";
 
 export const metadata = {
   title: "PBL Academy",

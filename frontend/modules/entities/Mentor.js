@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import User from "./User";
 
 class Mentor {
@@ -28,14 +28,18 @@ class Mentor {
       .then((response) => {
         console.log(response);
         if (response.error) {
-          window.confirm("Error Creating Course: ", response.error.message);
+          return {
+            success: false,
+            error: response.error,
+          };
         } else {
-          console.log("Succesfully created new course");
-          redirect(`/courses/${response.data.id}`);
+          return {
+            success: true,
+            data: response?.data,
+          };
         }
       });
   }
-
 }
 
 export default new Mentor();

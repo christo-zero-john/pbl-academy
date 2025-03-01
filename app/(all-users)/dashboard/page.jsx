@@ -23,6 +23,24 @@ export default function UserDashboard() {
     }
   }
 
+  if (!user) {
+    return <div className="">Fetching User data</div>;
+  }
+
+  if (user && !user.user_metadata.role) {
+    return (
+      <div className="">
+        <span className="text-danger fw-bold">'First Login' error.</span> It
+        seems Like there is some problem while login. We are trting to fix it as
+        soon as possible. Please Logout and Login again to access your
+        account...
+        <button className="" onClick={logoutHandler}>
+          Logout
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1 className="">
@@ -37,7 +55,7 @@ export default function UserDashboard() {
         Logout
       </button>
 
-      {user?.user_metadata.role.includes("mentor") ? (
+      {user?.user_metadata?.role.includes("mentor") ? (
         <button className="">
           <a href="/mentor" className="">
             Mentor Dashboard

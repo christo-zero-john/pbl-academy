@@ -1,4 +1,4 @@
- import Mentor from "@/app/api/modules/entities/Mentor";
+import Mentor from "../../modules/entities/Mentor";
 import { NextResponse } from "next/server";
 
 /**
@@ -48,5 +48,3 @@ export async function POST(request) {
     );
   }
 }
-
-

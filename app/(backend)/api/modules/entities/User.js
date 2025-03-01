@@ -94,7 +94,10 @@ class User {
       }
     } else {
       // Unexpected error. Either multiple records returned or something else.
-      console.log("Unexpected Error Occured: ", error);
+      console.log(
+        "Unexpected Error Occured while registering new user: ",
+        error
+      );
       return {
         success: false,
         error: new Error("500: Unexpected Error occured."),
@@ -124,13 +127,17 @@ class User {
         ])
         .select("*");
       if (response.error) {
-        console.log("Failed to insert record:", response.error.message);
+        console.log("Failed to register new User:", response.error.message);
         return {
           success: false,
           error: response.error,
         };
       } else {
-        console.log("Sucessfully registered user: ", data.user.email);
+        console.log(
+          "Sucessfully registered user: ",
+          data.user.email,
+          response.data
+        );
 
         return {
           success: true,

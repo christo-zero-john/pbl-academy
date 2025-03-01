@@ -37,12 +37,19 @@ function AllCourses() {
     } else {
       return (
         <div>
+          <p className="text-center">Displaying {courses.length} courses</p>
           {courses.map((course) => (
             <div
               key={course.id}
-              className="border border-3 border-secondary p-3 m-2 w-fit"
+              className="border border-3 border-secondary p-3 m-2 w-fit d-inline-block m-2"
             >
-              <h1 className="fs-5 fw- d-inline-block mx-2">{course.title}</h1>
+              <div className="">
+                <h1 className="fs-5 fw- d-inline-block mx-2">{course.title}</h1>
+                <p className="small">
+                  <span className="fw-bold">By: </span>
+                  {course.created_by.id}
+                </p>
+              </div>
               <button
                 className="btn btn-primary d-inline-block mx-2"
                 onClick={viewCourseHandler}

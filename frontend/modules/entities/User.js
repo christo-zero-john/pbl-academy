@@ -1,4 +1,4 @@
-import Supabase from "./Supabase";
+import { createClient } from "./Supabase";
 
 // User in frontend
 
@@ -14,6 +14,7 @@ class User {
   }
 
   async login(formData) {
+    const Supabase = createClient();
     try {
       const request = {
         method: "POST",
@@ -41,6 +42,8 @@ class User {
             data: data.userData,
           });
           await Supabase.auth.refreshSession();
+          this.user = data.session.user;
+          this.user.access_token = data.session.access_token;
           return {
             success: true,
             data: "User logged in successfully",
@@ -63,6 +66,7 @@ class User {
   }
 
   async setSession(session) {
+    const Supabase = createClient();
     try {
       const { data, error } = await Supabase.auth.setSession(session);
       if (error) {
@@ -84,6 +88,7 @@ class User {
   }
 
   async getSession() {
+    const Supabase = createClient();
     try {
       const { data, error } = await Supabase.auth.getSession();
       console.log("get session: ", data, error);
@@ -121,6 +126,7 @@ class User {
   }
 
   async logout() {
+    const Supabase = createClient();
     try {
       const { data, error } = await Supabase.auth.signOut();
       if (error) {

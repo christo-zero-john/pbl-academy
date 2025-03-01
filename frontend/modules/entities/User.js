@@ -5,12 +5,7 @@ import Supabase from "./Supabase";
 class User {
   constructor() {
     (async () => {
-      this.user = (await this.getUser()).user || null;
-      if (this.user) {
-        this.user.session_token = (
-          await this.getSession()
-        ).session.access_token;
-      }
+      await this.setUser();
       if (!User.instance) {
         this.instance = this;
       }
@@ -71,11 +66,20 @@ class User {
     try {
       const { data, error } = await Supabase.auth.setSession(session);
       if (error) {
-        return { success: false, error: error };
+        return {
+          success: false,
+          error: error,
+        };
       }
-      return { success: true, session: data };
+      return {
+        success: true,
+        session: data,
+      };
     } catch (error) {
-      return { success: false, error: error };
+      return {
+        success: false,
+        error: error,
+      };
     }
   }
 
@@ -106,15 +110,13 @@ class User {
     }
   }
 
-  async getUser() {
-    try {
-      const { data, error } = await Supabase.auth.getUser();
-      if (error) {
-        return { success: false, error: error };
-      }
-      return { success: true, user: data.user };
-    } catch (error) {
-      return { success: false, error: error };
+  async setUser() {
+    const getSessionStatus = await this.getSession();
+    if (getSessionStatus.success) {
+      this.user = getSessionStatus.session.user;
+      this.user.session_token = getSessionStatus.session.access_token;
+    } else {
+      this.user = null;
     }
   }
 
@@ -122,11 +124,20 @@ class User {
     try {
       const { data, error } = await Supabase.auth.signOut();
       if (error) {
-        return { success: false, error: error };
+        return {
+          success: false,
+          error: error,
+        };
       }
-      return { success: true, data: data };
+      return {
+        success: true,
+        data: data,
+      };
     } catch (error) {
-      return { success: false, error: error };
+      return {
+        success: false,
+        error: error,
+      };
     }
   }
 }

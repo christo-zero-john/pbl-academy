@@ -1,4 +1,4 @@
-import Supabase from "./Supabase";
+import { createClient } from "./Supabase";
 
 class Course {
   constructor() {
@@ -9,6 +9,7 @@ class Course {
   }
 
   async fetchCourses(filters) {
+    const Supabase = await createClient();
     try {
       const { data, error } = await Supabase.from("courses")
         .select(

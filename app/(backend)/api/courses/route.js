@@ -22,7 +22,10 @@ export async function POST(request) {
         { status: 400 }
       );
     } else {
-      console.log("Successfully fetched courses: ", getCoursesStatus.data);
+      console.log(
+        "Successfully fetched courses. Total: ",
+        getCoursesStatus.data.length
+      );
       return NextResponse.json(
         {
           success: true,

@@ -1,6 +1,5 @@
 "use client";
 
-import CheckLogin from "@/app/auth/check-login";
 import User from "@/frontend/modules/entities/User";
 
 export default function MenotorLayout({ children }) {

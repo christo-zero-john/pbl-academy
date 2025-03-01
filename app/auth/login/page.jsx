@@ -23,8 +23,8 @@ export default function LoginToAccount() {
     if (loginStatus.success) {
       redirect("/dashboard");
     } else {
-      console.log("Error while loggin in: ", loginStatus.error);
-      window.confirm(loginStatus.error.message);
+      console.log("Error while logging in: ", loginStatus.error);
+      window.confirm(loginStatus.error);
     }
   }
 

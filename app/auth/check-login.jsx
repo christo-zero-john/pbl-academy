@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import User from "@/frontend/modules/entities/User";
+import Link from "next/link";
 
 function CheckLogin({ children }) {
   const [isLoggedIn, setIsloggedIn] = useState(false);
-  
 
+  const router = useRouter();
 
   useEffect(() => {
     // console.log(User.user);

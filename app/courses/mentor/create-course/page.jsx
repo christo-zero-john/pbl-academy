@@ -2,10 +2,10 @@
 
 import TextEditor from "@/frontend/components/text-editor/text-editor";
 import Mentor from "@/frontend/modules/entities/Mentor";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
- * 
+ *
  * @description Display course creation form if the user is a mentor
  */
 export default function CreateCourse() {

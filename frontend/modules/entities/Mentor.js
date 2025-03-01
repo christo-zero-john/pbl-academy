@@ -31,7 +31,7 @@ class Mentor {
           window.confirm("Error Creating Course: ", response.error.message);
         } else {
           console.log("Succesfully created new course");
-          redirect(`/mentor/courses/${response.data.id}`);
+          redirect(`/courses/${response.data.id}`);
         }
       });
   }

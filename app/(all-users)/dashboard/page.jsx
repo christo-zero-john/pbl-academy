@@ -8,7 +8,7 @@ export default function UserDashboard() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    console.log(User.user);
+    // console.log(User.user);
     setUser(User.user);
   }, []);
 

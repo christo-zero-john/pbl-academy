@@ -2,11 +2,13 @@
 
 import User from "@/frontend/modules/entities/User";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginToAccount() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const router = useRouter();
 
   // useEffect(() => {
   //   console.log(User.user);
@@ -21,7 +23,7 @@ export default function LoginToAccount() {
     console.log(loginStatus);
 
     if (loginStatus.success) {
-      redirect("/dashboard");
+      router.push("/dashboard");
     } else {
       console.log("Error while logging in: ", loginStatus.error);
       window.confirm(loginStatus.error);

@@ -40,6 +40,37 @@ class Mentor {
         }
       });
   }
+
+  async updateCourse(course) {
+    console.log("Sending request to update course");
+    course.created_by = course.created_by.id
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(course),
+    };
+
+    console.log("Request: ", request);
+
+    fetch("/api/courses/update", request)
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+        if (response.error) {
+          return {
+            success: false,
+            error: response.error,
+          };
+        } else {
+          return {
+            success: true,
+            data: response?.data,
+          };
+        }
+      });
+  }
 }
 
 export default new Mentor();

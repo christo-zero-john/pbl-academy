@@ -13,6 +13,16 @@ class User {
     })();
   }
 
+  async getUser() {
+    //setTimeout only returns a timeout ID, so we should wrap it inside and resolve as a promise to get a desired outcome of delaying.
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // console.log(this.user);
+        resolve(this.user);
+      }, 200);
+    });
+  }
+
   async login(formData) {
     const Supabase = createClient();
     try {

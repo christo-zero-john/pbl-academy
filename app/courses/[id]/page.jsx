@@ -80,25 +80,21 @@ export default function CourseItemPage() {
           )
         }
       </div>
+
+      <p className="">
+        Created By: &nbsp;
+        {course.created_by.first_name} {course.created_by.last_name}
+      </p>
+      <p className="">{course.created_at}</p>
+      <p className="fw-bold">
+        {(course.published && "Published") || "In Drafts"}
+      </p>
       <div>
         <p
           className=""
           dangerouslySetInnerHTML={{ __html: course.description }}
         />
       </div>
-      <div>
-        <p className="">
-          Created By: &nbsp;
-          {course.created_by.first_name} {course.created_by.last_name}
-        </p>
-      </div>
-      <div>{course.created_at}</div>
-      <div>
-        <p className="fw-bold">
-          {(course.published && "Published") || "In Drafts"}
-        </p>
-      </div>
-      <div></div>
     </div>
   );
 }

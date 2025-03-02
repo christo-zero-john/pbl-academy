@@ -28,10 +28,15 @@ class Course {
       return fetch("/api/courses/", request)
         .then((res) => res.json())
         .then((data) => {
-          return data;
+          // The response returned from the server is sent to the course page. It contains success, error or courses fields.
+          return { ...data };
         });
     } catch (error) {
       console.log("Error Fetching Courses: ", error);
+      return {
+        success: false,
+        error: error,
+      };
     }
   }
 }

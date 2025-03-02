@@ -1,5 +1,8 @@
 import { createClient } from "./Supabase";
 
+/**
+ * Class to handle course related functionalities in backend
+ */
 class Course {
   constructor() {
     if (!Course.instance) {
@@ -9,21 +12,24 @@ class Course {
   }
 
   async fetchCourses(filters) {
-    const Supabase = await createClient();
+    // If the filter has an id, it will return the course with that id using fetchCourseById method
+    if (filters.id) {
+      return this.fetchCourseById(filters.id);
+    }
+
     try {
+      const Supabase = await createClient();
+      await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("courses")
         .select(
           `
             id,
             title,
-            description,
             published,
             created_by (
               id,
               first_name,
-              last_name,
-              username,
-              role
+              last_name
             )`
         )
         .match(filters);
@@ -39,6 +45,50 @@ class Course {
         };
       }
     } catch (error) {
+      // Catch unexpected errors
+      console.log("Internal Server Error: ", error);
+      return {
+        success: false,
+        error:
+          `Internal Server Error: ${error.message}` ||
+          "Something went wrong. Internal Server Error. Please Contact Support",
+      };
+    }
+  }
+
+  async fetchCourseById(id) {
+    try {
+      const Supabase = await createClient();
+      await Supabase.auth.getSession();
+      const { data, error } = await Supabase.from("courses")
+        .select(
+          `
+            id,
+            title,
+            published,
+            description,
+            created_by (
+              id,
+              first_name,
+              last_name,
+              username,
+              role
+            )`
+        )
+        .eq("id", id);
+      if (error) {
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          data: data,
+        };
+      }
+    } catch (error) {
+      // Catch unexpected errors
       console.log("Internal Server Error: ", error);
       return {
         success: false,

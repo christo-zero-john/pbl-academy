@@ -54,7 +54,7 @@ class Mentor {
 
     console.log("Request: ", request);
 
-    fetch("/api/courses/update", request)
+    return fetch("/api/courses/update", request)
       .then((res) => res.json())
       .then((response) => {
         console.log(response);

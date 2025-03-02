@@ -87,6 +87,16 @@ export default function EditCoursePage() {
     const updateCourseDeatilsStatus = await Mentor.updateCourse({
       ...formData,
     }); // using spread operator, otherwise only a reference is sent to the function, which will cause errors
+
+    if (!updateCourseDeatilsStatus.success) {
+      window.confirm(
+        "Error Updating Course: ",
+        updateCourseDeatilsStatus.error.message
+      );
+    } else {
+      console.log("Succesfully updated course");
+      router.push(`/courses/${updateCourseDeatilsStatus.data.id}`);
+    }
   }
 
   if (!course) {

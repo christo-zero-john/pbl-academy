@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 function AllCoursesOfMentor() {
+  const router = useRouter();
   const [courses, setCourses] = useState(null);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function AllCoursesOfMentor() {
   }, []);
 
   function viewCourseHandler(event) {
-    Router.push(`/courses/${event.target.id}`);
+    router.push(`/courses/${event.target.id}`);
   }
 
   if (courses == null) {

@@ -30,7 +30,11 @@ export default function CourseItemPage() {
 
       if (getCourseStatus.success) {
         console.log("Successfully fetched course");
-        if (getCourseStatus.courses.length > 1) {
+        if (getCourseStatus.courses.length == 0) {
+          {
+            router.push("/courses/404");
+          }
+        } else if (getCourseStatus.courses.length > 1) {
           window.confirm(
             "Something unexpected happened while fetching course. Instead of one, we got multiple courses!!!"
           );
@@ -38,8 +42,17 @@ export default function CourseItemPage() {
           setCourse(getCourseStatus.courses[0]);
           console.log(getCourseStatus.courses[0]);
         }
-      } else {
-        router.push("/courses/404");
+      } else if (getCourseStatus.error) {
+        if (getCourseStatus.error.includes("fetch failed")) {
+          window.confirm(
+            "Failed to connect with database. Check your network connection and try again later..."
+          );
+        } else {
+          window.confirm(
+            "Some Unexpected error while fetching course." +
+              getCourseStatus.error
+          );
+        }
       }
     })();
   }, []);
@@ -62,7 +75,7 @@ export default function CourseItemPage() {
                 router.push(`/courses/mentor/edit-course/${course.id}`)
               }
             >
-              Edit
+              Manage Course
             </button>
           )
         }

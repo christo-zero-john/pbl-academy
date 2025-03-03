@@ -19,6 +19,9 @@ class Course {
 
     try {
       const Supabase = await createClient();
+      if (!filters.created_by) {
+        filters.published = true;
+      }
       await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("courses")
         .select(
@@ -61,7 +64,7 @@ class Course {
       const Supabase = await createClient();
       await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("courses")
-      .select(
+        .select(
           `
         id,
         title,
@@ -79,12 +82,13 @@ class Course {
           created_at,
           course_id,
           description,
-          resource_links,
+          resource_link,
           day,
           index,
           created_by,
           updated_at
-        )`)
+        )`
+        )
         .eq("id", id);
       if (error) {
         return {

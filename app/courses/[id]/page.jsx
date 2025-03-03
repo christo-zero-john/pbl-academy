@@ -89,12 +89,10 @@ export default function CourseItemPage() {
       <p className="fw-bold">
         {(course.published && "Published") || "In Drafts"}
       </p>
-      <div>
-        <p
-          className=""
-          dangerouslySetInnerHTML={{ __html: course.description }}
-        />
-      </div>
+      <div
+        className=""
+        dangerouslySetInnerHTML={{ __html: course.description }}
+      ></div>
     </div>
   );
 }

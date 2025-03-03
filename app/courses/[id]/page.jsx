@@ -4,6 +4,7 @@ import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import RenderCourseTasks from "./course-tasks";
 
 /**
  *
@@ -26,7 +27,7 @@ export default function CourseItemPage() {
         id: params.id,
       });
 
-      console.log(getCourseStatus);
+      // console.log(getCourseStatus);
 
       if (getCourseStatus.success) {
         console.log("Successfully fetched course");
@@ -36,11 +37,11 @@ export default function CourseItemPage() {
           }
         } else if (getCourseStatus.courses.length > 1) {
           window.confirm(
-            "Something unexpected happened while fetching course. Instead of one, we got multiple courses!!!"
+            "Something unexpected happened while fetching course. Instead of one, we found multiple courses! Contact Support to resolve this problem"
           );
         } else {
           setCourse(getCourseStatus.courses[0]);
-          console.log(getCourseStatus.courses[0]);
+          // console.log(getCourseStatus.courses[0]);
         }
       } else if (getCourseStatus.error) {
         if (getCourseStatus.error.includes("fetch failed")) {
@@ -66,11 +67,20 @@ export default function CourseItemPage() {
       <div className="header">
         <h1 className="">{course.title}</h1>
 
+        <div className="duration">
+          <p className="d-inline-block mx-2">
+            Days: {course.totalDays || "calculating..."}
+          </p>
+          <p className="d-inline-block mx-2">
+            Tasks: {course.totalTasks || "calculating..."}
+          </p>
+        </div>
+
         {
           // Display an edit button if the course is viewed by the course creator.
           User.user.id == course.created_by.id && (
             <button
-              className=""
+              className="btn btn-primary"
               onClick={(event) =>
                 router.push(`/courses/mentor/edit-course/${course.id}`)
               }
@@ -81,9 +91,11 @@ export default function CourseItemPage() {
         }
       </div>
 
-      <p className="">
+      <p className="p-2">
         Created By: &nbsp;
-        {course.created_by.first_name} {course.created_by.last_name}
+        <span className="text-success">
+          {course.created_by.first_name} {course.created_by.last_name}
+        </span>
       </p>
       <p className="">{course.created_at}</p>
       <p className="fw-bold">
@@ -93,6 +105,7 @@ export default function CourseItemPage() {
         className=""
         dangerouslySetInnerHTML={{ __html: course.description }}
       ></div>
+      <RenderCourseTasks course={course} setCourse={setCourse} />
     </div>
   );
 }

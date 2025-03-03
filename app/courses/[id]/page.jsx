@@ -65,7 +65,7 @@ export default function CourseItemPage() {
   return (
     <div className="">
       <div className="header">
-        <h1 className="">{course.title}</h1>
+        <h1 className="text-center">{course.title}</h1>
 
         <div className="duration">
           <p className="d-inline-block mx-2">
@@ -79,14 +79,25 @@ export default function CourseItemPage() {
         {
           // Display an edit button if the course is viewed by the course creator.
           User.user.id == course.created_by.id && (
-            <button
-              className="btn btn-primary"
-              onClick={(event) =>
-                router.push(`/courses/mentor/edit-course/${course.id}`)
-              }
-            >
-              Manage Course
-            </button>
+            <div className="">
+              <button
+                className="btn btn-primary"
+                onClick={(event) =>
+                  router.push(`/courses/mentor/edit-course/${course.id}`)
+                }
+              >
+                Edit Course Details
+              </button>
+
+              <button
+                className="btn btn-primary"
+                onClick={(event) =>
+                  router.push(`/courses/mentor/edit-course/${course.id}`)
+                }
+              >
+                Manage Tasks
+              </button>
+            </div>
           )
         }
       </div>

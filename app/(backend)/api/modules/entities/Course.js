@@ -61,20 +61,30 @@ class Course {
       const Supabase = await createClient();
       await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("courses")
-        .select(
+      .select(
           `
-            id,
-            title,
-            published,
-            description,
-            created_by (
-              id,
-              first_name,
-              last_name,
-              username,
-              role
-            )`
-        )
+        id,
+        title,
+        published,
+        description,
+        created_by (
+          id,
+          first_name,
+          last_name,
+          username,
+          role
+        ),
+        tasks (
+          id,
+          created_at,
+          course_id,
+          description,
+          resource_links,
+          day,
+          index,
+          created_by,
+          updated_at
+        )`)
         .eq("id", id);
       if (error) {
         return {

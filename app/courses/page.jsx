@@ -33,7 +33,7 @@ function AllCourses() {
     return <div>Fetching Courses...</div>;
   } else {
     if (courses.length == 0) {
-      return <div>No Courses Found</div>;
+      return <div>0 Published Courses Found</div>;
     } else {
       return (
         <div>

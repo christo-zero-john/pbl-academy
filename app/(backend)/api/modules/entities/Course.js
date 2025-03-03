@@ -82,7 +82,7 @@ class Course {
           created_at,
           course_id,
           description,
-          resource_link,
+          resource_links,
           day,
           index,
           created_by,

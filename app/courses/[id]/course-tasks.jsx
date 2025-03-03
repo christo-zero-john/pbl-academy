@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
+import TaskDayWise from "./task-day-wise";
 
 export default function RenderCourseTasks({ course, setCourse }) {
-  const [readyToRender, setReadyToRender] = useState(null);
+  const [readyToRender, setReadyToRender] = useState(false);
 
   useEffect(() => {
     console.log(course);
-    if (course.tasks.length > 0) {
+    if (!readyToRender) {
       groupAndSortTasks();
-    } else if (course.tasks.length == 1) {
-      setCourse({
-        ...course,
-        tasks: [course.tasks],
-      });
     }
   }, [course]);
 
@@ -41,11 +37,62 @@ export default function RenderCourseTasks({ course, setCourse }) {
 
     setCourse({
       ...course,
-      tasks: { ...tasks2D },
+      tasks: [...tasks2D],
       totalDays: tasks2D.length,
       totalTasks: course.tasks.length,
     });
+    setReadyToRender(true);
   }
 
-  return <div></div>;
+  if (!readyToRender) {
+    return (
+      <>
+        <p className="">Loading Tasks...</p>
+      </>
+    );
+  }
+
+  console.log(course.tasks);
+
+  if (course.tasks.length == 0) {
+    return (
+      <>
+        <h2 className="text-center">Tasks</h2>
+        <p className="">No Tasks added to this course yet...</p>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <h2 className="text-center">Tasks</h2>
+      <div class="accordion accordion-flush" id="accordion-tasks-daywise">
+        {course.tasks.map((dayTasks, index) => (
+          <div class="accordion-item" key={index}>
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target={"#flush-collapse-day-" + (index + 1)}
+                aria-expanded="false"
+                aria-controls={"flush-collapse-day-" + (index + 1)}
+              >
+                Day {index + 1}
+              </button>
+            </h2>
+            <div
+              id={"flush-collapse-day-" + (index + 1)}
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordion-tasks-daywise"
+            >
+              <div class="accordion-body">
+                <TaskDayWise tasks={dayTasks} day={index + 1} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }

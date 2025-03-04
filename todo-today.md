@@ -5,8 +5,8 @@
 `23-02-2025`
 
 - [x] A form to create a new course with fields for title and description.
-- [ ] After course creation, redirect to create tasks page.
-- [ ] In the mentors dashboard, `my courses` are displayed.
+- [x] After course creation, redirect to course details page.
+- [x] In the mentors dashboard, `my courses` are displayed.
 - [ ] Mentors can edit, update and delete their own courses.
 
 `24-02-2025`

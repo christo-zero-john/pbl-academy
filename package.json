@@ -21,6 +21,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "eslint-config-next": "15.1.7"
+    "eslint-config-next": "15.1.7",
+    "supabase": "^2.15.8"
   }
 }

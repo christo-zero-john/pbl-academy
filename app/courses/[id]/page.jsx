@@ -81,8 +81,8 @@ export default function CourseItemPage() {
           User.user.id == course.created_by.id && (
             <div className="">
               <button
-                className="btn btn-primary"
-                onClick={(event) =>
+                className="btn btn-primary mx-2"
+                onClick={() =>
                   router.push(`/courses/mentor/edit-course/${course.id}`)
                 }
               >
@@ -90,9 +90,9 @@ export default function CourseItemPage() {
               </button>
 
               <button
-                className="btn btn-primary"
-                onClick={(event) =>
-                  router.push(`/courses/mentor/edit-course/${course.id}`)
+                className="btn btn-primary mx-2"
+                onClick={() =>
+                  router.push(`/courses/mentor/edit-course/${course.id}/tasks`)
                 }
               >
                 Manage Tasks

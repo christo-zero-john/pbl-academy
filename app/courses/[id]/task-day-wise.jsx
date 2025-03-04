@@ -2,14 +2,14 @@ export default function TaskDayWise({ tasks, day }) {
   return (
     <>
       <div
-        class="accordion accordion-flush"
+        className="accordion accordion-flush"
         id={"accordion-tasks-of-day-" + day}
       >
         {tasks.map((task, index) => (
-          <div class="accordion-item" key={index}>
-            <h2 class="accordion-header">
+          <div className="accordion-item" key={index}>
+            <h2 className="accordion-header">
               <button
-                class="accordion-button collapsed"
+                className="accordion-button collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target={
@@ -25,10 +25,10 @@ export default function TaskDayWise({ tasks, day }) {
             </h2>
             <div
               id={"flush-collapse-day-" + day + "-task-" + (index + 1)}
-              class="accordion-collapse collapse"
+              className="accordion-collapse collapse"
               data-bs-parent={"#accordion-tasks-of-day-" + day}
             >
-              <div class="accordion-body">{task.description}</div>
+              <div className="accordion-body">{task.description}</div>
             </div>
           </div>
         ))}

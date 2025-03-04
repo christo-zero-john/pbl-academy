@@ -66,12 +66,12 @@ export default function RenderCourseTasks({ course, setCourse }) {
   return (
     <>
       <h2 className="text-center">Tasks</h2>
-      <div class="accordion accordion-flush" id="accordion-tasks-daywise">
+      <div className="accordion accordion-flush" id="accordion-tasks-daywise">
         {course.tasks.map((dayTasks, index) => (
-          <div class="accordion-item" key={index}>
-            <h2 class="accordion-header">
+          <div className="accordion-item" key={index}>
+            <h2 className="accordion-header">
               <button
-                class="accordion-button collapsed"
+                className="accordion-button collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target={"#flush-collapse-day-" + (index + 1)}
@@ -83,10 +83,10 @@ export default function RenderCourseTasks({ course, setCourse }) {
             </h2>
             <div
               id={"flush-collapse-day-" + (index + 1)}
-              class="accordion-collapse collapse"
+              className="accordion-collapse collapse"
               data-bs-parent="#accordion-tasks-daywise"
             >
-              <div class="accordion-body">
+              <div className="accordion-body">
                 <TaskDayWise tasks={dayTasks} day={index + 1} />
               </div>
             </div>

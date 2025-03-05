@@ -1,6 +1,8 @@
-import { useRouter } from "next/navigation";
 import User from "./User";
 
+/**
+ * Mentor in frontend
+ */
 class Mentor {
   constructor() {
     if (!Mentor.instance) {
@@ -43,7 +45,7 @@ class Mentor {
 
   async updateCourse(course) {
     console.log("Sending request to update course");
-    course.created_by = course.created_by.id
+    course.created_by = course.created_by.id;
     const request = {
       method: "POST",
       headers: {
@@ -74,3 +76,4 @@ class Mentor {
 }
 
 export default new Mentor();
+// Mentor in frontend

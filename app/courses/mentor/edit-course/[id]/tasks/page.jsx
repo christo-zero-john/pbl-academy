@@ -22,8 +22,6 @@ export default function ManageTasksOfCourse() {
   const [newTasks, setNewtasks] = useState([]);
   const [showTaskForm, setShowTaskForm] = useState(false);
 
-  // Only if testFunction is still calling
-  const [testRun, setTestRun] = useState(false);
 
   // This useEffect fetches the course and sets course item (course state)
   useEffect(() => {
@@ -148,76 +146,6 @@ export default function ManageTasksOfCourse() {
     console.log("Saving Newly created Tasks to database");
   }
 
-  // The below test fuction and state is to manually test the component without inputing data
-
-  function testFunction() {
-    const tempTasks = [
-      {
-        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
-        description:
-          "<p>Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3</p>",
-        day: 3,
-        index: 4,
-        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
-        duration: 7,
-        title: "Task some of my new 3",
-      },
-      {
-        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
-        description:
-          "<p>Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 3</p>",
-        day: 3,
-        index: 5,
-        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
-        duration: 7,
-        title: "Task some of my new 4",
-      },
-      {
-        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
-        description:
-          "<p>Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 3</p>",
-        day: 4,
-        index: 1,
-        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
-        duration: 7,
-        title: "Task some of my new 5",
-      },
-      {
-        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
-        description:
-          "<p>Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 3</p>",
-        day: 5,
-        index: 2,
-        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
-        duration: 7,
-        title: "Task some of my new 7",
-      },
-    ];
-    const newT = [
-      [3, 4],
-      [3, 5],
-      [4, 1],
-      [4, 2],
-      [5, 2],
-      [5, 3],
-    ];
-
-    let tempTsks = [...tasks, [], []];
-    tempTsks[2].push(tempTasks[0]);
-    tempTsks[2].push(tempTasks[1]);
-    tempTsks[3].push(tempTasks[2]);
-    tempTsks[3].push(tempTasks[2]);
-    tempTsks[4].push(tempTasks[1]);
-    tempTsks[4].push(tempTasks[0]);
-
-    setTasks([...tempTsks]);
-    setNewtasks([...newT]);
-    setTestRun(true);
-  }
-
-  if (readyToRender && !testRun) {
-    testFunction();
-  }
 
   return (
     <>

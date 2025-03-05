@@ -4,7 +4,7 @@ import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import RenderCourseTasks from "./course-tasks";
+import RenderCourseTasks from "./render-course-tasks";
 
 /**
  *

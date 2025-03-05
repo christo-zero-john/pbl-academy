@@ -11,7 +11,7 @@ export function CheckMentor({ children }) {
     // console.log(User.user);
     (async () => {
       const user = await User.getUser();
-      console.log(typeof user);
+      // console.log(typeof user);
       if (user.user_metadata.role.includes("mentor")) {
         setIsMentor(true);
       }

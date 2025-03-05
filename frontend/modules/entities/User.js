@@ -14,7 +14,9 @@ class User {
   }
 
   async getUser() {
-    //setTimeout only returns a timeout ID, so we should wrap it inside and resolve as a promise to get a desired outcome of delaying.
+    /** comment
+     * setTimeout only returns a timeout ID, so we should wrap it inside and resolve as a promise to get a desired outcome of delaying.
+     */
     return new Promise((resolve) => {
       setTimeout(() => {
         // console.log(this.user);
@@ -109,10 +111,9 @@ class User {
           error: error,
         };
       } else {
-        if (!this.user) {
-          this.user = data.session.user;
-          this.user.session_token = data.session.access_token;
-        }
+        this.user = data.session.user;
+        this.user.session_token = data.session.access_token;
+
         return {
           success: true,
           session: data.session,
@@ -127,12 +128,15 @@ class User {
   }
 
   async setUser() {
-    const getSessionStatus = await this.getSession();
-    if (getSessionStatus.success) {
-      this.user = getSessionStatus.session.user;
-      this.user.session_token = getSessionStatus.session.access_token;
-    } else {
-      this.user = null;
+    if (!this.user) {
+      await this.getSession();
+      // this.user is set in this.getSession()
+      if (!this.user) {
+        console.log(
+          "Either no user found in session or failed to set user in user.getSession"
+        );
+        this.user = null;
+      }
     }
   }
 

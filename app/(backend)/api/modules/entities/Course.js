@@ -79,9 +79,10 @@ class Course {
         ),
         tasks (
           id,
+          title,
+          description,
           created_at,
           course_id,
-          description,
           resource_links,
           day,
           index,

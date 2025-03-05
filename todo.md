@@ -14,3 +14,7 @@
       -- Fixed it by displaying user not logged in or no internet conection in checkLogin page, then when getSession is true, set User.user as the returned user, so that the user is available for further operations
 
 -[ ] In the create course backend route, change the insert to be only allowed to authenticated users. Currently anyone could insert into public.courses
+
+- [ ] In the `/app/courses/mentor/edit-course/[id]/tasks/page.jsx`, the addTaskForm component is rendered for each day in the page. Fix it in such a way that
+  - [ ] only 1 add task form component is present in the entire page.
+  - [ ] And the day index should be passed

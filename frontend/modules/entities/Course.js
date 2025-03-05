@@ -1,5 +1,7 @@
 import User from "./User";
-
+/**
+ * Course in frontend
+ */
 class Course {
   constructor() {
     if (!Course.instance) {
@@ -42,3 +44,4 @@ class Course {
 }
 
 export default new Course();
+// Course in frontend

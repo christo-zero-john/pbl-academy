@@ -6,6 +6,7 @@ import Tasks from "@/frontend/modules/entities/Tasks";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AddTaskForm from "./add-task-form";
+import RenderTasks from "./render-tasks";
 
 export default function ManageTasksOfCourse() {
   const params = useParams();
@@ -20,6 +21,9 @@ export default function ManageTasksOfCourse() {
   const [tasks, setTasks] = useState(null);
   const [newTasks, setNewtasks] = useState([]);
   const [showTaskForm, setShowTaskForm] = useState(false);
+
+  // Only if testFunction is still calling
+  const [testRun, setTestRun] = useState(false);
 
   // This useEffect fetches the course and sets course item (course state)
   useEffect(() => {
@@ -106,13 +110,7 @@ export default function ManageTasksOfCourse() {
     }
   }
 
-  function addNewTaskHandler(day) {
-    console.log("Adding new task to day: ", day);
-    setShowTaskForm(true);
-  }
-
   function pushNewTaskHandler(task) {
-    console.log(`Pushing new task to day ${task.day}: `, task);
     console.log(tasks);
     /** Comment
      * Index of this task is equal to the length of total tasks in the tasks[day] array, as index of last element of tasks[day] = length-1.
@@ -122,7 +120,13 @@ export default function ManageTasksOfCourse() {
     if (taskIndex == 0) {
       taskIndex = 1;
     }
-    task.index = taskIndex;
+    task = {
+      ...task,
+      index: taskIndex,
+      course_id: course.id,
+    };
+
+    console.log(`Pushing new task to day ${task.day}: `, task);
     const tempTasks = [...tasks];
     tempTasks[task.day - 1].push(task);
     setTasks([...tempTasks]);
@@ -130,49 +134,110 @@ export default function ManageTasksOfCourse() {
       setNewtasks([...newTasks, [task.day, task.index]]);
     }
     setShowTaskForm(false);
+    return true;
+  }
+
+  function viewNewTasks() {
+    console.log("Viewing Newly created Tasks");
+    /**
+     * With the 
+     */
+  }
+
+  function saveNewTasks() {
+    console.log("Saving Newly created Tasks to database");
+  }
+
+  // The below test fuction and state is to manually test the component without inputing data
+
+  function testFunction() {
+    const tempTasks = [
+      {
+        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
+        description:
+          "<p>Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3Task some of my new 3</p>",
+        day: 3,
+        index: 4,
+        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
+        duration: 7,
+        title: "Task some of my new 3",
+      },
+      {
+        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
+        description:
+          "<p>Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 4Task some of my new 3</p>",
+        day: 3,
+        index: 5,
+        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
+        duration: 7,
+        title: "Task some of my new 4",
+      },
+      {
+        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
+        description:
+          "<p>Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 5Task some of my new 3</p>",
+        day: 4,
+        index: 1,
+        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
+        duration: 7,
+        title: "Task some of my new 5",
+      },
+      {
+        course_id: "60d8d53f-a5b0-4977-a89e-46ab98b9b00b",
+        description:
+          "<p>Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 7Task some of my new 3</p>",
+        day: 5,
+        index: 2,
+        created_by: "a39451a2-c393-4217-9e3f-604887222cbf",
+        duration: 7,
+        title: "Task some of my new 7",
+      },
+    ];
+    const newT = [
+      [3, 4],
+      [3, 5],
+      [4, 1],
+      [4, 2],
+      [5, 2],
+      [5, 3],
+    ];
+
+    let tempTsks = [...tasks, [], []];
+    tempTsks[2].push(tempTasks[0]);
+    tempTsks[2].push(tempTasks[1]);
+    tempTsks[3].push(tempTasks[2]);
+    tempTsks[3].push(tempTasks[2]);
+    tempTsks[4].push(tempTasks[1]);
+    tempTsks[4].push(tempTasks[0]);
+
+    setTasks([...tempTsks]);
+    setNewtasks([...newT]);
+    setTestRun(true);
+  }
+
+  if (readyToRender && !testRun) {
+    testFunction();
   }
 
   return (
     <>
       <h2 className="text-center">Tasks</h2>
-      <div className="accordion accordion-flush" id="accordion-tasks-daywise">
-        {tasks &&
-          tasks.map((dayTasks, index) => (
-            <div className="accordion-item" key={index}>
-              <h2 className="accordion-header">
-                <button
-                  className="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target={"#flush-collapse-day-" + (index + 1)}
-                  aria-expanded="false"
-                  aria-controls={"flush-collapse-day-" + (index + 1)}
-                >
-                  Day {index + 1}
-                </button>
-              </h2>
-              <div
-                id={"flush-collapse-day-" + (index + 1)}
-                className="accordion-collapse collapse"
-                data-bs-parent="#accordion-tasks-daywise"
-              >
-                <div className="accordion-body">
-                  <TaskDayWise
-                    tasks={[...dayTasks]}
-                    day={index + 1}
-                    addNewTaskHandler={addNewTaskHandler}
-                  />
-                  <AddTaskForm
-                    show={showTaskForm}
-                    setShow={setShowTaskForm}
-                    day={index + 1}
-                    submitHandler={pushNewTaskHandler}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
+      {newTasks.length > 0 && (
+        <>
+          <button className="btn btn-primary mx-2" onClick={viewNewTasks}>
+            View Changes
+          </button>
+          <button className="btn btn-success mx-2" onClick={saveNewTasks}>
+            Save Changes
+          </button>
+        </>
+      )}
+      <RenderTasks
+        tasks={[...tasks]}
+        pushNewTaskHandler={pushNewTaskHandler}
+        showTaskForm={showTaskForm}
+        setShowTaskForm={setShowTaskForm}
+      />
       <button
         className="border border-3 text-center py-3 col-12"
         onClick={addNewDayHandler}

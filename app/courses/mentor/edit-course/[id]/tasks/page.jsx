@@ -1,6 +1,5 @@
 "use client";
 
-import TaskDayWise from "@/app/courses/[id]/task-day-wise";
 import Course from "@/frontend/modules/entities/Course";
 import Tasks from "@/frontend/modules/entities/Tasks";
 import { useParams, useRouter } from "next/navigation";
@@ -15,13 +14,38 @@ export default function ManageTasksOfCourse() {
    * The @var course state stores the title and description of course to which task is added.
    * The @var tasks state stores all the tasks of the course as a matrix / 2D array.
    * The @var newTasks state stores a record of which tasks have been added newly to the @var tasks matrix. The @var newTasks is also a matrix. Each element of the @var newTasks is an array of 2 integers. First integer stores index of day of the modified task and the second integer represents index of that task in that particular day. for example [1,4] means 4th task of day 1 and [5,9] means 9th task of day 5
-   * @var showTaskForm is used to show and hide task form
+   * @var taskForm is used to show and hide task form
    */
   const [course, setCourse] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [newTasks, setNewtasks] = useState([]);
-  const [showTaskForm, setShowTaskForm] = useState(false);
+  const [taskForm, setTaskForm] = useState({
+    show: false,
+    day: null,
+  });
 
+  function showTaskForm(showValue) {
+    setTaskForm((prevState) => ({
+      ...prevState,
+      show: showValue,
+    }));
+  }
+
+  function setTaskFormDay(day) {
+    console.log("Setting day to:", day);
+    setTaskForm((prevState) => ({
+      ...prevState,
+      day: day,
+    }));
+  }
+
+  function setupNewTask(day) {
+    console.log("Setting up new task for day:", day);
+    setTaskForm({
+      show: true,
+      day: day,
+    });
+  }
 
   // This useEffect fetches the course and sets course item (course state)
   useEffect(() => {
@@ -73,7 +97,6 @@ export default function ManageTasksOfCourse() {
 
   const [readyToRender, setReadyToRender] = useState(false);
 
-  // Below condition false && false => true
   if (tasks && !readyToRender) {
     // console.log(tasks);
     const tasks2D = Tasks.groupAndSortTasks([...tasks]);
@@ -96,28 +119,65 @@ export default function ManageTasksOfCourse() {
 
   function addNewDayHandler() {
     let lastDayIndex = tasks.length - 1;
-    if (tasks[lastDayIndex].length == 0) {
-      window.confirm(
-        `New day cannot be added, as day ${
-          lastDayIndex + 1
-        } does not have any tasks. Add tasks to ${lastDayIndex + 1} first.`
-      );
+
+    // If there are no tasks, set day to 1
+    if (lastDayIndex < 0) {
+      console.log("Setting day to 1 for first task");
+      setupNewTask(1);
     } else {
-      console.log("Adding new day to course");
-      setTasks([...tasks, []]);
+      if (tasks[lastDayIndex].length == 0) {
+        window.confirm(
+          `New day cannot be added, as day ${
+            lastDayIndex + 1
+          } does not have any tasks. Add tasks to ${lastDayIndex + 1} first.`
+        );
+      } else {
+        console.log("Adding new day to course");
+        setTasks([...tasks, []]);
+      }
     }
   }
 
   function pushNewTaskHandler(task) {
-    console.log(tasks);
+    console.log("Tasks array:", tasks, "New task:", task);
+
+    // Initialize tasks array if it's null or empty
+    if (!tasks || tasks.length === 0) {
+      console.log("Initializing tasks array for first task");
+      const newTasks = [];
+      // Create array slots up to the day we need
+      for (let i = 0; i < task.day; i++) {
+        newTasks.push([]);
+      }
+
+      // Add the task to the appropriate day
+      task = {
+        ...task,
+        index: 1,
+        course_id: course.id,
+      };
+
+      newTasks[task.day - 1].push(task);
+      setTasks(newTasks);
+      setNewtasks([...newTasks, [task.day, task.index]]);
+      showTaskForm(false);
+      return true;
+    }
+
+    // Ensure the day's array exists in the tasks array
+    while (tasks.length < task.day) {
+      tasks.push([]);
+    }
+
     /** Comment
      * Index of this task is equal to the length of total tasks in the tasks[day] array, as index of last element of tasks[day] = length-1.
      * task.day stores the day as integer, original index 'i' of that day in the tasks matrix is task.day-1
      */
     let taskIndex = tasks[task.day - 1].length;
-    if (taskIndex == 0) {
+    if (taskIndex === 0) {
       taskIndex = 1;
     }
+
     task = {
       ...task,
       index: taskIndex,
@@ -128,24 +188,25 @@ export default function ManageTasksOfCourse() {
     const tempTasks = [...tasks];
     tempTasks[task.day - 1].push(task);
     setTasks([...tempTasks]);
+
     if (!newTasks.includes([task.day, task.index])) {
       setNewtasks([...newTasks, [task.day, task.index]]);
     }
-    setShowTaskForm(false);
+
+    showTaskForm(false);
     return true;
   }
 
   function viewNewTasks() {
     console.log("Viewing Newly created Tasks");
     /**
-     * With the 
+     * With the
      */
   }
 
   function saveNewTasks() {
     console.log("Saving Newly created Tasks to database");
   }
-
 
   return (
     <>
@@ -163,8 +224,8 @@ export default function ManageTasksOfCourse() {
       <RenderTasks
         tasks={[...tasks]}
         pushNewTaskHandler={pushNewTaskHandler}
-        showTaskForm={showTaskForm}
-        setShowTaskForm={setShowTaskForm}
+        setShowTaskForm={showTaskForm}
+        setDay={setTaskFormDay}
       />
       <button
         className="border border-3 text-center py-3 col-12"
@@ -172,6 +233,12 @@ export default function ManageTasksOfCourse() {
       >
         Add New Day
       </button>
+      <AddTaskForm
+        show={taskForm.show}
+        day={taskForm.day}
+        setShow={showTaskForm}
+        submitHandler={pushNewTaskHandler}
+      />
     </>
   );
 }

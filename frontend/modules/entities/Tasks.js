@@ -35,6 +35,7 @@ class Tasks {
       .sort((a, b) => a - b) // sort day keys numerically
       .map((day) => tasksByDay[day]);
 
+    console.log("Tasks 2D: ", tasks2D);
     return tasks2D;
   }
 }

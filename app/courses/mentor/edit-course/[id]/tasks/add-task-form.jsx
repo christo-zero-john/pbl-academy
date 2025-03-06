@@ -1,6 +1,6 @@
 import TextEditor from "@/frontend/components/text-editor/text-editor";
 import User from "@/frontend/modules/entities/User";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddResourceLinksForm from "./add-resource-links-form";
 
 export default function AddTaskForm({
@@ -9,16 +9,25 @@ export default function AddTaskForm({
   day,
   submitHandler,
 }) {
-  console.log("day: ", day);
+  console.log("day in AddTaskForm: ", day);
   const [task, setTask] = useState({
     course_id: "",
     description: "",
-    day: day,
+    day: day || 1,
     index: null,
     created_by: User.user.id,
     duration: 1,
     title: "",
   });
+
+  useEffect(() => {
+    console.log("Day prop changed to:", day);
+    // Always update the task state when the form is shown, using a default of 1 if day is undefined
+    setTask(prevTask => ({
+      ...prevTask,
+      day: day || prevTask.day || 1
+    }));
+  }, [day, show]); // React to both day and show changes
 
   function setDescription(description) {
     description = description.trim();

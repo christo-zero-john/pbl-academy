@@ -1,23 +1,29 @@
 import TaskDayWise from "@/app/courses/[id]/task-day-wise";
-import AddTaskForm from "./add-task-form";
 
-/**comment 
+/**comment
  * This componsnt is used in course-item and edit-tasks pages.
  * @var props with @default null value means thay are optional props passed only from edit-task page.
  * @param tasks It is a 2D array of tasks related to a course.
- * @param pushNewTaskHandler It is a function to handle adding new task to the 2D tasks array in the edit-task page. It pushes new task to the @var tasks[day] array and stores an a reference of this new modification in another 2D array named @var newTasks in edit-tasks page
- * @param showTaskForm and @param setShowTaskForm is used to handle a boolean state of whether to show or hide edit-task form in the edit-task page.
- * In reality, edit-task form is inserted in this component
-*/
+ * @param setShowTaskForm is used to handle a boolean state of whether to show or hide edit-task form in the edit-task page.
+ */
 export default function RenderTasks({
   tasks,
-  pushNewTaskHandler = null,
-  showTaskForm = null,
   setShowTaskForm = null,
+  setDay = null,
 }) {
   function addNewTaskHandler(day) {
     console.log("Adding new task to day: ", day);
-    setShowTaskForm(true);
+    if (setDay && typeof setDay === 'function') {
+      setDay(day);
+      console.log("Day set to:", day);
+    }
+    if (setShowTaskForm && typeof setShowTaskForm === 'function') {
+      setShowTaskForm(true);
+    }
+  }
+
+  if (tasks.length === 0) {
+    return <p>No tasks added yet.</p>;
   }
 
   return (
@@ -49,20 +55,6 @@ export default function RenderTasks({
                     day={index + 1}
                     addNewTaskHandler={addNewTaskHandler}
                   />
-                  {
-                    /**
-                     * This component is used in edit-task and course pages. Only edit-task page @function pushNewTaskHandler.
-                     * If @function pushNewTaskHandler is present it means this is an edit page. Then we can show the 'Add Task Form' offcanvas.
-                     */
-                    pushNewTaskHandler && (
-                      <AddTaskForm
-                        show={showTaskForm}
-                        setShow={setShowTaskForm}
-                        day={index + 1}
-                        submitHandler={pushNewTaskHandler}
-                      />
-                    )
-                  }
                 </div>
               </div>
             </div>

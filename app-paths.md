@@ -15,6 +15,11 @@
 /courses/mentor/
 /courses/mentor/all-courses
 /courses/mentor/create-course
+/courses/mentor/edit-course
+
+<!--edit task page -->
+
+/courses/mentor/edit-course/[id]/tasks
 
 //////////////////////////////
 

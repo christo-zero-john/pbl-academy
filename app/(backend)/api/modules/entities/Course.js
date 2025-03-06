@@ -70,27 +70,10 @@ class Course {
         title,
         published,
         description,
-        created_by (
-          id,
-          first_name,
-          last_name,
-          username,
-          role
-        ),
-        tasks (
-          id,
-          title,
-          description,
-          created_at,
-          course_id,
-          resource_links,
-          day,
-          index,
-          created_by,
-          updated_at
-        )`
+        created_by (*),
+        tasks (*)`
         )
-        .eq("id", id);
+        .eq("id", id)
       if (error) {
         return {
           success: false,

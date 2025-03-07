@@ -24,3 +24,11 @@
       Optional resource links (URLs for videos, articles, etc.)
       Deadline or estimated duration (e.g., “complete in 1 day”)
       Courses can be marked as “published” to appear in the public catalog.
+
+<!--  -->
+
+`06-03-2025`
+
+- [ ] Implement mechanism to preview changed tasks when `view changes` button is clicked
+- [ ] Implement mechanism to save tasks to database when `save changes` button is clicked
+- [ ] Implement mechanism to add new resource links to tasks

@@ -38,6 +38,24 @@ class Tasks {
     console.log("Tasks 2D: ", tasks2D);
     return tasks2D;
   }
+
+  /** comment
+   * @description Returns a 2D array (matrix) of tasks. This function extracts the tasks that are updated from 'tasksMatrix' array based on the indexes stored in the tasksIndex2D array. The updated tasks are then returned as a 2D array.
+   * @param tasksMatrix An array of tasks grouped by day. Each array in 'tasksMatrix' is an array of tasks for that day.
+   * @param taskIndex2D
+   */
+  getUpdatedTasks(tasksMatrix, taskIndex2D) {
+    let updatedTasks = [];
+    taskIndex2D.forEach((taskIndex) => {
+      let M = taskIndex[0] - 1;
+      let J = taskIndex[1] - 1;
+      updatedTasks.push(tasksMatrix[M][J]);
+    });
+
+    let tasks2D = this.groupAndSortTasks(updatedTasks);
+
+    return tasks2D;
+  }
 }
 
 export default new Tasks();

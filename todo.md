@@ -1,6 +1,7 @@
 # ToDo's
 
 - [ ] Populate the add resource link component in add task form
+- [ ] Implement mechanism to update and delete user details, course and tasks
 
 # To Fix
 

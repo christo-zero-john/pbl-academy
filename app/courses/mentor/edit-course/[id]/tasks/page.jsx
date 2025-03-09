@@ -5,7 +5,8 @@ import Tasks from "@/frontend/modules/entities/Tasks";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AddTaskForm from "./add-task-form";
-import RenderTasks from "./render-tasks";
+import DisplayTasks from "./display-tasks";
+import Mentor from "@/frontend/modules/entities/Mentor";
 
 export default function ManageTasksOfCourse() {
   const params = useParams();
@@ -24,7 +25,7 @@ export default function ManageTasksOfCourse() {
     show: false,
     day: null,
   });
-  const [viewUpdatedTasks, setViewTasks] = useState(false);
+  const [viewUpdatedTasks, setViewUpdatedTasks] = useState(false);
 
   function showTaskForm(showValue) {
     setTaskForm((prevState) => ({
@@ -34,7 +35,7 @@ export default function ManageTasksOfCourse() {
   }
 
   function setTaskFormDay(day) {
-    console.log("Setting day to:", day);
+    // console.log("Setting day to:", day);
     setTaskForm((prevState) => ({
       ...prevState,
       day: day,
@@ -93,15 +94,6 @@ export default function ManageTasksOfCourse() {
     })();
   }, []);
 
-  useEffect(() => {
-    console.log(
-      "New Tasks: ",
-      viewUpdatedTasks,
-      "Updated Tasks: ",
-      updatedTasks
-    );
-  }, [viewUpdatedTasks, updatedTasks]);
-
   const [readyToRender, setReadyToRender] = useState(false);
 
   if (tasks && !readyToRender) {
@@ -148,23 +140,23 @@ export default function ManageTasksOfCourse() {
   }
 
   function addNewTaskHandler(day) {
-    console.log("Adding new task to day: ", day);
+    // console.log("Adding new task to day: ", day);
     setTaskFormDay(day);
-    console.log("Day set to:", day);
+    // console.log("Day set to:", day);
 
     showTaskForm(true);
   }
 
   function pushNewTaskHandler(task) {
-    console.log("Tasks array:", tasks, "New task:", task);
+    // console.log("Tasks array:", tasks, "New task:", task);
 
     // Initialize tasks array if it's null or empty
     if (!tasks || tasks.length === 0) {
-      console.log("Initializing tasks array for first task");
-      const newTasks = [];
+      console.log("Pushing first task to course");
+      const tempTasks = [];
       // Create array slots up to the day we need
       for (let i = 0; i < task.day; i++) {
-        newTasks.push([]);
+        tempTasks.push([]);
       }
 
       // Add the task to the appropriate day
@@ -174,8 +166,8 @@ export default function ManageTasksOfCourse() {
         course_id: course.id,
       };
 
-      newTasks[task.day - 1].push(task);
-      setTasks(newTasks);
+      tempTasks[task.day - 1].push(task);
+      setTasks(tempTasks);
       setNewtasks([...newTasks, [task.day, task.index]]);
       showTaskForm(false);
       return true;
@@ -202,7 +194,7 @@ export default function ManageTasksOfCourse() {
       course_id: course.id,
     };
 
-    console.log(`Pushing new task to day ${task.day}: `, task);
+    console.log(`Pushing new task to day ${task.day}`);
     const tempTasks = [...tasks];
     tempTasks[task.day - 1].push(task);
     setTasks([...tempTasks]);
@@ -217,20 +209,30 @@ export default function ManageTasksOfCourse() {
 
   function viewNewTasks() {
     console.log("Viewing Newly created Tasks");
-    let updatedTasks = Tasks.getUpdatedTasks([...tasks], [...newTasks]);
+    let tempUpdatedTasks = Tasks.getUpdatedTasks([...tasks], [...newTasks]);
 
-    console.log(newTasks, updatedTasks);
-    setUpdatedTasks(updatedTasks);
-    setViewTasks(true);
+    // console.log(newTasks, updatedTasks);
+    setUpdatedTasks(tempUpdatedTasks);
+    setViewUpdatedTasks(true);
   }
 
-  function saveNewTasks() {
+  async function saveNewTasks() {
     console.log("Saving Newly created Tasks to database");
+    const tasks2D = Tasks.getUpdatedTasks([...tasks], [...newTasks]);
+
+    const tasksToSave = Tasks.ungroupTasks2D(tasks2D);
+    console.log("Tasks to be saved: ", tasksToSave);
+    const saveStatus = await Mentor.saveTasksToDB(tasksToSave);
+    setViewUpdatedTasks(false);
   }
 
   return (
     <>
-      <h2 className="text-center">Tasks</h2>
+      <h2 className="text-center">
+        Editing Tasks of course{" "}
+        <span className="text-success">{course.title}</span>
+      </h2>
+      <h4 className="">Tasks</h4>
       {newTasks.length > 0 && (
         <>
           {!viewUpdatedTasks ? (
@@ -240,7 +242,7 @@ export default function ManageTasksOfCourse() {
           ) : (
             <button
               className="btn btn-primary mx-2"
-              onClick={() => setViewTasks(false)}
+              onClick={() => setViewUpdatedTasks(false)}
             >
               All Tasks
             </button>
@@ -251,23 +253,35 @@ export default function ManageTasksOfCourse() {
         </>
       )}
 
-      {!viewUpdatedTasks ? (
-        <RenderTasks tasks={[...tasks]} addNewTaskHandler={addNewTaskHandler} />
-      ) : (
-        <RenderTasks tasks={[...updatedTasks]} />
-      )}
-      <button
-        className="border border-3 text-center py-3 col-12"
-        onClick={addNewDayHandler}
-      >
-        Add New Day
-      </button>
-      <AddTaskForm
-        show={taskForm.show}
-        day={taskForm.day}
-        setShow={showTaskForm}
-        submitHandler={pushNewTaskHandler}
-      />
+      {
+        // If not showing task form, display tasks. Otherwise display only taskform
+        !taskForm.show ? (
+          // If not viewing updated tasks show add task button (passed along with the addnewTaskHandler) and add day button. Otherwise only show updated tasks in daywise order
+          !viewUpdatedTasks ? (
+            <>
+              <DisplayTasks
+                tasks={[...tasks]}
+                addNewTaskHandler={addNewTaskHandler}
+              />
+              <button
+                className="border border-3 text-center py-3 col-12"
+                onClick={addNewDayHandler}
+              >
+                Add New Day
+              </button>
+            </>
+          ) : (
+            <DisplayTasks tasks={[...updatedTasks]} />
+          )
+        ) : (
+          <AddTaskForm
+            show={taskForm.show}
+            day={taskForm.day}
+            setShow={showTaskForm}
+            submitHandler={pushNewTaskHandler}
+          />
+        )
+      }
     </>
   );
 }

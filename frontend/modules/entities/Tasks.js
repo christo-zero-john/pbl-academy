@@ -35,7 +35,7 @@ class Tasks {
       .sort((a, b) => a - b) // sort day keys numerically
       .map((day) => tasksByDay[day]);
 
-    console.log("Tasks 2D: ", tasks2D);
+    // console.log("Tasks 2D: ", tasks2D);
     return tasks2D;
   }
 
@@ -45,16 +45,31 @@ class Tasks {
    * @param taskIndex2D
    */
   getUpdatedTasks(tasksMatrix, taskIndex2D) {
+    console.log("Combining Updated tasks: ", tasksMatrix, taskIndex2D);
     let updatedTasks = [];
     taskIndex2D.forEach((taskIndex) => {
       let M = taskIndex[0] - 1;
       let J = taskIndex[1] - 1;
+      console.log(M, J);
+
       updatedTasks.push(tasksMatrix[M][J]);
     });
 
     let tasks2D = this.groupAndSortTasks(updatedTasks);
 
     return tasks2D;
+  }
+
+  /** comment
+   * This method will convert the tasks2D array into a normal 1D array. So that we can save thes tasks to database
+   */
+  ungroupTasks2D(tasks2D) {
+    let tasks = [];
+    tasks2D.forEach((dayTasks) => {
+      dayTasks.forEach((taskItem) => tasks.push(taskItem));
+    });
+
+    return tasks;
   }
 }
 

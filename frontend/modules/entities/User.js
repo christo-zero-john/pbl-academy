@@ -9,6 +9,11 @@ class User {
       if (!User.instance) {
         this.instance = this;
       }
+      if (this.user) {
+        console.log("User session found");
+      } else {
+        console.log("User session not found");
+      }
       return User.instance;
     })();
   }
@@ -104,8 +109,9 @@ class User {
     const Supabase = createClient();
     try {
       const { data, error } = await Supabase.auth.getSession();
-      console.log("get session: ", data, error);
+      // console.log("get session: ", data, error);
       if (error) {
+        console.log("Error while fetching user session");
         return {
           success: false,
           error: error,
@@ -120,6 +126,9 @@ class User {
         };
       }
     } catch (error) {
+      console.log(
+        "Internal client (Frontend) error while fetching user session"
+      );
       return {
         success: false,
         error: error,

@@ -92,6 +92,40 @@ class Mentor {
       };
     }
   }
+
+  async saveTasksToDB(tasks) {
+    try {
+      const Supabase = await createClient();
+      const userSession = await Supabase.auth.getSession();
+      console.log(
+        "user session fetched successfully. Current User: ",
+        userSession.data.session.user.email
+      );
+
+      const { data, error } = await Supabase.from("tasks").upsert(tasks);
+
+      if (error) {
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          data: "Successfully Inserted Tasks",
+        };
+      }
+    } catch (error) {
+      // Catch unexpected errors
+      console.log("Internal Server Error: ", error);
+      return {
+        success: false,
+        error:
+          `Internal Server Error: ${error.message}` ||
+          "Something went wrong. Internal Server Error. Please Contact Support",
+      };
+    }
+  }
 }
 
 export default new Mentor();

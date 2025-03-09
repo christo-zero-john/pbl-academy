@@ -9,7 +9,7 @@ export default function AddTaskForm({
   day,
   submitHandler,
 }) {
-  console.log("day in AddTaskForm: ", day);
+  // console.log("day in AddTaskForm: ", day);
   const [task, setTask] = useState({
     course_id: "",
     description: "",
@@ -21,11 +21,11 @@ export default function AddTaskForm({
   });
 
   useEffect(() => {
-    console.log("Day prop changed to:", day);
+    // console.log("Day prop changed to:", day);
     // Always update the task state when the form is shown, using a default of 1 if day is undefined
-    setTask(prevTask => ({
+    setTask((prevTask) => ({
       ...prevTask,
-      day: day || prevTask.day || 1
+      day: day || prevTask.day || 1,
     }));
   }, [day, show]); // React to both day and show changes
 

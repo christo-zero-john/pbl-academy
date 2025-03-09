@@ -73,6 +73,36 @@ class Mentor {
         }
       });
   }
+
+  async saveTasksToDB(tasks) {
+    console.log("Sending request to save tasks to database");
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(tasks),
+    };
+
+    console.log("Request: ", request);
+
+    return fetch("/api/courses/update/tasks", request)
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+        if (response.error) {
+          return {
+            success: false,
+            error: response.error,
+          };
+        } else {
+          return {
+            success: true,
+            data: response?.data,
+          };
+        }
+      });
+  }
 }
 
 export default new Mentor();

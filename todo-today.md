@@ -11,7 +11,7 @@
 
 `24-02-2025`
 
-- [ ] Mentors can add tasks to their courses.
+- [x] Mentors can add tasks to their courses.
 - [ ] After Adding tasks, course can be submited for admin approval (Atleast 1 task is required to submit for approval)
 - [ ] Admins can view all courses including approval needed courses. They can choose to approve or reject with a message/report.
 - [ ] Once the admin approves it, mentors can publish the course for public access.
@@ -28,7 +28,22 @@
 <!--  -->
 
 `06-03-2025`
+overdue
 
-- [ ] Implement mechanism to preview changed tasks when `view changes` button is clicked
-- [ ] Implement mechanism to save tasks to database when `save changes` button is clicked
-- [ ] Implement mechanism to add new resource links to tasks
+- [x] Implement mechanism to preview changed tasks when `view changes` button is clicked ✅`09 03 2025`
+- [x] Implement mechanism to save tasks to database when `save changes` button is clicked ✅ `09 03 2025`
+- [x] Implement mechanism to add new resource links to tasks ✅ `09 03 2025`
+
+`11 03 2025`
+
+- [ ] If the course is published show a button ad classroom. Otherwise show text pusblish course then add a classroom
+- [ ] Classroms should have a maximum enrollment size and date of starting.
+- [ ] Once a classroom is added students can request to enroll in classrooms.
+- [ ] Mentors can view enrollment requests and allow students to attend the cohort.
+
+`12 03 2025`
+
+- [ ] Once a student is enrolled in a course ther will appear a progressbar and a mark a s completed button in all tasks of that course along with option to submit proof of work
+- [ ] Once a task is completed students could submit their proof of work to the mentor.
+- [ ] Mentors can choose either to approve or reject proof of work with sufficcient comment/message/feedback
+- [ ] 

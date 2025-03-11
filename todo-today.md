@@ -36,7 +36,8 @@ overdue
 
 `11 03 2025`
 
-- [ ] If the course is published show a button ad classroom. Otherwise show text pusblish course then add a classroom
+- [ ] If the course is published show a button `New classroom`. Otherwise show text pusblish course then add a classroom.
+- [ ] List existing classrooms of course
 - [ ] Classroms should have a maximum enrollment size and date of starting.
 - [ ] Once a classroom is added students can request to enroll in classrooms.
 - [ ] Mentors can view enrollment requests and allow students to attend the cohort.

@@ -1,4 +1,4 @@
-import CheckLogin from "../(all-users)/dashboard/check-login";
+import CheckLogin from "../(learners)/dashboard/check-login";
 
 export default function MenotorLayout({ children }) {
   return (

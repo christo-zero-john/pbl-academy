@@ -109,9 +109,15 @@ export default function CourseItemPage() {
         </span>
       </p>
       <p className="">{course.created_at}</p>
-      <p className="fw-bold">
-        {(course.published && "Published") || "In Drafts"}
-      </p>
+      {
+        // Show whether the course is published or not
+        course.published ? (
+          <p className="fw-bold text-danger"> Published</p>
+        ) : (
+          <p className="fw-bold text-danger">Not Published</p>
+        )
+      }
+
       <div
         className=""
         dangerouslySetInnerHTML={{ __html: course.description }}

@@ -18,12 +18,18 @@
 
 ## Task Creation and Management
 
-- [ ] An interface to add, edit, and reorder tasks within a course.
-      Each task includes:
-      Task description
-      Optional resource links (URLs for videos, articles, etc.)
-      Deadline or estimated duration (e.g., “complete in 1 day”)
-      Courses can be marked as “published” to appear in the public catalog.
+An interface to
+
+- [x] add tasks within a course
+- [ ] edit tasks within a course
+- [ ] reorder tasks within a course.
+
+Each task includes:
+
+- [x] Task description
+- [ ] Optional resource links (URLS)
+- [x] Deadline or estimated duration (e.g., “complete in 1 day”)
+- [x] Courses can be marked as “published” to appear in the public catalog.
 
 <!--  -->
 
@@ -36,7 +42,7 @@ overdue
 
 `11 03 2025`
 
-- [ ] Create tables in supabase to store classroom and enrollment data.
+- [x] Create tables in supabase to store classroom and enrollment data.
 
 - [ ] If the course is published show a button `New classroom`. Otherwise show text pusblish course then add a classroom.
 - [ ] List existing classrooms of course
@@ -51,6 +57,7 @@ overdue
 - [ ] Mentors can choose either to approve or reject proof of work with sufficcient comment/message/feedback
 
 classrooms table
+
 - created_by
 - start_date
 - main_mentor

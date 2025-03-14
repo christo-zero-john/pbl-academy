@@ -4,7 +4,8 @@ import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import RenderCourseTasks from "./render-course-tasks";
+import DisplayTasks from "../mentor/edit-course/[id]/tasks/display-tasks";
+import Tasks from "@/frontend/modules/entities/Tasks";
 
 /**
  *
@@ -30,8 +31,11 @@ export default function CourseItemPage() {
       // console.log(getCourseStatus);
 
       if (getCourseStatus.success) {
-        console.log("Successfully fetched course");
+        console.log("Response recieved");
         if (getCourseStatus.courses.length == 0) {
+          console.log(
+            "Invalid Course. Either course is deleted or course does not exists"
+          );
           {
             router.push("/courses/404");
           }
@@ -40,8 +44,10 @@ export default function CourseItemPage() {
             "Something unexpected happened while fetching course. Instead of one, we found multiple courses! Contact Support to resolve this problem"
           );
         } else {
-          setCourse(getCourseStatus.courses[0]);
-          // console.log(getCourseStatus.courses[0]);
+          console.log("Course fetched Successfully");
+          let tempCourse = getCourseStatus.courses[0];
+          tempCourse.tasks = Tasks.groupAndSortTasks(tempCourse.tasks);
+          setCourse(tempCourse);
         }
       } else if (getCourseStatus.error) {
         if (getCourseStatus.error.includes("fetch failed")) {
@@ -67,12 +73,28 @@ export default function CourseItemPage() {
       <div className="header">
         <h1 className="text-center">{course.title}</h1>
 
+        <p className="">
+          Created By: &nbsp;
+          <span className="text-success">
+            {course.created_by.first_name} {course.created_by.last_name}
+          </span>
+        </p>
+        <p className="">{course.created_at}</p>
+        {
+          // Show whether the course is published or not
+          course.published ? (
+            <p className="fw-bold text-danger"> Published</p>
+          ) : (
+            <p className="fw-bold text-danger">Not Published</p>
+          )
+        }
+
         <div className="duration">
           <p className="d-inline-block mx-2">
-            Days: {course.totalDays || "calculating..."}
+            Days: {course.tasks.length || "calculating..."}
           </p>
           <p className="d-inline-block mx-2">
-            Tasks: {course.totalTasks || "calculating..."}
+            Tasks: {Tasks.getCount(course.tasks) || "calculating..."}
           </p>
         </div>
 
@@ -102,27 +124,11 @@ export default function CourseItemPage() {
         }
       </div>
 
-      <p className="p-2">
-        Created By: &nbsp;
-        <span className="text-success">
-          {course.created_by.first_name} {course.created_by.last_name}
-        </span>
-      </p>
-      <p className="">{course.created_at}</p>
-      {
-        // Show whether the course is published or not
-        course.published ? (
-          <p className="fw-bold text-danger"> Published</p>
-        ) : (
-          <p className="fw-bold text-danger">Not Published</p>
-        )
-      }
-
       <div
         className=""
         dangerouslySetInnerHTML={{ __html: course.description }}
       ></div>
-      <RenderCourseTasks course={course} setCourse={setCourse} />
+      <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
     </div>
   );
 }

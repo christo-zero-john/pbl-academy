@@ -1,4 +1,4 @@
-import TaskDayWise from "@/app/courses/[id]/task-day-wise";
+import TaskDayWise from "@/app/courses/[id]/components/task-day-wise";
 
 /**comment
  * This componsnt is used in course-item and edit-tasks pages.

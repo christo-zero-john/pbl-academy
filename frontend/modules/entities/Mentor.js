@@ -23,12 +23,12 @@ class Mentor {
       body: JSON.stringify(course),
     };
 
-    console.log("Request: ", request);
+    // console.log("Request: ", request);
 
-    fetch("/api/courses/create", request)
+    return fetch("/api/courses/create", request)
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
+        console.log("Request sent successfully and response recieved.");
         if (response.error) {
           return {
             success: false,

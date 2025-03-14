@@ -29,7 +29,7 @@ export default function CreateCourse() {
 
   async function createCourceHandler(event) {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     const createCourseStatus = await Mentor.createCourse(formData);
     if (!createCourseStatus.success) {
       window.confirm(
@@ -38,7 +38,7 @@ export default function CreateCourse() {
       );
     } else {
       console.log("Succesfully created new course");
-      router.push(`/courses/${response.data.id}`);
+      router.push(`/courses/${createCourseStatus.data.id}`);
     }
   }
 

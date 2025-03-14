@@ -36,6 +36,7 @@ class Tasks {
       .map((day) => tasksByDay[day]);
 
     // console.log("Tasks 2D: ", tasks2D);
+    console.log("Completed grouping and sorting");
     return tasks2D;
   }
 
@@ -70,6 +71,16 @@ class Tasks {
     });
 
     return tasks;
+  }
+
+  /**
+   * Returns total number of tasks in the 2D tasks array
+   * @param tasks2D matrix holding tasks grouped daywise
+   */
+  getCount(tasks2D) {
+    let count = 0;
+    tasks2D.forEach((day) => (count += day.length));
+    return count;
   }
 }
 

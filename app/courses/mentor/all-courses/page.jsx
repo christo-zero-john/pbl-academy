@@ -4,7 +4,7 @@ import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import DisplayCourses from "./display-courses";
+import DisplayCourses from "../../../../frontend/components/courses/display-courses";
 
 function AllCoursesOfMentor() {
   const router = useRouter();

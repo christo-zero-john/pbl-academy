@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import User from "@/frontend/modules/entities/User";
 
 export function CheckMentor({ children }) {
@@ -11,7 +10,6 @@ export function CheckMentor({ children }) {
     // console.log(User.user);
     (async () => {
       const user = await User.getUser();
-      // console.log(typeof user);
       if (user.user_metadata.role.includes("mentor")) {
         setIsMentor(true);
       }

@@ -4,11 +4,12 @@ import Course from "@/frontend/modules/entities/Course";
 import User from "@/frontend/modules/entities/User";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import DisplayTasks from "../mentor/edit-course/[id]/tasks/display-tasks";
+import DisplayTasks from "../../../frontend/components/courses/display-tasks";
 import Tasks from "@/frontend/modules/entities/Tasks";
-import MentorSettings from "./components/mentor-settings";
+import MentorSettings from "../../../frontend/components/mentor/mentor-settings";
+import AllCourseClassrooms from "@/frontend/components/classrooms/all-course-classrooms";
 
-/**
+/** comment
  *
  * @returns Display a particular course with a course id
  */
@@ -81,26 +82,6 @@ export default function CourseItemPage() {
           </span>
         </p>
         <p className="">{course.created_at}</p>
-        {
-          // Show whether the course is published or not
-          course.published ? (
-            <>
-              <p className="fw-bold text-danger">Published</p>
-              <button className="btn btn-danger d-inline-block ms-2">
-                Move Course to Drafts
-              </button>
-            </>
-          ) : (
-            <>
-              <p className="fw-bold text-danger d-inline-block">
-                Not Published
-              </p>
-              <button className="btn btn-success d-inline-block ms-2">
-                Publish Course
-              </button>
-            </>
-          )
-        }
 
         <div className="duration">
           <p className="d-inline-block mx-2">
@@ -114,7 +95,7 @@ export default function CourseItemPage() {
         {
           // Display mentor settings if the course is being viewed by the course creator.
           User.user.id == course.created_by.id && (
-            <MentorSettings course={course} />
+            <MentorSettings course={course} setCourse={setCourse} />
           )
         }
       </div>
@@ -123,7 +104,10 @@ export default function CourseItemPage() {
         className=""
         dangerouslySetInnerHTML={{ __html: course.description }}
       ></div>
+      <h3 className="text-center">Course Activities</h3>
       <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
+      
+      <AllCourseClassrooms courseID={course.id} />
     </div>
   );
 }

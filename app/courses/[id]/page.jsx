@@ -115,7 +115,11 @@ export default function CourseItemPage() {
       <h3 className="text-center">Course Activities</h3>
       <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
 
-      <AllCourseClassrooms courseID={course.id} show={showClassrooms} />
+      <AllCourseClassrooms
+        courseID={course.id}
+        show={showClassrooms}
+        setShow={setShowClassrooms}
+      />
     </div>
   );
 }

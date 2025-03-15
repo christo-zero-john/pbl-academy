@@ -7,16 +7,15 @@ import Mentor from "../../../modules/entities/Mentor";
 export async function POST(request) {
   try {
     const tasks = await request.json();
-    console.log("Recieved Tasks: ", tasks);
+    // console.log("Recieved Tasks: ", tasks);
 
     console.log("Initializing 'Save Tasks to database'");
 
     const updateStatus = await Mentor.saveTasksToDB(tasks);
-
-    console.log(updateStatus);
+    // console.log(updateStatus);
 
     if (updateStatus.success) {
-      console.log("Successfully updated course");
+      console.log("Successfully saved tasks to database");
       return NextResponse.json(
         {
           success: true,
@@ -25,7 +24,7 @@ export async function POST(request) {
         { status: 200 }
       );
     } else {
-      console.log("Error while updating course");
+      console.log("Error while saving tasks");
       return NextResponse.json(
         {
           success: false,

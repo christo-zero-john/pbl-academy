@@ -15,11 +15,16 @@
 /courses/mentor/
 /courses/mentor/all-courses
 /courses/mentor/create-course
+
+<!-- edit course routes page -->
+
 /courses/mentor/edit-course
-
-<!--edit task page -->
-
 /courses/mentor/edit-course/[id]/tasks
+
+<!-- classroom routes -->
+
+/courses/mentor/classrooms/
+/courses/mentor/classrooms/manage
 
 //////////////////////////////
 

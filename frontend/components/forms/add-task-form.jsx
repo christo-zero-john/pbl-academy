@@ -2,6 +2,7 @@ import TextEditor from "@/frontend/components/text-editor/text-editor";
 import User from "@/frontend/modules/entities/User";
 import { useState, useEffect } from "react";
 import AddResourceLinksForm from "../mentor/add-resource-links-form";
+import { Offcanvas, Form, Button } from "react-bootstrap";
 
 export default function AddTaskForm({
   show = false,
@@ -61,26 +62,16 @@ export default function AddTaskForm({
   }
 
   return (
-    <div
-      className={`offcanvas col-12 wd-100 fixed-top ${show && "show"}`}
-      data-bs-backdrop="static"
-      tabIndex="-1"
-      id="staticBackdrop"
-      aria-labelledby="add-task-form"
+    <Offcanvas
+      show={show}
+      onHide={() => setShow(false)}
+      backdrop="static"
+      className="w-100"
     >
-      <div className="offcanvas-header">
-        <h5 className="offcanvas-title" id="add-task-form">
-          Add new task to day {day}
-        </h5>
-        <button
-          type="button"
-          className="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-          onClick={() => setShow(false)}
-        ></button>
-      </div>
-      <div className="offcanvas-body">
+      <Offcanvas.Header closeButton>
+        <Offcanvas.Title>Add new task to day {day}</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
         <form method="POST" className="col-12" onSubmit={formSubmitHandler}>
           <input
             type="text"
@@ -123,7 +114,7 @@ export default function AddTaskForm({
           <AddResourceLinksForm />
           <button type="submit">Add New Task</button>
         </form>
-      </div>
-    </div>
+      </Offcanvas.Body>
+    </Offcanvas>
   );
 }

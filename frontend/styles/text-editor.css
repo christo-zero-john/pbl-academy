@@ -1,0 +1,9 @@
+.ProseMirror {
+  height: 75vh !important;
+  overflow: auto;
+}
+
+
+.ProseMirror:focus{
+  border: none;
+}

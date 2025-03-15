@@ -24,7 +24,6 @@ class User {
      */
     return new Promise((resolve) => {
       setTimeout(() => {
-        // console.log(this.user);
         resolve(this.user);
       }, 200);
     });

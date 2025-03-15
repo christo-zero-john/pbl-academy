@@ -17,6 +17,7 @@ export default function CourseItemPage() {
   const params = useParams();
   const router = useRouter();
   const [course, setCourse] = useState(null);
+  const [showClassrooms, setShowClassrooms] = useState(false);
 
   // This useEffect fetches the course and sets course item (course state)
   useEffect(() => {
@@ -90,6 +91,13 @@ export default function CourseItemPage() {
           <p className="d-inline-block mx-2">
             Tasks: {Tasks.getCount(course.tasks) || "calculating..."}
           </p>
+
+          <button
+            className="btn btn-primary"
+            onClick={() => setShowClassrooms(true)}
+          >
+            Enroll For Free
+          </button>
         </div>
 
         {
@@ -106,8 +114,8 @@ export default function CourseItemPage() {
       ></div>
       <h3 className="text-center">Course Activities</h3>
       <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
-      
-      <AllCourseClassrooms courseID={course.id} />
+
+      <AllCourseClassrooms courseID={course.id} show={showClassrooms} />
     </div>
   );
 }

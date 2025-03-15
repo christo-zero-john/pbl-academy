@@ -1,4 +1,4 @@
-export default function AllCourseClassrooms() {
+export default function AllCourseClassrooms({ courseID, show }) {
   return (
     <>
       <div className="accordion accordion-flush" id="accordion-tasks-daywise">

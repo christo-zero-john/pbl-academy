@@ -62,7 +62,7 @@ class Course {
   async fetchCourseById(id) {
     try {
       const Supabase = await createClient();
-      await Supabase.auth.getSession();
+      const userSession = await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("courses")
         .select(
           `
@@ -73,7 +73,9 @@ class Course {
         created_by (*),
         tasks (*)`
         )
-        .eq("id", id)
+        .match({
+          id: id,
+        });
       if (error) {
         return {
           success: false,

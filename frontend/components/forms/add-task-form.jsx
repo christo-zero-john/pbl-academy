@@ -2,7 +2,7 @@ import TextEditor from "@/frontend/components/text-editor/text-editor";
 import User from "@/frontend/modules/entities/User";
 import { useState, useEffect } from "react";
 import AddResourceLinksForm from "../mentor/add-resource-links-form";
-import { Offcanvas, Form, Button } from "react-bootstrap";
+import { Offcanvas} from "react-bootstrap";
 
 export default function AddTaskForm({
   show = false,

@@ -45,11 +45,10 @@ overdue
 - [x] Create tables in supabase to store classroom and enrollment data.
 
 - [ ] If the course is published show a button `New classroom`. Otherwise show text pusblish course then add a classroom.
-- [ ] List existing classrooms of course
+- [ ] List existing classrooms of course while viewing course
 - [ ] Classroms should have a maximum enrollment size and date of starting.
 - [ ] Once a classroom is added students can request to enroll in classrooms.
 - [ ] Mentors can view enrollment requests and allow students to attend the cohort.
-
 
 `12 03 2025`
 

@@ -5,12 +5,13 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
+import "../../styles/text-editor.css";
 
 /**
  * Component used to insert a  text editor with text styling functionalities.
  * @props initialContent: Text to be displayed in the text editor.
- * @props onChange: A state updater function to which the 
- * 
+ * @props onChange: A state updater function to which the
+ *
  */
 const TextEditor = ({ initialContent = "", onChange }) => {
   const editor = useEditor({
@@ -55,69 +56,81 @@ const TextEditor = ({ initialContent = "", onChange }) => {
     <div className="editor-wrapper border border-2">
       {/* Custom Toolbar */}
       <div className="border-bottom border-2 p-2 d-flex justify-content-start align-items-center flex-wrap">
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1 fw-bold"
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={!editor.can().chain().focus().toggleBold().run()}
         >
           B
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
         >
           <i>I</i>
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           disabled={!editor.can().chain().focus().toggleUnderline().run()}
         >
           <u>U</u>
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleStrike().run()}
           disabled={!editor.can().chain().focus().toggleStrike().run()}
         >
           <s>S</s>
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           disabled={!editor.can().chain().focus().toggleBulletList().run()}
         >
           Bullet List
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           disabled={!editor.can().chain().focus().toggleOrderedList().run()}
         >
           Ordered List
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           disabled={!editor.can().chain().focus().toggleBlockquote().run()}
         >
           Blockquote
         </button>
-        <button type="button"
+        <button
+          type="button"
           className="btn btn-outline-secondary px-2 py-0 m-1"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
         >
           &lt; /&gt;
         </button>
-        <button type="button" className="btn btn-outline-secondary px-2 py-0 m-1 link-primary" onClick={addLink}>
+        <button
+          type="button"
+          className="btn btn-outline-secondary px-2 py-0 m-1 link-primary"
+          onClick={addLink}
+        >
           Link
         </button>
       </div>
       {/* Editor Content */}
       <div className="hd-75">
-        <EditorContent editor={editor} />
+        <EditorContent className="overflow-auto no-scrollbar m-2" editor={editor} />
       </div>
     </div>
   );

@@ -4,12 +4,6 @@
 
 /* This file contains all the default css I uses in my web projects */
 
-
-.ProseMirror{
-  height: 75vh;
-  overflow:auto
-}
-
 /* webkit */
 .no-scrollbar::-webkit-scrollbar {
   width: 5px;
@@ -538,6 +532,63 @@
 
 .alert-violet {
   background-color: #a047fa50;
+}
+
+/* Button colors */
+.btn-wheat {
+  background-color: wheat;
+}
+
+.btn-orange {
+  background-color: orange;
+}
+
+.btn-darkorange {
+  background-color: darkorange;
+}
+
+.btn-aqua {
+  background-color: aqua;
+}
+
+.btn-aquamarine {
+  background-color: aquamarine;
+}
+
+.btn-greenyellow {
+  background-color: greenyellow;
+}
+
+.btn-violet {
+  background-color: #a047fa;
+}
+
+.btn-wheat:hover {
+  background-color: #f5deb3cb;
+}
+
+.btn-orange:hover {
+  background-color: #ffa500cb;
+}
+
+.btn-darkorange:hover {
+  background-color: #ff8c00cb;
+}
+
+.btn-aqua:hover {
+  background-color: #00ffffcb;
+}
+
+.btn-aquamarine:hover {
+  background-color: #7fffd4cb;
+}
+
+.btn-greenyellow:hover {
+  background-color: #adff2fcb;
+}
+
+.btn-violet:hover {
+  background-color: #a047facb;
 }
 
 /* text shadow */

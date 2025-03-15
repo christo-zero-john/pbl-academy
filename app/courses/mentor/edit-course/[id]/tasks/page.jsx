@@ -4,8 +4,8 @@ import Course from "@/frontend/modules/entities/Course";
 import Tasks from "@/frontend/modules/entities/Tasks";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import AddTaskForm from "./add-task-form";
-import DisplayTasks from "./display-tasks";
+import AddTaskForm from "../../../../../../frontend/components/forms/add-task-form";
+import DisplayTasks from "../../../../../../frontend/components/courses/display-tasks";
 import Mentor from "@/frontend/modules/entities/Mentor";
 
 export default function ManageTasksOfCourse() {
@@ -147,6 +147,18 @@ export default function ManageTasksOfCourse() {
     showTaskForm(true);
   }
 
+  /**
+   * Handles the addition of a new task to the course.
+   *
+   * @param {Object} task - The task object to be added.
+   * @param {number} task.day - The day number to which the task belongs.
+   * @param {string} task.title - The title of the task.
+   * @param {string} task.description - The description of the task.
+   * @param {number} [task.index] - The index of the task within the day (optional).
+   * @param {string} [task.course_id] - The ID of the course (optional).
+   *
+   * @returns {boolean} - Returns true if the task was successfully added.
+   */
   function pushNewTaskHandler(task) {
     // console.log("Tasks array:", tasks, "New task:", task);
 
@@ -207,6 +219,11 @@ export default function ManageTasksOfCourse() {
     return true;
   }
 
+  /**
+   * Handles the viewing of newly created tasks.
+   * Logs a message to the console, updates the list of tasks with newly created tasks,
+   * and sets the state to view the updated tasks.
+   */
   function viewNewTasks() {
     console.log("Viewing Newly created Tasks");
     let tempUpdatedTasks = Tasks.getUpdatedTasks([...tasks], [...newTasks]);
@@ -223,6 +240,11 @@ export default function ManageTasksOfCourse() {
     const tasksToSave = Tasks.ungroupTasks2D(tasks2D);
     console.log("Tasks to be saved: ", tasksToSave);
     const saveStatus = await Mentor.saveTasksToDB(tasksToSave);
+    if (saveStatus.success) {
+      window.confirm("New Tasks added successfully");
+      setNewtasks([]);
+      setUpdatedTasks([]);
+    }
     setViewUpdatedTasks(false);
   }
 

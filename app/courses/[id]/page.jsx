@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import DisplayTasks from "../mentor/edit-course/[id]/tasks/display-tasks";
 import Tasks from "@/frontend/modules/entities/Tasks";
+import MentorSettings from "./components/mentor-settings";
 
 /**
  *
@@ -83,9 +84,21 @@ export default function CourseItemPage() {
         {
           // Show whether the course is published or not
           course.published ? (
-            <p className="fw-bold text-danger"> Published</p>
+            <>
+              <p className="fw-bold text-danger">Published</p>
+              <button className="btn btn-danger d-inline-block ms-2">
+                Move Course to Drafts
+              </button>
+            </>
           ) : (
-            <p className="fw-bold text-danger">Not Published</p>
+            <>
+              <p className="fw-bold text-danger d-inline-block">
+                Not Published
+              </p>
+              <button className="btn btn-success d-inline-block ms-2">
+                Publish Course
+              </button>
+            </>
           )
         }
 
@@ -99,27 +112,9 @@ export default function CourseItemPage() {
         </div>
 
         {
-          // Display an edit button if the course is viewed by the course creator.
+          // Display mentor settings if the course is being viewed by the course creator.
           User.user.id == course.created_by.id && (
-            <div className="">
-              <button
-                className="btn btn-primary mx-2"
-                onClick={() =>
-                  router.push(`/courses/mentor/edit-course/${course.id}`)
-                }
-              >
-                Edit Course Details
-              </button>
-
-              <button
-                className="btn btn-primary mx-2"
-                onClick={() =>
-                  router.push(`/courses/mentor/edit-course/${course.id}/tasks`)
-                }
-              >
-                Manage Tasks
-              </button>
-            </div>
+            <MentorSettings course={course} />
           )
         }
       </div>

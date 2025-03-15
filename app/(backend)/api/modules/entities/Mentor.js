@@ -126,6 +126,45 @@ class Mentor {
       };
     }
   }
+
+  async togglePublishCourse(courseID, publishedState) {
+    try {
+      const Supabase = await createClient();
+      const userSession = await Supabase.auth.getSession();
+      console.log(
+        "User session fetched successfully. Current User: ",
+        userSession.data.session.user.email
+      );
+
+      const { data, error } = await Supabase.from("courses")
+        .update({
+          published: publishedState,
+        })
+        .eq("id", courseID);
+
+      if (error) {
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          data: "Successfully Published",
+        };
+      }
+    } catch (error) {
+      // Catch unexpected errors
+      console.log("Internal Server Error: ", error);
+      return {
+        success: false,
+        error:
+          `Internal Server Error: ${error.message}` ||
+          "Something went wrong. Internal Server Error. Please Contact Support",
+      };
+    }
+  }
 }
 
 export default new Mentor();
+// Mentor in Backend

@@ -1,8 +1,13 @@
+"use client";
+
 import Mentor from "@/frontend/modules/entities/Mentor";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import CreateClassroomForm from "../forms/create-classroom-form";
 
 export default function MentorSettings({ course, setCourse }) {
+  const [showClassroomForm, setSshowClassroomForm] = useState(false);
+
   async function publishCourseHandler() {
     const publishStatus = await Mentor.togglePublishCourse(course.id, true);
     if (publishStatus.success) {
@@ -38,7 +43,7 @@ export default function MentorSettings({ course, setCourse }) {
 
   async function createClassroomHandler() {
     console.log("Displaying form to create course classroom");
-    
+    setSshowClassroomForm(true);
   }
 
   return (
@@ -66,13 +71,17 @@ export default function MentorSettings({ course, setCourse }) {
           >
             Move Course to Drafts
           </button>
-          <Link
-            href={`/courses/${course.id}/classrooms/new`}
+          <button
             className="btn btn-primary ms-2 d-inline-block"
             onClick={createClassroomHandler}
           >
             Create New Classroom
-          </Link>
+          </button>
+          <CreateClassroomForm
+            course={course}
+            show={showClassroomForm}
+            setShow={setSshowClassroomForm}
+          />
         </div>
       ) : (
         <div className="m-3">

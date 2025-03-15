@@ -46,12 +46,12 @@ class Tasks {
    * @param taskIndex2D
    */
   getUpdatedTasks(tasksMatrix, taskIndex2D) {
-    console.log("Combining Updated tasks: ", tasksMatrix, taskIndex2D);
+    console.log("Combining Updated tasks");
     let updatedTasks = [];
     taskIndex2D.forEach((taskIndex) => {
       let M = taskIndex[0] - 1;
       let J = taskIndex[1] - 1;
-      console.log(M, J);
+      // console.log(M, J);
 
       updatedTasks.push(tasksMatrix[M][J]);
     });

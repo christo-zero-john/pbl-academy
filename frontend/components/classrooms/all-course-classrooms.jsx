@@ -2,7 +2,6 @@ import Course from "@/frontend/modules/entities/Course";
 import Classroom from "@/frontend/modules/entities/Classroom";
 import { useState, useEffect } from "react";
 import { Offcanvas, Accordion } from "react-bootstrap";
-import CreateClassroomForm from "../forms/create-classroom-form";
 
 export default function AllCourseClassrooms({ course, show, setShow }) {
   console.log("Rendering Classrroms of course ", course.id);
@@ -97,7 +96,6 @@ export default function AllCourseClassrooms({ course, show, setShow }) {
             }
           </Offcanvas.Body>
         </Offcanvas>
-        <CreateClassroomForm />
       </>
     );
   }

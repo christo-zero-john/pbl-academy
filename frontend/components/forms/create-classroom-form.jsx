@@ -23,7 +23,15 @@ export default function CreateClassroomForm({ course, show, setShow }) {
       `Creating New Classroom for course '${course.title}' with data:`,
       formData
     );
-    const createStatus = await Mentor.createClassroom(formData);
+    const createClassroomStatus = await Mentor.createClassroom(formData);
+
+    if (createClassroomStatus.success) {
+      window.confirm("Classroom created successfuly");
+    } else {
+      window.confirm(
+        `Could'nt create classroom. ${createClassroomStatus.error.message}`
+      );
+    }
   }
 
   return (

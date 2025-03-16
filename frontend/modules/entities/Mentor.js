@@ -130,6 +130,40 @@ class Mentor {
         return response;
       });
   }
+
+  async createClassroom(formData) {
+    console.log(
+      "Sending request to create new classroom for course: ",
+      formData.course_id
+    );
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+
+    // // console.log("Request: ", request);
+
+    return fetch("/api/courses/classrooms/new", request)
+      .then((res) => res.json())
+      .then((response) => {
+        console.log("Request sent successfully and response recieved.");
+        console.log(response)
+        if (response.error) {
+          return {
+            success: false,
+            error: response.error,
+          };
+        } else {
+          return {
+            success: true,
+            data: response?.data,
+          };
+        }
+      });
+  }
 }
 
 export default new Mentor();

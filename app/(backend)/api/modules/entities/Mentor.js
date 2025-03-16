@@ -44,9 +44,11 @@ class Mentor {
       console.log("Internal Server Error: ", error);
       return {
         success: false,
-        error:
-          `Internal Server Error: ${error.message}` ||
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       };
     }
   }
@@ -86,9 +88,11 @@ class Mentor {
       console.log("Internal Server Error: ", error);
       return {
         success: false,
-        error:
-          `Internal Server Error: ${error.message}` ||
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       };
     }
   }
@@ -120,9 +124,11 @@ class Mentor {
       console.log("Internal Server Error: ", error);
       return {
         success: false,
-        error:
-          `Internal Server Error: ${error.message}` ||
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       };
     }
   }
@@ -158,9 +164,11 @@ class Mentor {
       console.log("Internal Server Error: ", error);
       return {
         success: false,
-        error:
-          `Internal Server Error: ${error.message}` ||
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       };
     }
   }
@@ -176,7 +184,6 @@ class Mentor {
       const { data, error } = await Supabase.from("classrooms")
         .insert([classroomData])
         .select("id");
-
       if (error) {
         return {
           success: false,
@@ -193,9 +200,11 @@ class Mentor {
       console.log("Internal Server Error: ", error);
       return {
         success: false,
-        error:
-          `Internal Server Error: ${error.message}` ||
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       };
     }
   }

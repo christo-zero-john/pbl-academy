@@ -40,9 +40,11 @@ export async function POST(request) {
     return NextResponse.json(
       {
         success: false,
-        error:
-          `Internal Server Error: ${error.message}` ||
-          "Something went wrong. Internal Server Error. Please Contact Support",
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
       },
       { status: 500 }
     );

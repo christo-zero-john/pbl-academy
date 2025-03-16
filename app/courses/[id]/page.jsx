@@ -116,7 +116,7 @@ export default function CourseItemPage() {
       <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
 
       <AllCourseClassrooms
-        courseID={course.id}
+        course={course}
         show={showClassrooms}
         setShow={setShowClassrooms}
       />

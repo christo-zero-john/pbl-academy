@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import CreateClassroomForm from "../forms/create-classroom-form";
 
 export default function MentorSettings({ course, setCourse }) {
-  const [showClassroomForm, setSshowClassroomForm] = useState(false);
+  const [showClassroomForm, setShowClassroomForm] = useState(false);
 
   async function publishCourseHandler() {
     const publishStatus = await Mentor.togglePublishCourse(course.id, true);
@@ -43,7 +43,7 @@ export default function MentorSettings({ course, setCourse }) {
 
   async function createClassroomHandler() {
     console.log("Displaying form to create course classroom");
-    setSshowClassroomForm(true);
+    setShowClassroomForm(true);
   }
 
   return (
@@ -80,7 +80,7 @@ export default function MentorSettings({ course, setCourse }) {
           <CreateClassroomForm
             course={course}
             show={showClassroomForm}
-            setShow={setSshowClassroomForm}
+            setShow={setShowClassroomForm}
           />
         </div>
       ) : (

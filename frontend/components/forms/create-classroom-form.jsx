@@ -1,12 +1,29 @@
-import { useState } from "react";
+import Mentor from "@/frontend/modules/entities/Mentor";
+import User from "@/frontend/modules/entities/User";
+import { useEffect, useState } from "react";
 import { Offcanvas } from "react-bootstrap/esm";
 
 export default function CreateClassroomForm({ course, show, setShow }) {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    created_by: User.user.id,
+    main_mentor: User.user.id,
+    start_date: null,
+    course_id: course.id,
+    enrollment_price: 1,
+    total_seats: 0,
+  });
+
+  useEffect(() => {
+    console.log("Form Data: ", formData);
+  }, [formData]);
 
   async function createClassroomHandler(event) {
     event.preventDefault();
-    console.log("Creating New Classroom for course: ", course.id);
+    console.log(
+      `Creating New Classroom for course '${course.title}' with data:`,
+      formData
+    );
+    const createStatus = await Mentor.createClassroom(formData);
   }
 
   return (
@@ -30,7 +47,55 @@ export default function CreateClassroomForm({ course, show, setShow }) {
           method="POST"
           className="col-12"
           onSubmit={createClassroomHandler}
-        ></form>
+        >
+          <label className="d-block mb-4">
+            Start Date
+            <input
+              type="date"
+              required
+              className="d-block"
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  start_date: event.target.value,
+                })
+              }
+            />
+          </label>
+          <label className="d-block mb-4">
+            Enrollment Price
+            <input
+              type="number"
+              required
+              min={50}
+              className="d-block"
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  enrollment_price: +event.target.value,
+                })
+              }
+            />
+          </label>
+          <label className="d-block mb-4">
+            Total Seats
+            <input
+              type="number"
+              required
+              min={5}
+              className="d-block"
+              onChange={(event) =>
+                setFormData({
+                  ...formData,
+                  total_seats: +event.target.value,
+                })
+              }
+            />
+          </label>
+          <button className="btn btn-success" type="submit">
+            Create Classroom
+          </button>
+        </form>
       </Offcanvas.Body>
     </Offcanvas>
   );

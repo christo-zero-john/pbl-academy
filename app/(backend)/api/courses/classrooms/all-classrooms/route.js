@@ -10,11 +10,13 @@ export async function POST(request) {
     console.log("Recieved Data: ", requestData);
 
     console.log(
-      "Initializing get all classrrooms for course: ",
+      "Initializing get all classrooms for course: ",
       requestData.course_id
     );
 
-    const getClassroomStatus = await Course.fetchClassrooms(requestData.id);
+    const getClassroomStatus = await Course.fetchClassrooms(
+      requestData.course_id
+    );
 
     if (getClassroomStatus.success) {
       console.log(
@@ -24,7 +26,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: true,
-          data: getClassroomStatus.data,
+          classrooms: getClassroomStatus.data,
         },
         { status: 200 }
       );

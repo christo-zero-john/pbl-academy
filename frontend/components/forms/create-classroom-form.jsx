@@ -13,9 +13,9 @@ export default function CreateClassroomForm({ course, show, setShow }) {
     total_seats: 0,
   });
 
-  useEffect(() => {
-    console.log("Form Data: ", formData);
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log("Form Data: ", formData);
+  // }, [formData]);
 
   async function createClassroomHandler(event) {
     event.preventDefault();

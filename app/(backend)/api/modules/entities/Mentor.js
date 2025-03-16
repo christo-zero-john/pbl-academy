@@ -164,6 +164,41 @@ class Mentor {
       };
     }
   }
+
+  async createClassroom(classroomData) {
+    try {
+      const Supabase = await createClient();
+      const userSession = await Supabase.auth.getSession();
+      console.log(
+        "user session fetched successfully. Current User: ",
+        userSession.data.session.user.email
+      );
+      const { data, error } = await Supabase.from("classrooms")
+        .insert([classroomData])
+        .select("id");
+
+      if (error) {
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          data: data[0],
+        };
+      }
+    } catch (error) {
+      // Catch unexpected errors
+      console.log("Internal Server Error: ", error);
+      return {
+        success: false,
+        error:
+          `Internal Server Error: ${error.message}` ||
+          "Something went wrong. Internal Server Error. Please Contact Support",
+      };
+    }
+  }
 }
 
 export default new Mentor();

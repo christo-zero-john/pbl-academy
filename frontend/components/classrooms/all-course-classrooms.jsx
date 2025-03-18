@@ -2,6 +2,7 @@ import Course from "@/frontend/modules/entities/Course";
 import Classroom from "@/frontend/modules/entities/Classroom";
 import { useState, useEffect } from "react";
 import { Offcanvas } from "react-bootstrap";
+import EnrollToClassroom from "./enroll-to-classroom";
 
 export default function AllCourseClassrooms({ course, show, setShow }) {
   console.log("Rendering Classrroms of course ", course.id);
@@ -87,10 +88,7 @@ export default function AllCourseClassrooms({ course, show, setShow }) {
                       </span>
                     </span>
                   </div>
-                  <button className="btn btn-primary m-2">
-                    Enroll{" "}
-                    <span className="">₹{classroom.enrollment_price}</span>{" "}
-                  </button>
+                  <EnrollToClassroom classroom={classroom} />
                 </div>
               ))
             }

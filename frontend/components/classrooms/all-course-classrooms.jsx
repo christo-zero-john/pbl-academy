@@ -5,8 +5,7 @@ import { Offcanvas } from "react-bootstrap";
 
 export default function AllCourseClassrooms({ course, show, setShow }) {
   console.log("Rendering Classrroms of course ", course.id);
-  const [classrooms, setClassrooms] = useState(null);
-
+ 
   // This useEffect fetches the classrooms and sets classrooms state
   useEffect(() => {
     /**

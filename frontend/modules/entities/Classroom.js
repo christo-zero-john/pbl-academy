@@ -35,6 +35,33 @@ class Classroom {
     const endDate = `${endYear}-${endMonth}-${endDay}`;
     return endDate;
   }
+
+  async enrollToClassroom(enrollmentData) {
+    console.log("Sending request to enroll learner to classroom");
+
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(enrollmentData),
+    };
+
+    try {
+      return fetch("/api/courses/classrooms/enroll", request)
+        .then((res) => res.json())
+        .then((data) => {
+          // The response returned from the server is sent back to the caller. It contains success, error or classroms fields.
+          return data;
+        });
+    } catch (error) {
+      console.log("Error Enrolling to classroom: ", error);
+      return {
+        success: false,
+        error: error,
+      };
+    }
+  }
 }
 
 export default new Classroom();

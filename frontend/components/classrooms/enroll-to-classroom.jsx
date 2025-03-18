@@ -1,3 +1,6 @@
+import Classroom from "@/frontend/modules/entities/Classroom";
+import User from "@/frontend/modules/entities/User";
+
 export default function EnrollToClassroom({ classroom }) {
   async function enrollTOClassroomHandler() {
     console.log("Enrolling to classroom");
@@ -5,7 +8,14 @@ export default function EnrollToClassroom({ classroom }) {
       "Are you sure you want to enroll to this classroom??"
     );
     if (confirmAction) {
-      console.log("User ready to enroll to classroom");
+      console.log("User ready to enroll in classroom");
+      const enrollmentData = {
+        learner_id: User.user.id,
+        classroom_id: classroom.id,
+      };
+      Classroom.enrollToClassroom(enrollmentData);
+    } else {
+      console.log("User refused to enroll in classroom");
     }
   }
 

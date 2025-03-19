@@ -37,7 +37,7 @@ class Classroom {
   }
 
   async enrollToClassroom(enrollmentData) {
-    console.log("Sending request to enroll learner to classroom");
+    console.log("Sending request to enroll learner into classroom");
 
     const request = {
       method: "POST",
@@ -51,6 +51,7 @@ class Classroom {
       return fetch("/api/courses/classrooms/enroll", request)
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           // The response returned from the server is sent back to the caller. It contains success, error or classroms fields.
           return data;
         });

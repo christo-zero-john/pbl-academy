@@ -13,7 +13,15 @@ export default function EnrollToClassroom({ classroom }) {
         learner_id: User.user.id,
         classroom_id: classroom.id,
       };
-      Classroom.enrollToClassroom(enrollmentData);
+      const enrollmentStatus = Classroom.enrollToClassroom(enrollmentData);
+
+      if (enrollmentStatus.success) {
+        window.confirm("Successfully enrolled to classroom");
+      } else {
+        window.confirm(
+          `Some problem occurred while enrolling: ${enrollmentStatus.error.message} `
+        );
+      }
     } else {
       console.log("User refused to enroll in classroom");
     }

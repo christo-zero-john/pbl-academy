@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Course from "../../../modules/entities/Course";
+import Classroom from "../../../modules/entities/Classroom";
 
 /**
  * API Route to get all classrooms of a course
@@ -11,7 +11,7 @@ export async function POST(request) {
 
     console.log("Initializing enroll learner to classroom", requestData);
 
-    const enrollmentStatus = await Course.enrollToClassroom(requestData);
+    const enrollmentStatus = await Classroom.enrollToClassroom(requestData);
 
     if (enrollmentStatus.success) {
       console.log(

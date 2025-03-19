@@ -39,3 +39,4 @@
 
 /courses
 /courses/create
+

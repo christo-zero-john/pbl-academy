@@ -9,17 +9,14 @@ export async function POST(request) {
     const requestData = await request.json();
     console.log("Recieved Data: ", requestData);
 
-    console.log(
-      "Initializing enroll learner to classroom ",
-      requestData.classroom_id
-    );
+    console.log("Initializing enroll learner to classroom", requestData);
 
     const enrollmentStatus = await Course.enrollToClassroom(requestData);
 
     if (enrollmentStatus.success) {
       console.log(
-        "Successfully fetched classrooms of course ",
-        requestData.course_id
+        "Successfully enrolled learner into classroom",
+        requestData.classroom_id
       );
       return NextResponse.json(
         {
@@ -29,7 +26,7 @@ export async function POST(request) {
         { status: 200 }
       );
     } else {
-      console.log("Error while fetching  classrooms");
+      console.log("Error while fetching  classrooms.");
       return NextResponse.json(
         {
           success: false,

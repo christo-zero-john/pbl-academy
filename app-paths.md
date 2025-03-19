@@ -30,7 +30,7 @@
 
 # API App Paths
 
-## AUthentication
+## Authentication
 
 /auth/login
 /auth/signup

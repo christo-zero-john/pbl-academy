@@ -142,7 +142,8 @@ class Course {
       const { data, error } = await Supabase.from("enrollments")
         .insert(enrollmentData)
         .select("*");
-      if (error) {        
+      if (error) {  
+        console.log("\n\n\nError\n\n\n")      
         return {
           success: false,
           error: error,

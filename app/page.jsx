@@ -19,7 +19,7 @@ export default function HomePage() {
       <br />
       <hr className="border border-3" />
       <h2 className="text-center text-success fs-4">Courses</h2>
-      <Link className="d-block m-1" href="/courses">
+      <Link className="d-block m-1 btn btn-primary w-fit" href="/courses">
         All Courses
       </Link>
       <br />

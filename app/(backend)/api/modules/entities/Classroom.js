@@ -19,7 +19,6 @@ class Classroom {
         .insert(enrollmentData)
         .select("*");
       if (error) {
-        console.log("\n\n\nError\n\n\n");
         return {
           success: false,
           error: error,
@@ -27,7 +26,7 @@ class Classroom {
       } else {
         return {
           success: true,
-          data: data,
+          data: data[0],
         };
       }
     } catch (error) {

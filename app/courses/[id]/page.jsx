@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import DisplayTasks from "../../../frontend/components/courses/display-tasks";
 import Tasks from "@/frontend/modules/entities/Tasks";
-import MentorSettings from "../../../frontend/components/mentor/mentor-settings";
+import MentorActions from "../../../frontend/components/mentor/mentor-actions";
 import AllCourseClassrooms from "@/frontend/components/classrooms/all-course-classrooms";
 
 /** comment
@@ -26,7 +26,7 @@ export default function CourseItemPage() {
      */
 
     (async () => {
-      console.log("Fetching getCourseStatus");
+      console.log("Fetching course");
       const getCourseStatus = await Course.fetchCourses({
         id: params.id,
       });
@@ -34,7 +34,7 @@ export default function CourseItemPage() {
       // console.log(getCourseStatus);
 
       if (getCourseStatus.success) {
-        console.log("Response recieved");
+        // console.log("Response recieved");
         if (getCourseStatus.courses.length == 0) {
           console.log(
             "Invalid Course. Either course is deleted or course does not exists"
@@ -47,7 +47,7 @@ export default function CourseItemPage() {
             "Something unexpected happened while fetching course. Instead of one, we found multiple courses! Contact Support to resolve this problem"
           );
         } else {
-          console.log("Course fetched Successfully");
+          // console.log("Course fetched Successfully");
           let tempCourse = getCourseStatus.courses[0];
           tempCourse.tasks = Tasks.groupAndSortTasks(tempCourse.tasks);
           setCourse(tempCourse);
@@ -103,7 +103,7 @@ export default function CourseItemPage() {
         {
           // Display mentor settings if the course is being viewed by the course creator.
           User.user.id == course.created_by.id && (
-            <MentorSettings course={course} setCourse={setCourse} />
+            <MentorActions course={course} setCourse={setCourse} />
           )
         }
       </div>

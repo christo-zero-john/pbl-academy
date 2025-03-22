@@ -4,7 +4,7 @@ import TextEditor from "@/frontend/components/text-editor/text-editor";
 import Course from "@/frontend/modules/entities/Course";
 import Mentor from "@/frontend/modules/entities/Mentor";
 import User from "@/frontend/modules/entities/User";
-import { useParams, useRouter } from "next/navigation";
+import { redirect, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 /**
@@ -106,6 +106,15 @@ export default function EditCoursePage() {
   return (
     <div className="">
       <h1 className="text-center">Edit Course Details</h1>
+
+      <button
+        className="btn btn-primary ms-auto d-block"
+        onClick={() =>
+          (window.location.href = `/courses/mentor/edit-course/${course.id}/tasks`)
+        }
+      >
+        Manage Course tasks
+      </button>
 
       <form className="p-3" onSubmit={updateCourseDetailsHandler}>
         <label htmlFor="published" className="">

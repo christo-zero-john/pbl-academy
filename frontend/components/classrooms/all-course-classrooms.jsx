@@ -65,7 +65,6 @@ export default function AllCourseClassrooms({ course, show, setShow }) {
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            
             {
               // Displaying classrom items of course
               classrooms.map((classroom, index) => (
@@ -89,7 +88,10 @@ export default function AllCourseClassrooms({ course, show, setShow }) {
                       </span>
                     </span>
                   </div>
-                  <EnrollToClassroom classroom={classroom} />
+                  <EnrollToClassroom
+                    classroom={classroom}
+                    courseTitle={course.title}
+                  />
                 </div>
               ))
             }

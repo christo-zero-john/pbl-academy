@@ -1,11 +1,16 @@
 import Classroom from "@/frontend/modules/entities/Classroom";
 import User from "@/frontend/modules/entities/User";
+import { useRouter } from "next/navigation";
 
-export default function EnrollToClassroom({ classroom }) {
+export default function EnrollToClassroom({ classroom, courseTitle }) {
+  courseTitle = courseTitle.split(" ").join("-").toLowerCase();
+  console.log(courseTitle);
+
+  const router = useRouter();
   async function enrollTOClassroomHandler() {
     console.log("Enrolling to classroom");
     const confirmAction = window.confirm(
-      "Are you sure you want to enroll to this classroom??"
+      "Are you sure you want to enroll to this classroom?"
     );
     if (confirmAction) {
       console.log("User ready to enroll in classroom");
@@ -13,10 +18,13 @@ export default function EnrollToClassroom({ classroom }) {
         learner_id: User.user.id,
         classroom_id: classroom.id,
       };
-      const enrollmentStatus = Classroom.enrollToClassroom(enrollmentData);
+      const enrollmentStatus = await Classroom.enrollToClassroom(
+        enrollmentData
+      );
 
       if (enrollmentStatus.success) {
         window.confirm("Successfully enrolled to classroom");
+        router.push(`/learn/${enrollmentStatus.classrooms.classroom_id}`);
       } else {
         window.confirm(
           `Some problem occurred while enrolling: ${enrollmentStatus.error.message} `

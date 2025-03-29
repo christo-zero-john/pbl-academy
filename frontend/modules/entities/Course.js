@@ -13,7 +13,7 @@ class Course {
   // Create Course in Mentor Class
 
   async fetchCourses(filters) {
-    console.log("Fetching Courses with filters: ", filters);
+    // console.log("Fetching Courses with filters: ", filters);
 
     const request = {
       method: "POST",

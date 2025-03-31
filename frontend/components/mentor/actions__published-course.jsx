@@ -1,9 +1,12 @@
 import { useState } from "react";
 import CreateClassroomForm from "../forms/create-classroom-form";
 import Mentor from "@/frontend/modules/entities/Mentor";
+import ManageClassrooms from "./manage-classrooms";
 
 export default function PublishedCourse__Mentor({ course, setCourse }) {
   const [showClassroomForm, setShowClassroomForm] = useState(false);
+
+  const [showManageClassrooms, setShowManageClassrooms] = useState(false);
 
   async function moveCourseToDraftsHandler() {
     const moveToDraftStatus = await Mentor.togglePublishCourse(
@@ -28,8 +31,8 @@ export default function PublishedCourse__Mentor({ course, setCourse }) {
     setShowClassroomForm(true);
   }
 
-  function manageClassrooms() {}
-  
+  function manageClassroomsHandler() {}
+
   return (
     <div className="my-3">
       <p className="fw-bold text-success p-0 m-0">Course Already Published</p>
@@ -48,7 +51,7 @@ export default function PublishedCourse__Mentor({ course, setCourse }) {
 
       <button
         className="btn btn-primary ms-2 d-inline-block"
-        onClick={createClassroomHandler}
+        onClick={() => setShowManageClassrooms(true)}
       >
         Manage Clasrooms
       </button>
@@ -56,8 +59,16 @@ export default function PublishedCourse__Mentor({ course, setCourse }) {
       <CreateClassroomForm
         course={course}
         show={showClassroomForm}
-        setShow={setShowClassroomForm}
+        setShow={setShowManageClassrooms}
       />
+
+      {showManageClassrooms && (
+        <ManageClassrooms
+          course={course}
+          show={showManageClassrooms}
+          setShow={setShowManageClassrooms}
+        />
+      )}
     </div>
   );
 }

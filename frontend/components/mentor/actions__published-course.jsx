@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CreateClassroomForm from "../forms/create-classroom-form";
 import Mentor from "@/frontend/modules/entities/Mentor";
-import ManageClassrooms from "./manage-classrooms";
+import ManageClassrooms__Mentor from "./manage-classrooms";
 
 export default function PublishedCourse__Mentor({
   course,
@@ -69,7 +69,7 @@ export default function PublishedCourse__Mentor({
       />
 
       {showManageClassrooms && (
-        <ManageClassrooms
+        <ManageClassrooms__Mentor
           course={course}
           show={showManageClassrooms}
           setShow={setShowManageClassrooms}          

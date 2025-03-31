@@ -2,6 +2,7 @@
 
 - [ ] Populate the add resource link component in add task form
 - [ ] Implement mechanism to update and delete user details, course tasks and classrooms
+- [ ] when mentor views their course, seperately view published and unpublished courses
 
 # To Fix
 

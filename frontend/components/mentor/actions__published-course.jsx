@@ -3,7 +3,13 @@ import CreateClassroomForm from "../forms/create-classroom-form";
 import Mentor from "@/frontend/modules/entities/Mentor";
 import ManageClassrooms from "./manage-classrooms";
 
-export default function PublishedCourse__Mentor({ course, setCourse }) {
+export default function PublishedCourse__Mentor({
+  course,
+  setCourse,
+  offCanvasBody,
+  setOffCanvasBody,
+  setPreviousOffCanvasBody,
+}) {
   const [showClassroomForm, setShowClassroomForm] = useState(false);
 
   const [showManageClassrooms, setShowManageClassrooms] = useState(false);
@@ -66,7 +72,7 @@ export default function PublishedCourse__Mentor({ course, setCourse }) {
         <ManageClassrooms
           course={course}
           show={showManageClassrooms}
-          setShow={setShowManageClassrooms}
+          setShow={setShowManageClassrooms}          
         />
       )}
     </div>

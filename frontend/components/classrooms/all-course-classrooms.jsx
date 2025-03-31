@@ -3,13 +3,14 @@ import Classroom from "@/frontend/modules/entities/Classroom";
 import { useState, useEffect } from "react";
 import { Offcanvas } from "react-bootstrap";
 import EnrollToClassroom from "./enroll-to-classroom";
+import ManageClassroomItem__Mentor from "../mentor/manage-classroom-item";
 
 export default function AllCourseClassrooms({
   course,
   show,
   setShow,
   mentor = false,
-  mentorActions=<></>
+  mentorActions = <></>,
 }) {
   console.log("Rendering Classrroms of course ", course.id);
   console.log("Viewed by mentor. Rendering mentor actions");
@@ -54,57 +55,54 @@ export default function AllCourseClassrooms({
       </Offcanvas>
     );
   } else {
-    return (
-      <>
-        <Offcanvas
-          show={show}
-          onHide={() => setShow(false)}
-          backdrop="static"
-          className="w-100"
-        >
-          <Offcanvas.Header
-            closeButton
-            className="border-bottom border-3 border-warning"
+    // Displaying classrom items of course
+    const offCanvasBody = classrooms.map((classroom, index) => (
+      <div
+        className="card p-2 m-2 d-flex flex-row justify-content-between align-items-center"
+        key={index}
+      >
+        <div className="w-fit">
+          <span className="d-block  fs-6">Cohort from</span>
+          <span className="d-block text-success fw-600">
+            {classroom.start_date.split("-").reverse().join("-")} to{" "}
+            {classroom.end_date.split("-").reverse().join("-")}
+          </span>
+          <span className="fw-700">Seats: {classroom.total_seats}</span>
+          <span className="d-block">
+            Led By{" "}
+            <span className="text-success fw-500">{classroom.created_by}</span>
+          </span>
+        </div>
+        <EnrollToClassroom classroom={classroom} courseTitle={course.title} />
+        {mentor && <ManageClassroomItem__Mentor classroom={classroom} />}
+      </div>
+    ));
+    if (mentor == true) {
+      return offCanvasBody;
+    } else {
+      return (
+        <>
+          <Offcanvas
+            show={show}
+            onHide={() => setShow(false)}
+            backdrop="static"
+            className="w-100"
           >
-            <Offcanvas.Title className="text-center w-100">
-              <span className="fs-6 d-block">All Classrooms of</span>
-              <span className="fs-4 text-success d-block">{course.title}</span>
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            {
-              // Displaying classrom items of course
-              classrooms.map((classroom, index) => (
-                <div
-                  className="card p-2 m-2 d-flex flex-row justify-content-between align-items-center"
-                  key={index}
-                >
-                  <div className="w-fit">
-                    <span className="d-block  fs-6">Cohort from</span>
-                    <span className="d-block text-success fw-600">
-                      {classroom.start_date.split("-").reverse().join("-")} to{" "}
-                      {classroom.end_date.split("-").reverse().join("-")}
-                    </span>
-                    <span className="fw-700">
-                      Seats: {classroom.total_seats}
-                    </span>
-                    <span className="d-block">
-                      Led By{" "}
-                      <span className="text-success fw-500">
-                        {classroom.created_by}
-                      </span>
-                    </span>
-                  </div>
-                  <EnrollToClassroom
-                    classroom={classroom}
-                    courseTitle={course.title}
-                  />
-                </div>
-              ))
-            }
-          </Offcanvas.Body>
-        </Offcanvas>
-      </>
-    );
+            <Offcanvas.Header
+              closeButton
+              className="border-bottom border-3 border-warning"
+            >
+              <Offcanvas.Title className="text-center w-100">
+                <span className="fs-6 d-block">All Classrooms of</span>
+                <span className="fs-4 text-success d-block">
+                  {course.title}
+                </span>
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>{offCanvasBody}</Offcanvas.Body>
+          </Offcanvas>
+        </>
+      );
+    }
   }
 }

@@ -4,8 +4,15 @@ import { useState, useEffect } from "react";
 import { Offcanvas } from "react-bootstrap";
 import EnrollToClassroom from "./enroll-to-classroom";
 
-export default function AllCourseClassrooms({ course, show, setShow }) {
+export default function AllCourseClassrooms({
+  course,
+  show,
+  setShow,
+  mentor = false,
+  mentorActions=<></>
+}) {
   console.log("Rendering Classrroms of course ", course.id);
+  console.log("Viewed by mentor. Rendering mentor actions");
   const [classrooms, setClassrooms] = useState(null);
 
   // This useEffect fetches the classrooms and sets classrooms state

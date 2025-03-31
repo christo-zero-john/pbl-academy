@@ -150,7 +150,7 @@ class Mentor {
       .then((res) => res.json())
       .then((response) => {
         console.log("Request sent successfully and response recieved.");
-        console.log(response)
+        console.log(response);
         if (response.error) {
           return {
             success: false,
@@ -164,6 +164,7 @@ class Mentor {
         }
       });
   }
+
 }
 
 export default new Mentor();

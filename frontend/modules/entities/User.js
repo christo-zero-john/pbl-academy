@@ -105,6 +105,7 @@ class User {
   }
 
   async getSession() {
+    console.log("Searching session");
     const Supabase = createClient();
     try {
       const { data, error } = await Supabase.auth.getSession();
@@ -136,6 +137,7 @@ class User {
   }
 
   async setUser() {
+    console.log("Searching for user...");
     if (!this.user) {
       await this.getSession();
       // this.user is set in this.getSession()

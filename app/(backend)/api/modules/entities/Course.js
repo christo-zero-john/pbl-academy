@@ -108,7 +108,7 @@ class Course {
       const Supabase = await createClient();
       await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("classrooms")
-        .select(`*`)
+        .select(`*, enrollments(*)`)
         .eq("course_id", courseID);
       if (error) {
         return {

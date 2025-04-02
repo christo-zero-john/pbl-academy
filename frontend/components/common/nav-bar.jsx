@@ -12,11 +12,6 @@ export default function NavBar({ active }) {
     }
   }
 
-
-
-
-  
-
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top">
       <Link
@@ -62,13 +57,11 @@ export default function NavBar({ active }) {
           {User.user ? (
             <>
               <Link
-                  href="/dashboard"
-                  className={`nav-item nav-link ${
-                    active == "auth" && "active"
-                  }`}
-                >
-                  Goto Dashboard
-                </Link>
+                href="/dashboard"
+                className={`nav-item nav-link ${active == "auth" && "active"}`}
+              >
+                Goto Dashboard
+              </Link>
               <p
                 onClick={logoutHandler}
                 className={`nav-item nav-link ${active == "auth" && "active"}`}

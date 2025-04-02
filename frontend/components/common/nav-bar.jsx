@@ -12,6 +12,9 @@ export default function NavBar({ active }) {
     }
   }
 
+
+
+
   
 
   return (

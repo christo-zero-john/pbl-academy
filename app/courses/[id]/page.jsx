@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import DisplayTasks from "../../../frontend/components/courses/display-tasks";
 import Tasks from "@/frontend/modules/entities/Tasks";
 import MentorActions from "../../../frontend/components/mentor/mentor-actions";
-import AllCourseClassrooms from "@/frontend/components/classrooms/all-course-classrooms";
+import EnrollmentOptions from "@/frontend/components/classrooms/enrollment-options";
 
 /** comment
  *
@@ -92,12 +92,11 @@ export default function CourseItemPage() {
             Tasks: {Tasks.getCount(course.tasks) || "calculating..."}
           </p>
 
-          <button
-            className="btn btn-primary"
-            onClick={() => setShowClassrooms(true)}
-          >
-            Enroll For Free
-          </button>
+          <EnrollmentOptions
+            course={course}
+            show={showClassrooms}
+            setShow={setShowClassrooms}
+          />
         </div>
 
         {
@@ -114,12 +113,6 @@ export default function CourseItemPage() {
       ></div>
       <h3 className="text-center">Course Activities</h3>
       <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
-
-      <AllCourseClassrooms
-        course={course}
-        show={showClassrooms}
-        setShow={setShowClassrooms}
-      />
     </div>
   );
 }

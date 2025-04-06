@@ -1,8 +1,6 @@
 "use client";
 import ClassroomTasks from "@/frontend/components/learners/learn/classroom/classroom-tasks";
-import Classroom from "@/frontend/modules/entities/Classroom";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
 
 /**
  * Displays course classroom

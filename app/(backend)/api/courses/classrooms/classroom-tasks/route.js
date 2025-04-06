@@ -26,7 +26,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: true,
-          course: getTasksStatus.data[0],
+          course: getTasksStatus.data,
         },
         { status: 200 }
       );

@@ -89,18 +89,21 @@ class Classroom {
   }
 
   async getClassroomTasks(classroom_id, course_id) {
-    console.log("Sending request to enroll learner into classroom");
+    console.log("Sending request to fetch classroom tasks");
 
     const request = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(enrollmentData),
+      body: JSON.stringify({
+        classroom_id: classroom_id,
+        course_id:course_id
+      }),
     };
 
     try {
-      return fetch("/api/courses/classrooms/enroll", request)
+      return fetch("/api/courses/classrooms/classroom-tasks", request)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

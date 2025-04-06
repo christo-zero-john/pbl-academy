@@ -106,7 +106,7 @@ class Classroom {
       return fetch("/api/courses/classrooms/classroom-tasks", request)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           // The response returned from the server is sent back to the caller. It contains success, error or tasks fields.
           return data;
         });

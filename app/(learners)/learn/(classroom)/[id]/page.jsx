@@ -1,4 +1,5 @@
 "use client";
+import ClassroomTasks from "@/frontend/components/learners/learn/classroom/classroom-tasks";
 import Classroom from "@/frontend/modules/entities/Classroom";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -9,25 +10,13 @@ import { useEffect } from "react";
 export default function ClassroomPage() {
   const params = useParams();
   const [classroomID, courseID, courseTitle] = params.id.split("-");
-  const [tasks, setTasks] = useState([]);
-
-  console.log(classroomID, courseID, courseTitle);
-
-  useEffect(() => {
-    (async () => {
-      const getTasksStatus = await Classroom.getClassroomTasks(
-        classroomID,
-        courseID
-      );
-      console.log(getTasksStatus);
-    })();
-  });
 
   return (
     <div>
       <h1 className="">
         Classroom <span className="text-success">Course Name</span>
       </h1>
+      <ClassroomTasks classroomID={classroomID} courseID={courseID} />
     </div>
   );
 }

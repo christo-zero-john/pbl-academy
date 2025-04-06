@@ -15,7 +15,7 @@ export async function POST(request) {
     );
 
     const getTasksStatus = await Classroom.fetchClassroomTasks(
-      requestData.classroom_id
+      requestData
     );
 
     if (getTasksStatus.success) {

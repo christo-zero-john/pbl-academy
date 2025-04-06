@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Offcanvas } from "react-bootstrap";
 import EnrollToClassroom from "./enroll-to-classroom";
 import ManageClassroomItem__Mentor from "../mentor/manage-classroom-item";
+import User from "@/frontend/modules/entities/User";
 
 export default function EnrollmentOptions({ course, mentor = false }) {
   console.log("Rendering Classrroms of course ", course.id);
@@ -19,12 +20,19 @@ export default function EnrollmentOptions({ course, mentor = false }) {
      */
 
     (async () => {
+      console.log(User.user.id);
       console.log("Fetching classrooms");
       const getClassroomStatus = await Course.fetchClassrooms(course.id);
 
       if (getClassroomStatus.success) {
         console.log("Successfully fetched course classrooms");
         // We should optimize classrooms to be used in the component
+        console.log(
+          "Before Optimization. Classrooms: ",
+          getClassroomStatus.classrooms,
+          "course: ",
+          course
+        );
         const optimizedClassrooms = Classroom.optimizeClassroomItems(
           getClassroomStatus.classrooms,
           course

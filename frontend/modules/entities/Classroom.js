@@ -87,6 +87,34 @@ class Classroom {
     }
     return [false, null];
   }
+
+  async getClassroomTasks(classroom_id, course_id) {
+    console.log("Sending request to enroll learner into classroom");
+
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(enrollmentData),
+    };
+
+    try {
+      return fetch("/api/courses/classrooms/enroll", request)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          // The response returned from the server is sent back to the caller. It contains success, error or tasks fields.
+          return data;
+        });
+    } catch (error) {
+      console.log("Error fetching classroom tasks: ", error);
+      return {
+        success: false,
+        error: error,
+      };
+    }
+  }
 }
 
 export default new Classroom();

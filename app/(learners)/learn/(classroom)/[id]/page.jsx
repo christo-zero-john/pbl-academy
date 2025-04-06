@@ -1,4 +1,5 @@
 "use client";
+import Classroom from "@/frontend/modules/entities/Classroom";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -13,17 +14,11 @@ export default function ClassroomPage() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("/api/classrooms/classroom-tasks", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          classroom_id: classroomID,
-        }),
-      });
-      const data = await response.json();
-      console.log("Classroom Tasks: ", data);
+      const getTasksStatus = await Classroom.getClassroomTasks(
+        classroomID,
+        courseID
+      );
+      console.log(getTasksStatus);
     })();
   });
 

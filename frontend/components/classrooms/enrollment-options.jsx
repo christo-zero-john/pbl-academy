@@ -5,6 +5,7 @@ import { Offcanvas } from "react-bootstrap";
 import EnrollToClassroom from "./enroll-to-classroom";
 import ManageClassroomItem__Mentor from "../mentor/manage-classroom-item";
 import User from "@/frontend/modules/entities/User";
+import Link from "next/link";
 
 export default function EnrollmentOptions({ course, mentor = false }) {
   console.log("Rendering Classrroms of course ", course.id);
@@ -79,7 +80,7 @@ export default function EnrollmentOptions({ course, mentor = false }) {
             <span className="text-success fw-500">{classroom.created_by}</span>
           </span>
         </div>
-        <EnrollToClassroom classroom={classroom} courseTitle={course.title} />
+        <EnrollToClassroom classroom={classroom} course={course} />
         {mentor && <ManageClassroomItem__Mentor classroom={classroom} />}
       </div>
     ));
@@ -90,14 +91,18 @@ export default function EnrollmentOptions({ course, mentor = false }) {
         <>
           {!show &&
             (isEnrolled[0] ? (
-              <button
+              /** comment
+               * If the user is enrolled then display link to classroom. Classroom link has 3 parts classroom_id, course_id, and course_title. coure title is splitted, joined and converted to lowercase
+               */
+              <Link
+                href={`/learn/${isEnrolled[1]}-${course.id}-${course.title
+                  .split(" ")
+                  .join("-")
+                  .toLowerCase()}`}
                 className="btn btn-primary"
-                onClick={() =>
-                  (window.location.href = `/learn/${isEnrolled[1]}`)
-                }
               >
                 Goto Classroom
-              </button>
+              </Link>
             ) : (
               <button className="btn btn-primary" onClick={() => setShow(true)}>
                 Enrollment Options

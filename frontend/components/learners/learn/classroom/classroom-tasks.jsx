@@ -1,10 +1,11 @@
 import Classroom from "@/frontend/modules/entities/Classroom";
+import Tasks from "@/frontend/modules/entities/Tasks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ClassroomTasks({ classroomID, courseID }) {
   const router = useRouter();
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -29,9 +30,9 @@ export default function ClassroomTasks({ classroomID, courseID }) {
           );
         } else {
           // console.log("Course fetched Successfully");
-          let tempCourse = getTasksStatus.courses[0];
+          let tempCourse = getTasksStatus.course[0];
           tempCourse.tasks = Tasks.groupAndSortTasks(tempCourse.tasks);
-          setCourse(tempCourse);
+          setTasks(tempCourse.tasks);
         }
       } else if (getTasksStatus.error) {
         if (getTasksStatus.error.includes("fetch failed")) {
@@ -46,6 +47,12 @@ export default function ClassroomTasks({ classroomID, courseID }) {
         }
       }
     })();
-  });
-  return <div>ClassroomTasks</div>;
+  }, []);
+
+  if (!tasks) {
+    return <p className="content-loading-full">Loading...</p>;
+  }
+  return <div>
+    
+  </div>;
 }

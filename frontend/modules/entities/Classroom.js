@@ -18,14 +18,12 @@ class Classroom {
       const totalDays = course.tasks.length;
       classroom.end_date = this.getEndDate(startDate, totalDays);
 
-      classroom.isEnrolled = null;
+      classroom.isEnrolled = false;
 
       // Verify whether the student is enrolled or not.
       classroom.enrollments.forEach((enrollment) => {
         if (enrollment.learner_id == User.user.id) {
           classroom.isEnrolled = true;
-        } else {
-          classroom.isEnrolled = false;
         }
       });
     });

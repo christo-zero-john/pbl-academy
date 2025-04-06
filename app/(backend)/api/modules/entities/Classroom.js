@@ -43,13 +43,21 @@ class Classroom {
     }
   }
 
-  async fetchClassroomTasks(classroom_id) {
+  async fetchClassroomTasks(requestData) {
     try {
       const Supabase = await createClient();
       await Supabase.auth.getSession();
-      const { data, error } = await Supabase.from("classrooms")
-        .select(`*, enrollments(*)`)
-        .eq("course_id", courseID);
+      const { data, error } = await Supabase.from("courses")
+        .select(
+          `
+            id,
+            title,
+            description,
+            tasks (*)`
+        )
+        .match({
+          id: requestData.course_id,
+        });
       if (error) {
         return {
           success: false,

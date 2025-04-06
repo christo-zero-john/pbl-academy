@@ -27,3 +27,5 @@
 
 - [ ] When trying to fetch course by ID, unpublished courses are also returned. Fix it so that:
   - [ ] When course is feched by id, unpublished courses are returned only if it is fetched y the course creator
+
+-[ ] When a students enroll into a course, they should be prompted to upload the payment reciept and then the mentor should be able to verfy and approve the enrollment

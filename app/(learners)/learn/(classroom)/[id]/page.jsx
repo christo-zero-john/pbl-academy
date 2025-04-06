@@ -28,7 +28,6 @@ export default function ClassroomPage() {
       <h1 className="">
         Classroom <span className="text-success">Course Name</span>
       </h1>
-      
     </div>
   );
 }

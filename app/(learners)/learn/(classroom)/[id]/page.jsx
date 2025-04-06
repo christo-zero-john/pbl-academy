@@ -9,6 +9,7 @@ import { useEffect } from "react";
 export default function ClassroomPage() {
   const params = useParams();
   const [classroomID, courseID, courseTitle] = params.id.split("-");
+  const [tasks, setTasks] = useState([]);
 
   console.log(classroomID, courseID, courseTitle);
 
@@ -27,6 +28,7 @@ export default function ClassroomPage() {
       <h1 className="">
         Classroom <span className="text-success">Course Name</span>
       </h1>
+      
     </div>
   );
 }

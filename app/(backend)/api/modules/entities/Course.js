@@ -61,7 +61,7 @@ class Course {
     }
   }
 
-  async fetchCourseById(id) {
+  async fetchCourseById(course_id) {
     try {
       const Supabase = await createClient();
       const userSession = await Supabase.auth.getSession();
@@ -76,7 +76,7 @@ class Course {
         tasks (*)`
         )
         .match({
-          id: id,
+          id: course_id,
         });
       if (error) {
         return {

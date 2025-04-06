@@ -1,3 +1,5 @@
+import User from "./User";
+
 /**
  * Classroom in frontend
  */
@@ -15,6 +17,17 @@ class Classroom {
       const startDate = classroom.start_date;
       const totalDays = course.tasks.length;
       classroom.end_date = this.getEndDate(startDate, totalDays);
+
+      classroom.isEnrolled = null;
+
+      // Verify whether the student is enrolled or not.
+      classroom.enrollments.forEach((enrollment) => {
+        if (enrollment.learner_id == User.user.id) {
+          classroom.isEnrolled = true;
+        } else {
+          classroom.isEnrolled = false;
+        }
+      });
     });
     console.log("Optimized classrooms");
     return classrooms;
@@ -62,6 +75,19 @@ class Classroom {
         error: error,
       };
     }
+  }
+
+  /**
+   * @param classrooms Array of classrooms of a course after optimixation using Classroom.optimizeClassroomItems
+   * @returns boolean along with enrolled classroom id. If enrolled it return true, otherwise false
+   */
+  checkEnrollment(classrooms) {
+    for (let classroom of classrooms) {
+      if (classroom.isEnrolled) {
+        return [true, classroom.id];
+      }
+    }
+    return [false, null];
   }
 }
 

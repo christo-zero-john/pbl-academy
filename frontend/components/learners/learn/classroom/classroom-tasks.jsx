@@ -1,9 +1,8 @@
 import Classroom from "@/frontend/modules/entities/Classroom";
+import { useEffect, useState } from "react";
 
-export default function ClassroomTasks({ classroomID, courseID }) {
+export default function ClassroomTasks({ classroomID, courseID, }) {
   const [tasks, setTasks] = useState([]);
-
-  console.log(classroomID, courseID, courseTitle);
 
   useEffect(() => {
     (async () => {
@@ -12,6 +11,10 @@ export default function ClassroomTasks({ classroomID, courseID }) {
         courseID
       );
       console.log(getTasksStatus);
+
+      if(!getTasksStatus.success) {
+        
+      }
     })();
   });
   return <div>ClassroomTasks</div>;

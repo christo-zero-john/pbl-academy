@@ -2,6 +2,8 @@ import Classroom from "@/frontend/modules/entities/Classroom";
 import Tasks from "@/frontend/modules/entities/Tasks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import DaywiseTasks from "./daywise-tasks";
+import DisplayTasks from "@/frontend/components/courses/display-tasks";
 
 export default function ClassroomTasks({ classroomID, courseID }) {
   const router = useRouter();
@@ -52,7 +54,5 @@ export default function ClassroomTasks({ classroomID, courseID }) {
   if (!tasks) {
     return <p className="content-loading-full">Loading...</p>;
   }
-  return <div>
-    
-  </div>;
+  return <DisplayTasks tasks={tasks} classroom={true} />;
 }

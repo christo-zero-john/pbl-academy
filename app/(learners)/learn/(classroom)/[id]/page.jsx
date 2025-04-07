@@ -1,7 +1,8 @@
 "use client";
-import ClassroomTasks from "@/frontend/components/learners/learn/classroom/classroom-tasks";
+import ClassroomTasks from "@/frontend/components/learners/learn/classroom/tasks/classroom-tasks";
 import { useParams } from "next/navigation";
-
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 /**
  * Displays course classroom
  */
@@ -11,17 +12,37 @@ export default function ClassroomPage() {
 
   return (
     <div>
-      <h1 className="">
-        Classroom <span className="text-success">Course Name</span>
+      <h1 className="text-center m-4">
+        <span className="fs-4 d-block">Learn</span>{" "}
+        <span className="text-success">{courseTitle.split("-").join(" ")}</span>
       </h1>
-      <ClassroomTasks classroomID={classroomID} courseID={courseID} />
+
+      <Tabs
+        defaultActiveKey="tasks"
+        id="justify-tab-example"
+        className="mb-3"
+        justify
+      >
+        <Tab eventKey="tasks" title="Activities">
+          <ClassroomTasks classroomID={classroomID} courseID={courseID} />
+        </Tab>
+        <Tab eventKey="learners" title="Learners">
+          Tab content for Profile
+        </Tab>
+        <Tab eventKey="longer-tab" title="Group Discussion">
+          Tab content for Group Chat
+        </Tab>
+        <Tab eventKey="contact" title="Details">
+          Tab content for Course deatils
+        </Tab>
+      </Tabs>
     </div>
   );
 }
 
 /**
- * Fetch classroom and course details
- * Extract, group and sort tasks
- * Display tasks daywise along with mark as completed buton.
- * When clicked on a task, display task details in an offcanvas
+ * Fetch classroom and course details. ✅
+ * Extract, group and sort tasks. ✅
+ * Display tasks daywise along with mark as completed buton. ✅
+ * When clicked on a task, display task details in an offcanvas. ✅
  */

@@ -1,7 +1,38 @@
-export default function TaskDayWise({ tasks, day, addNewTaskHandler = null }) {
+import { useState } from "react";
+import {
+  Offcanvas,
+  OffcanvasBody,
+  OffcanvasHeader,
+  OffcanvasTitle,
+} from "react-bootstrap";
+
+export default function TaskDayWise({
+  tasks,
+  day,
+  addNewTaskHandler = null,
+  completedTasks = [],
+}) {
   // The below check is needed as tasks needed to be grouped, sorted and converted into a 2D array. If it is not a 2D array, it will cause error in the task.map method below in the return statement.
-  
+
   // console.log("Tasks of Day: ", tasks);
+  console.log("Completed Tasks: ", completedTasks);
+
+  const [show, setShow] = useState(false);
+  const [offCanvasContent, setOffCanvasContent] = useState({
+    title: "",
+    description: "",
+  });
+
+  function viewTaskItem(index) {
+    console.log(index);
+    console.log(tasks[index]);
+    setOffCanvasContent({
+      title: tasks[index].title,
+      description: tasks[index].description,
+    });
+    setShow(true);
+  }
+
   if (!Array.isArray(tasks)) {
     return (
       <>
@@ -17,35 +48,38 @@ export default function TaskDayWise({ tasks, day, addNewTaskHandler = null }) {
         id={"accordion-tasks-of-day-" + day}
       >
         {tasks.map((task, index) => (
-          <div className="accordion-item" key={index}>
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={
-                  "#flush-collapse-day-" + day + "-task-" + (index + 1)
-                }
-                aria-expanded="false"
-                aria-controls={
-                  "flush-collapse-day-" + day + "-task-" + (index + 1)
-                }
-              >
-                Task {task.index || index + 1}
-              </button>
-            </h2>
-            <div
-              id={"flush-collapse-day-" + day + "-task-" + (index + 1)}
-              className="accordion-collapse collapse"
-              data-bs-parent={"#accordion-tasks-of-day-" + day}
+          <div className="d-block" key={`${index}-${day}`}>
+            {" "}
+            <p
+              className="link-primary d-inline-block"
+              onClick={() => viewTaskItem(index)}
             >
-              <div
-                className="accordion-body"
-                dangerouslySetInnerHTML={{ __html: task.description }}
-              ></div>
-            </div>
+              {" "}
+              {task.index || index + 1}. {task.title}
+            </p>
+            <input
+              type="checkbox"
+              checked={completedTasks.includes(task.id)}
+              className="float-end"
+              id={`${index}-${day}`}
+            />
           </div>
         ))}
+
+        <Offcanvas show={show} onHide={() => setShow(false)} className="w-100">
+          <OffcanvasHeader
+            closeButton
+            className="border-bottom border-3 border-warning"
+          >
+            <OffcanvasTitle>{offCanvasContent.title}</OffcanvasTitle>
+          </OffcanvasHeader>
+          <OffcanvasBody>
+            <div
+              className=""
+              dangerouslySetInnerHTML={{ __html: offCanvasContent.description }}
+            ></div>
+          </OffcanvasBody>
+        </Offcanvas>
       </div>
       {
         /**
@@ -63,4 +97,10 @@ export default function TaskDayWise({ tasks, day, addNewTaskHandler = null }) {
       }
     </>
   );
+}
+{
+  /* <div
+                className="accordion-body"
+                dangerouslySetInnerHTML={{ __html: task.description }}
+              ></div> */
 }

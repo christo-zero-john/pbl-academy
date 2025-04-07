@@ -4,8 +4,16 @@ import TaskDayWise from "@/frontend/components/courses/task-day-wise";
  * This componsnt is used in course-item and edit-tasks pages.
  * @var props with @default null value means thay are optional props passed only from edit-task page.
  * @param tasks It is a 2D array of tasks related to a course.
+ * @param classroom It is a boolean value. If true, then it means this component is used in classroom page.
+ * @param addNewTaskHandler It is a function which is used to add new task. It is passed from edit-task page. It is passed only if the user is mentor of the course.
  */
-export default function DisplayTasks({ tasks, addNewTaskHandler = null }) {
+
+export default function DisplayTasks({
+  tasks,
+  addNewTaskHandler = null,
+  classroom = false,
+  completedTasks = [],
+}) {
   console.log("Displaying Course tasks");
   if (tasks.length === 0) {
     return <p>No tasks added yet.</p>;
@@ -43,6 +51,7 @@ export default function DisplayTasks({ tasks, addNewTaskHandler = null }) {
                     tasks={dayTasks}
                     day={dayTasks[0]?.day || index + 1}
                     addNewTaskHandler={addNewTaskHandler}
+                    completedTasks={completedTasks}
                   />
                 </div>
               </div>

@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function DaywiseTasks() {
-  return <div>DaywiseTasks</div>;
+export default function DaywiseTasks({ tasks }) {
+  return <div>
+    
+  </div>;
 }

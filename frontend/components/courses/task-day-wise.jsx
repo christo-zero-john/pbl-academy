@@ -1,38 +1,14 @@
-import { useState } from "react";
-import {
-  Offcanvas,
-  OffcanvasBody,
-  OffcanvasHeader,
-  OffcanvasTitle,
-} from "react-bootstrap";
-
 export default function TaskDayWise({
   tasks,
   day,
   addNewTaskHandler = null,
-  completedTasks = [],
   classroom = false,
+  viewTaskItem = null,
+  completedTasks = [],
 }) {
   // The below check is needed as tasks needed to be grouped, sorted and converted into a 2D array. If it is not a 2D array, it will cause error in the task.map method below in the return statement.
 
   // console.log("Tasks of Day: ", tasks);
-  console.log("Completed Tasks: ", completedTasks);
-
-  const [show, setShow] = useState(false);
-  const [offCanvasContent, setOffCanvasContent] = useState({
-    title: "",
-    description: "",
-  });
-
-  function viewTaskItem(index) {
-    console.log(index);
-    console.log(tasks[index]);
-    setOffCanvasContent({
-      title: tasks[index].title,
-      description: tasks[index].description,
-    });
-    setShow(true);
-  }
 
   if (!Array.isArray(tasks)) {
     return (
@@ -49,12 +25,13 @@ export default function TaskDayWise({
         id={"accordion-tasks-of-day-" + day}
       >
         {tasks.map((task, index) => (
-          <div className="d-block" key={`${index}-${day}`}>
+          <div
+            className="alert alert-success border-0 rounded-0  m-0"
+            key={`${index}-${day}`}
+            onClick={() => viewTaskItem(day, index)}
+          >
             {" "}
-            <p
-              className="link-primary d-inline-block"
-              onClick={() => viewTaskItem(index)}
-            >
+            <p className="link-primary d-inline-block p-0 m-0">
               {" "}
               {task.index || index + 1}. {task.title}
             </p>
@@ -63,29 +40,14 @@ export default function TaskDayWise({
               classroom && (
                 <input
                   type="checkbox"
+                  className="form-check-input float-end"
                   checked={completedTasks.includes(task.id)}
-                  className="float-end"
                   id={`${index}-${day}`}
                 />
               )
             }
           </div>
         ))}
-
-        <Offcanvas show={show} onHide={() => setShow(false)} className="w-100">
-          <OffcanvasHeader
-            closeButton
-            className="border-bottom border-3 border-warning"
-          >
-            <OffcanvasTitle>{offCanvasContent.title}</OffcanvasTitle>
-          </OffcanvasHeader>
-          <OffcanvasBody>
-            <div
-              className=""
-              dangerouslySetInnerHTML={{ __html: offCanvasContent.description }}
-            ></div>
-          </OffcanvasBody>
-        </Offcanvas>
       </div>
       {
         /**

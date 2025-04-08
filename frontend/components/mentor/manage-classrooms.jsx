@@ -1,7 +1,5 @@
-import { Offcanvas } from "react-bootstrap";
-import AllCourseClassrooms from "../classrooms/enrollment-options";
-import ManageClassroomItem__Mentor from "./manage-classroom-item";
+import EnrollmentOptions from "../courses/classrooms/enrollment-options";
 
 export default function ManageClassrooms__Mentor({ course }) {
-  return <AllCourseClassrooms course={course} mentor={true} />;
+  return <EnrollmentOptions course={course} mentor={true} />;
 }

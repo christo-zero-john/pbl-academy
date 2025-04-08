@@ -52,6 +52,7 @@ export default function DisplayTasks({
                     day={dayTasks[0]?.day || index + 1}
                     addNewTaskHandler={addNewTaskHandler}
                     completedTasks={completedTasks}
+                    classroom={classroom}
                   />
                 </div>
               </div>

@@ -146,6 +146,23 @@ class User {
       }
     }
   }
+
+  async getUser() {
+    const Supabase = await createClient();
+    const { data, error } = await Supabase.auth.getUser();
+
+    if (error) {
+      return {
+        succes: false,
+        error: error,
+      };
+    } else {
+      return {
+        success: true,
+        data: data.user,
+      };
+    }
+  }
 }
 
 export default new User();

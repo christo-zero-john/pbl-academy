@@ -7,6 +7,7 @@ import DisplayTasks from "@/frontend/components/courses/display-tasks";
 export default function ClassroomTasks({ classroomID, courseID }) {
   const router = useRouter();
   const [tasks, setTasks] = useState(null);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -53,5 +54,12 @@ export default function ClassroomTasks({ classroomID, courseID }) {
   if (!tasks) {
     return <p className="content-loading-full">Loading...</p>;
   }
-  return <DisplayTasks tasks={tasks} classroom={true} />;
+
+  return (
+    <DisplayTasks
+      tasks={tasks}
+      classroom={true}
+      completedTasks={completedTasks}
+    />
+  );
 }

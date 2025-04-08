@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import DisplayTasks from "../../../frontend/components/courses/display-tasks";
 import Tasks from "@/frontend/modules/entities/Tasks";
 import MentorActions from "../../../frontend/components/mentor/mentor-actions";
-import EnrollmentOptions from "@/frontend/components/classrooms/enrollment-options";
+import EnrollmentOptions from "@/frontend/components/courses/classrooms/enrollment-options";
 
 /** comment
  *

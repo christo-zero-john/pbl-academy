@@ -1,4 +1,11 @@
 import TaskDayWise from "@/frontend/components/courses/task-day-wise";
+import { useState } from "react";
+import {
+  Offcanvas,
+  OffcanvasBody,
+  OffcanvasHeader,
+  OffcanvasTitle,
+} from "react-bootstrap";
 
 /**comment
  * This componsnt is used in course-item and edit-tasks pages.
@@ -14,7 +21,27 @@ export default function DisplayTasks({
   classroom = false,
   completedTasks = [],
 }) {
-  console.log("Displaying Course tasks");
+  console.log("Completed Tasks: ", completedTasks);
+
+  const [show, setShow] = useState(false);
+  const [offCanvasContent, setOffCanvasContent] = useState({
+    title: "Failed to load",
+    description: "Failed to load!",
+  });
+
+  /**
+   * Used to display a particular task item.
+   * The day and taskindex can be used to access particular task in the task array.
+   */
+  function viewTaskItem(day, taskIndex) {
+    const [d, t] = [day - 1, taskIndex];
+    setOffCanvasContent({
+      title: tasks[d][t].title,
+      description: tasks[d][t].description,
+    });
+    setShow(true);
+  }
+
   if (tasks.length === 0) {
     return <p>No tasks added yet.</p>;
   }
@@ -53,12 +80,28 @@ export default function DisplayTasks({
                     addNewTaskHandler={addNewTaskHandler}
                     completedTasks={completedTasks}
                     classroom={classroom}
+                    viewTaskItem={viewTaskItem}
                   />
                 </div>
               </div>
             </div>
           ))}
       </div>
+
+      <Offcanvas show={show} onHide={() => setShow(false)} className="w-100">
+        <OffcanvasHeader
+          closeButton
+          className="border-bottom border-3 border-warning"
+        >
+          <OffcanvasTitle>{offCanvasContent.title}</OffcanvasTitle>
+        </OffcanvasHeader>
+        <OffcanvasBody>
+          <div
+            className=""
+            dangerouslySetInnerHTML={{ __html: offCanvasContent.description }}
+          ></div>
+        </OffcanvasBody>
+      </Offcanvas>
     </>
   );
 }

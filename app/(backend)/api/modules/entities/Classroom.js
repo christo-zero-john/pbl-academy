@@ -82,6 +82,41 @@ class Classroom {
       };
     }
   }
+
+  async fecthCompletedTasks(classroomID, learnerID) {
+    try {
+      const Supabase = await createClient();
+      await Supabase.auth.getSession();
+      const { data, error } = await Supabase.from("completed_tasks")
+        .select("*")
+        .match({
+          classroom_id: classroomID,
+          learner_id: learnerID,
+        });
+      if (error) {
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          data: data,
+        };
+      }
+    } catch (error) {
+      // Catch unexpected errors
+      console.log("Internal Server Error: ", error);
+      return {
+        success: false,
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
+      };
+    }
+  }
 }
 
 export default new Classroom();

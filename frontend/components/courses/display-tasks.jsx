@@ -6,6 +6,7 @@ import {
   OffcanvasHeader,
   OffcanvasTitle,
 } from "react-bootstrap";
+import MarkAsDoneBtn from "./classrooms/btn__mark-as-done";
 
 /**comment
  * This componsnt is used in course-item and edit-tasks pages.
@@ -28,11 +29,13 @@ export default function DisplayTasks({
     title: "Failed to load",
     description: "Failed to load!",
   });
+  const [currentTask, setCurrentTask] = useState(null);
 
   /**
    * Used to display a particular task item.
    * The day and taskindex can be used to access particular task in the task array.
    */
+
   function viewTaskItem(day, taskIndex) {
     const [d, t] = [day - 1, taskIndex];
     setOffCanvasContent({
@@ -40,6 +43,7 @@ export default function DisplayTasks({
       description: tasks[d][t].description,
     });
     setShow(true);
+    setCurrentTask(tasks[d][t].id);
   }
 
   if (tasks.length === 0) {
@@ -100,6 +104,8 @@ export default function DisplayTasks({
             className=""
             dangerouslySetInnerHTML={{ __html: offCanvasContent.description }}
           ></div>
+
+          <MarkAsDoneBtn currentTask={currentTask} />
         </OffcanvasBody>
       </Offcanvas>
     </>

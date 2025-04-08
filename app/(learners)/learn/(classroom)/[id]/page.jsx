@@ -7,6 +7,7 @@ import Tabs from "react-bootstrap/Tabs";
  * Displays course classroom
  */
 export default function ClassroomPage() {
+  // The url parameter has classroom id, course id and course title seprated with hyphens
   const params = useParams();
   const [classroomID, courseID, courseTitle] = params.id.split("-");
 

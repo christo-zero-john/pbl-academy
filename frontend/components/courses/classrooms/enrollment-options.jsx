@@ -3,7 +3,7 @@ import Classroom from "@/frontend/modules/entities/Classroom";
 import { useState, useEffect } from "react";
 import { Offcanvas } from "react-bootstrap";
 import EnrollToClassroom from "./enroll-to-classroom";
-import ManageClassroomItem__Mentor from "../mentor/manage-classroom-item";
+import ManageClassroomItem__Mentor from "../../mentor/manage-classroom-item";
 import User from "@/frontend/modules/entities/User";
 import Link from "next/link";
 

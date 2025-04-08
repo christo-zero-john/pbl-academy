@@ -71,3 +71,9 @@ classrooms table
 - [ ] Mentors could accept requests of learners to enroll into a clasroom
 
 - [ ] After a mentor accepts an enrollment request, students can access classroom and course materials.
+
+### `07 04 2025`
+
+- [ ] When a user clicks and opens a task in a classroom, there should be:
+  - [ ] Next and previous buttos to navigate throught tasks
+  - [ ] Button to mark task as done.

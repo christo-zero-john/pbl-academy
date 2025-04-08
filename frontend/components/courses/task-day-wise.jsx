@@ -11,6 +11,7 @@ export default function TaskDayWise({
   day,
   addNewTaskHandler = null,
   completedTasks = [],
+  classroom = false,
 }) {
   // The below check is needed as tasks needed to be grouped, sorted and converted into a 2D array. If it is not a 2D array, it will cause error in the task.map method below in the return statement.
 
@@ -57,12 +58,17 @@ export default function TaskDayWise({
               {" "}
               {task.index || index + 1}. {task.title}
             </p>
-            <input
-              type="checkbox"
-              checked={completedTasks.includes(task.id)}
-              className="float-end"
-              id={`${index}-${day}`}
-            />
+            {
+              // If the task is displayed in a classroom, then show the checkbox
+              classroom && (
+                <input
+                  type="checkbox"
+                  checked={completedTasks.includes(task.id)}
+                  className="float-end"
+                  id={`${index}-${day}`}
+                />
+              )
+            }
           </div>
         ))}
 

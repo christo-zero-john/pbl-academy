@@ -26,15 +26,14 @@ export default function TaskDayWise({
       >
         {tasks.map((task, index) => (
           <div
-            className="alert alert-success border-0 rounded-0  m-0"
+            className={`m-0 alert border-0 rounded-0 ${
+              completedTasks.includes(task.id) && "alert-success"
+            }`}
             key={`${index}-${day}`}
             onClick={() => viewTaskItem(day, index)}
           >
             {" "}
-            <p className="link-primary d-inline-block p-0 m-0">
-              {" "}
-              {task.index || index + 1}. {task.title}
-            </p>
+            <p className="link-primary d-inline-block p-0 m-0"> {task.title}</p>
             {
               // If the task is displayed in a classroom, then show the checkbox
               classroom && (

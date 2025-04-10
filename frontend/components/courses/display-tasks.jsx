@@ -21,6 +21,7 @@ export default function DisplayTasks({
   addNewTaskHandler = null,
   classroom = false,
   completedTasks = [],
+  setCompletedTasks = null,
 }) {
   console.log("Completed Tasks: ", completedTasks);
 
@@ -105,7 +106,11 @@ export default function DisplayTasks({
             dangerouslySetInnerHTML={{ __html: offCanvasContent.description }}
           ></div>
 
-          <MarkAsDoneBtn currentTask={currentTask} />
+          <MarkAsDoneBtn
+            currentTask={currentTask}
+            completedTasks={completedTasks}
+            setCompletedTasks={setCompletedTasks}
+          />
         </OffcanvasBody>
       </Offcanvas>
     </>

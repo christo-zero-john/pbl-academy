@@ -85,7 +85,7 @@ class Classroom {
     try {
       const Supabase = await createClient();
       const { data, error } = await Supabase.from("completed_tasks")
-        .select("*")
+        .select("completed_tasks")
         .match({
           classroom_id: classroomID,
           learner_id: learnerID,

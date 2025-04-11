@@ -23,7 +23,7 @@ export async function POST(request) {
     }
 
     const getUserStatus = await User.getUser();
-    console.log(getUserStatus);
+    // console.log(getUserStatus);
     if (getUserStatus.success && getUserStatus.data.id != learner_id) {
       throw new Error("Access denied. Client user does not match learner.");
     }

@@ -40,7 +40,8 @@ export async function POST(request) {
           {
             success: true,
             course: getCourseStatus.data,
-            completed_tasks: getCompletedTasksStatus.data,
+            completed_tasks:
+              getCompletedTasksStatus.data[0] || getCompletedTasksStatus.data,
           },
           { status: 200 }
         );

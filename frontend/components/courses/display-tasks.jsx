@@ -30,7 +30,7 @@ export default function DisplayTasks({
     title: "Failed to load",
     description: "Failed to load!",
   });
-  const [currentTask, setCurrentTask] = useState(null);
+  const [currentTaskID, setCurrentTaskID] = useState(null);
 
   /**
    * Used to display a particular task item.
@@ -44,7 +44,7 @@ export default function DisplayTasks({
       description: tasks[d][t].description,
     });
     setShow(true);
-    setCurrentTask(tasks[d][t].id);
+    setCurrentTaskID(tasks[d][t].id);
   }
 
   if (tasks.length === 0) {
@@ -107,7 +107,7 @@ export default function DisplayTasks({
           ></div>
 
           <MarkAsDoneBtn
-            currentTask={currentTask}
+            currentTaskID={currentTaskID}
             completedTasks={completedTasks}
             setCompletedTasks={setCompletedTasks}
           />

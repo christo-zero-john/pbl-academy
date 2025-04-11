@@ -38,14 +38,14 @@ export default function ClassroomTasks({ classroomID, courseID }) {
           setTasks(tempCourse.tasks);
         }
       } else if (getTasksStatus.error) {
-        if (getTasksStatus.error.includes("fetch failed")) {
+        if (getTasksStatus.error.message.includes("fetch failed")) {
           window.confirm(
             "Failed to connect with database. Check your network connection and try again later..."
           );
         } else {
           window.confirm(
             "Some Unexpected error while fetching course." +
-              getTasksStatus.error
+              getTasksStatus.error.message
           );
         }
       }

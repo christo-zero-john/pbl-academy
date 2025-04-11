@@ -98,7 +98,39 @@ class Classroom {
       },
       body: JSON.stringify({
         classroom_id: classroom_id,
-        course_id:course_id
+        course_id: course_id,
+      }),
+    };
+
+    try {
+      return fetch("/api/courses/classrooms/classroom-tasks", request)
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          // The response returned from the server is sent back to the caller. It contains success, error or tasks fields.
+          return data;
+        });
+    } catch (error) {
+      console.log("Error fetching classroom tasks: ", error);
+      return {
+        success: false,
+        error: error,
+      };
+    }
+  }
+
+  async markTaskAsDone(taskID, classroomID) {
+    console.log(`Sending request to mark task ${taskID} as done`);
+
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        task_id: taskID,
+        classroom_id: classroomID,
+        learner_id: User.user.id,
       }),
     };
 

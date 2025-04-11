@@ -46,7 +46,7 @@ export async function POST(request) {
         );
       } else {
         console.log(
-          `Successfully fetched course ${requestData.course_id} but failed to fetch tasks of classroom ${requestData.classroom_id}`
+          `Successfully fetched course ${requestData.course_id} but failed to fetch tasks of classroom ${requestData.classroom_id}. ${getCompletedTasksStatus.error}`
         );
         throw new Error(
           `Error fetching tasks of classroom ${requestData.classroom_id}`

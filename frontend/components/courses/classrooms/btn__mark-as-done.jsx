@@ -2,8 +2,8 @@ import Classroom from "@/frontend/modules/entities/Classroom";
 import { useParams } from "next/navigation";
 
 export default function MarkAsDoneBtn({
-  currentTask,
-  completedTasks,
+  currentTaskID,
+  completedTasks = [],
   setCompletedTasks,
 }) {
   const params = useParams();
@@ -14,17 +14,19 @@ export default function MarkAsDoneBtn({
     window.confirm("Are you sure you want to mark this task as done?");
 
     const markAsDoneStatus = Classroom.markTaskAsDone(
-      [...completedTasks, currentTask],
+      [...completedTasks, currentTaskID],
       classroomID
     );
 
-    if (markTaskAsDone.success) {
+    if (markAsDoneStatus.success) {
       console.log("Task marked as done successfully.");
       setCompletedTasks();
       window.confirm("Marked task as done successfully");
     }
   }
-  return (
+  return completedTasks.includes(currentTaskID) ? (
+    <p className="alert alert-success">Task already completed</p>
+  ) : (
     <button className="btn btn-success" onClick={markAsDoneHandler}>
       Mark as done
     </button>

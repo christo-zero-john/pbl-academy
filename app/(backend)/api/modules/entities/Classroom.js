@@ -14,7 +14,6 @@ class Classroom {
   async enrollToClassroom(enrollmentData) {
     try {
       const Supabase = await createClient();
-      const userSession = await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("enrollments")
         .insert(enrollmentData)
         .select("*");
@@ -46,7 +45,6 @@ class Classroom {
   async fetchClassroomTasks(requestData) {
     try {
       const Supabase = await createClient();
-      await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("courses")
         .select(
           `
@@ -86,7 +84,6 @@ class Classroom {
   async fecthCompletedTasks(classroomID, learnerID) {
     try {
       const Supabase = await createClient();
-      await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("completed_tasks")
         .select("*")
         .match({
@@ -102,6 +99,43 @@ class Classroom {
         return {
           success: true,
           data: data,
+        };
+      }
+    } catch (error) {
+      // Catch unexpected errors
+      console.log("Internal Server Error: ", error);
+      return {
+        success: false,
+        error: {
+          message:
+            `Internal Server Error: ${error.message}` ||
+            "Something went wrong. Internal Server Error. Please Contact Support",
+        },
+      };
+    }
+  }
+
+  async markAsDone(completed_tasks, classroom_id, learner_id) {
+    try {
+      const Supabase = await createClient();
+      const { data, error } = await Supabase.from("completed_tasks")
+        .upsert([
+          {
+            completed_tasks: completed_tasks,
+            classroom_id: classroom_id,
+            learner_id: learner_id,
+          },
+        ])
+        .select("*");
+      if (error) {
+        return {
+          success: false,
+          error: error,
+        };
+      } else {
+        return {
+          success: true,
+          data: data[0],
         };
       }
     } catch (error) {

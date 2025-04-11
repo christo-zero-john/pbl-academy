@@ -8,19 +8,22 @@ export default function MarkAsDoneBtn({
 }) {
   const params = useParams();
   // URL paramters has such a parameter. Refer file: /learn/(classroom)[id]
+  console.log(completedTasks.includes(currentTaskID));
 
   const classroomID = params.id.split("-")[0];
   function markAsDoneHandler() {
     window.confirm("Are you sure you want to mark this task as done?");
 
+    const updatedCompletedTasks = [...completedTasks, currentTaskID];
+
     const markAsDoneStatus = Classroom.markTaskAsDone(
-      [...completedTasks, currentTaskID],
+      updatedCompletedTasks,
       classroomID
     );
 
     if (markAsDoneStatus.success) {
       console.log("Task marked as done successfully.");
-      setCompletedTasks();
+      setCompletedTasks(markAsDoneStatus.data.completedTasks);
       window.confirm("Marked task as done successfully");
     }
   }

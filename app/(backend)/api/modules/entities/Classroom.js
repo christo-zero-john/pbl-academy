@@ -96,9 +96,13 @@ class Classroom {
           error: error,
         };
       } else {
+        let completedTasks = [];
+        data.forEach((item) => {
+          completedTasks.push(item.completed_tasks);
+        });
         return {
           success: true,
-          data: data,
+          data: completedTasks,
         };
       }
     } catch (error) {
@@ -126,7 +130,7 @@ class Classroom {
             learner_id: learner_id,
           },
         ])
-        .select("*");
+        .select("completed_tasks");
       if (error) {
         return {
           success: false,

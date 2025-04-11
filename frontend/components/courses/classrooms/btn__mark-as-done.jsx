@@ -13,7 +13,16 @@ export default function MarkAsDoneBtn({
   function markAsDoneHandler() {
     window.confirm("Are you sure you want to mark this task as done?");
 
-    const markAsDoneStatus = Classroom.markTaskAsDone(currentTask, classroomID);
+    const markAsDoneStatus = Classroom.markTaskAsDone(
+      [...completedTasks, currentTask],
+      classroomID
+    );
+
+    if (markTaskAsDone.success) {
+      console.log("Task marked as done successfully.");
+      setCompletedTasks();
+      window.confirm("Marked task as done successfully");
+    }
   }
   return (
     <button className="btn btn-success" onClick={markAsDoneHandler}>

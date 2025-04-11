@@ -96,13 +96,9 @@ class Classroom {
           error: error,
         };
       } else {
-        let completedTasks = [];
-        data.forEach((item) => {
-          completedTasks.push(item.completed_tasks);
-        });
         return {
           success: true,
-          data: completedTasks,
+          data: data,
         };
       }
     } catch (error) {

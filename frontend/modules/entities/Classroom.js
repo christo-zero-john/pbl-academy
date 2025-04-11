@@ -138,6 +138,8 @@ class Classroom {
       }),
     };
 
+    console.log(request);
+
     try {
       return fetch(
         "/api/courses/classrooms/classroom-tasks/mark-as-done",

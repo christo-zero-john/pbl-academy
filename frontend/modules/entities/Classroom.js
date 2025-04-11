@@ -126,6 +126,8 @@ class Classroom {
       } as done`
     );
 
+    completedTasks = JSON.stringify(completedTasks);
+
     const request = {
       method: "POST",
       headers: {
@@ -137,8 +139,6 @@ class Classroom {
         learner_id: User.user.id,
       }),
     };
-
-    console.log(request);
 
     try {
       return fetch(

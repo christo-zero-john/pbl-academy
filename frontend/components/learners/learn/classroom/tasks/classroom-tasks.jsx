@@ -32,6 +32,7 @@ export default function ClassroomTasks({ classroomID, courseID }) {
           );
         } else {
           // console.log("Course fetched Successfully");
+          setCompletedTasks(getTasksStatus.completed_tasks);
           let tempCourse = getTasksStatus.course[0];
           tempCourse.tasks = Tasks.groupAndSortTasks(tempCourse.tasks);
           setTasks(tempCourse.tasks);
@@ -60,6 +61,7 @@ export default function ClassroomTasks({ classroomID, courseID }) {
       tasks={tasks}
       classroom={true}
       completedTasks={completedTasks}
+      setCompletedTasks={setCompletedTasks}
     />
   );
 }

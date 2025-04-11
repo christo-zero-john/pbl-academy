@@ -119,8 +119,12 @@ class Classroom {
     }
   }
 
-  async markTaskAsDone(taskID, classroomID) {
-    console.log(`Sending request to mark task ${taskID} as done`);
+  async markTaskAsDone(completedTasks, classroomID) {
+    console.log(
+      `Sending request to mark task ${
+        completedTasks[completedTasks.length - 1]
+      } as done`
+    );
 
     const request = {
       method: "POST",
@@ -128,17 +132,20 @@ class Classroom {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        task_id: taskID,
+        completed_tasks: completedTasks,
         classroom_id: classroomID,
         learner_id: User.user.id,
       }),
     };
 
     try {
-      return fetch("/api/courses/classrooms/classroom-tasks", request)
+      return fetch(
+        "/api/courses/classrooms/classroom-tasks/mark-as-done",
+        request
+      )
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
+          console.log(data);
           // The response returned from the server is sent back to the caller. It contains success, error or tasks fields.
           return data;
         });

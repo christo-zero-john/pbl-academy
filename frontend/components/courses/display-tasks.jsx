@@ -23,7 +23,7 @@ export default function DisplayTasks({
   completedTasks = [],
   setCompletedTasks = null,
 }) {
-  console.log("Completed Tasks: ", completedTasks);
+  // console.log("Completed Tasks: ", completedTasks);
 
   const [show, setShow] = useState(false);
   const [offCanvasContent, setOffCanvasContent] = useState({

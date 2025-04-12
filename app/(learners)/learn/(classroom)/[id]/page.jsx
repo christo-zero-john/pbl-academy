@@ -10,6 +10,11 @@ export default function ClassroomPage() {
   // The url parameter has classroom id, course id and course title seprated with hyphens
   const params = useParams();
   const [classroomID, courseID, courseTitle] = params.id.split("-");
+  const [classroomData, setClassroomData] = useState({
+    totalTasks: 0,
+    completionPercentage: 0,
+    completedTasks: 0,
+  });
 
   return (
     <div>
@@ -25,7 +30,14 @@ export default function ClassroomPage() {
         justify
       >
         <Tab eventKey="tasks" title="Activities">
-          <ClassroomTasks classroomID={classroomID} courseID={courseID} />
+          <ClassroomTasks
+            classroomID={classroomID}
+            courseID={courseID}
+            classroom={{
+              classroomData: classroomData,
+              setClassroomData: setClassroomData,
+            }}
+          />
         </Tab>
         <Tab eventKey="learners" title="Learners">
           Tab content for Profile

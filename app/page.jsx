@@ -1,13 +1,27 @@
+import User from "@/frontend/modules/entities/User";
 import Link from "next/link";
 
 export default function HomePage() {
+  console.log(User.user);
   return (
     <>
       <h1 className="text-center text-primary fs-3">All Paths in the App</h1>
       <h2 className="text-center text-success fs-4">Authentication</h2>
-      <Link href="/auth/login" className="d-block m-1 btn btn-primary w-fit">
-        Login
-      </Link>{" "}
+      {User.user ? (
+        <p
+          className="d-block m-1 btn btn-primary w-fit"
+          onClick={() => {
+            User.logout();
+            window.location.reload();
+          }}
+        >
+          Logout
+        </p>
+      ) : (
+        <Link href="/auth/login" className="d-block m-1 btn btn-primary w-fit">
+          Login
+        </Link>
+      )}
       <br />
       <Link className="d-block m-1" href="/auth/signup">
         Signup

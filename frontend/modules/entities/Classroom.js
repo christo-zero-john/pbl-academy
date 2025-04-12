@@ -106,7 +106,7 @@ class Classroom {
       return fetch("/api/courses/classrooms/classroom-tasks", request)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           // The response returned from the server is sent back to the caller. It contains success, error or tasks fields.
           if (data.success) {
             data = this.optimizeCompletedTasks(data);
@@ -166,7 +166,7 @@ class Classroom {
   optimizeCompletedTasks(data) {
     if (!Array.isArray(data.completedTasks)) {
       data.completed_tasks = JSON.parse(data.completed_tasks.completed_tasks);
-      console.log(data);
+      // console.log(data);
     } else {
       console.log("Completed tasks is arrray");
     }

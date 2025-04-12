@@ -150,8 +150,8 @@ class Classroom {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          // The response returned from the server is sent back to the caller. It contains success, error or tasks fields.
+          // console.log(data);
+          // The response returned from the server is sent back to the caller. It contains success, error or data fields.
           return data;
         });
     } catch (error) {

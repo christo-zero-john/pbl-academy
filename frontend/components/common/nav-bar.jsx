@@ -12,6 +12,8 @@ export default function NavBar({ active }) {
     }
   }
 
+  
+
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top">
       <Link

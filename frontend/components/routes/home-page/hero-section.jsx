@@ -51,7 +51,7 @@ export default function HeroSection() {
                   <h5 class="text-primary text-uppercase mb-3 animated slideInDown">
                     Best Online Courses
                   </h5>
-                  <h1 ="display-3 text-white animated slideInDown">
+                  <h1 class="display-3 text-white animated slideInDown">
                     Get Educated Online From Your Home
                   </h1>
                   <p class="fs-5 text-white mb-4 pb-2">

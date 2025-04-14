@@ -14,10 +14,12 @@
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
     "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1",
     "next": "latest",
     "react": "19.0.0",
     "react-bootstrap": "^2.10.9",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "react-owl-carousel": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

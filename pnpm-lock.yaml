@@ -29,6 +29,9 @@ importers:
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
+      jquery:
+        specifier: ^3.7.1
+        version: 3.7.1
       next:
         specifier: latest
         version: 15.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -41,6 +44,9 @@ importers:
       react-dom:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
+      react-owl-carousel:
+        specifier: ^2.3.3
+        version: 2.3.3(jquery@3.7.1)(react@19.0.0)
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -1315,6 +1321,9 @@ packages:
   jackspeak@3.4.3:
     resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
 
+  jquery@3.7.1:
+    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -1498,6 +1507,9 @@ packages:
   orderedmap@2.1.1:
     resolution: {integrity: sha512-TvAWxi0nDe1j/rtMcWcIj94+Ffe6n7zhow33h40SKxmsmozs6dz/e+EajymfoFcHd7sxNn8yHM8839uixMOV6g==}
 
+  owl.carousel@2.3.4:
+    resolution: {integrity: sha512-JaDss9+feAvEW8KZppPSpllfposEzQiW+Ytt/Xm5t/3CTJ7YVmkh6RkWixoA2yXk2boIwedYxOvrrppIGzru9A==}
+
   own-keys@1.0.1:
     resolution: {integrity: sha512-qFOyK5PjiWZd+QQIh+1jhdb9LpxTF0qs7Pm8o5QHYZ0M3vKqSqzsZaEB6oWlxZ+q2sJBMI/Ktgd2N5ZwQoRHfg==}
     engines: {node: '>= 0.4'}
@@ -1646,6 +1658,11 @@ packages:
       '@types/react':
         optional: true
 
+  react-dom@16.14.0:
+    resolution: {integrity: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==}
+    peerDependencies:
+      react: ^16.14.0
+
   react-dom@19.0.0:
     resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
     peerDependencies:
@@ -1656,6 +1673,12 @@ packages:
 
   react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
+
+  react-owl-carousel@2.3.3:
+    resolution: {integrity: sha512-B4TI2EDDtp7IDM8CWzl5Rh/17p1NfMW/QBIbkC18CkiMGCbO9ztY+vAPTN60tp+63V9v/oLqArLjkiQtDGqj/A==}
+    peerDependencies:
+      jquery: '>=1.8.3'
+      react: '>=15'
 
   react-transition-group@4.4.5:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
@@ -1723,6 +1746,9 @@ packages:
   safe-regex-test@1.1.0:
     resolution: {integrity: sha512-x/+Cz4YrimQxQccJf5mKEbIa1NzeCRNI5Ecl/ekmlYaampdNLPalVyIcCZNNH3MvmqBugV5TMYZXv0ljslUlaw==}
     engines: {node: '>= 0.4'}
+
+  scheduler@0.19.1:
+    resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==}
 
   scheduler@0.25.0:
     resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
@@ -3494,6 +3520,8 @@ snapshots:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
+  jquery@3.7.1: {}
+
   js-tokens@4.0.0: {}
 
   js-yaml@4.1.0:
@@ -3681,6 +3709,10 @@ snapshots:
       word-wrap: 1.2.5
 
   orderedmap@2.1.1: {}
+
+  owl.carousel@2.3.4:
+    dependencies:
+      jquery: 3.7.1
 
   own-keys@1.0.1:
     dependencies:
@@ -3872,6 +3904,14 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.10
 
+  react-dom@16.14.0(react@19.0.0):
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.8.1
+      react: 19.0.0
+      scheduler: 0.19.1
+
   react-dom@19.0.0(react@19.0.0):
     dependencies:
       react: 19.0.0
@@ -3880,6 +3920,13 @@ snapshots:
   react-is@16.13.1: {}
 
   react-lifecycles-compat@3.0.4: {}
+
+  react-owl-carousel@2.3.3(jquery@3.7.1)(react@19.0.0):
+    dependencies:
+      jquery: 3.7.1
+      owl.carousel: 2.3.4
+      react: 19.0.0
+      react-dom: 16.14.0(react@19.0.0)
 
   react-transition-group@4.4.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
@@ -3962,6 +4009,11 @@ snapshots:
       call-bound: 1.0.3
       es-errors: 1.3.0
       is-regex: 1.2.1
+
+  scheduler@0.19.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
 
   scheduler@0.25.0: {}
 

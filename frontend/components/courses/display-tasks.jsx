@@ -106,11 +106,16 @@ export default function DisplayTasks({
             dangerouslySetInnerHTML={{ __html: offCanvasContent.description }}
           ></div>
 
-          <MarkAsDoneBtn
-            currentTaskID={currentTaskID}
-            completedTasks={completedTasks}
-            setCompletedTasks={setCompletedTasks}
-          />
+          {
+            // Display mark as done btn only if it is classroom page.
+            classroom && (
+              <MarkAsDoneBtn
+                currentTaskID={currentTaskID}
+                completedTasks={completedTasks}
+                setCompletedTasks={setCompletedTasks}
+              />
+            )
+          }
         </OffcanvasBody>
       </Offcanvas>
     </>

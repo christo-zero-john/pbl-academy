@@ -4,6 +4,7 @@ import HeroSection from "@/frontend/components/routes/home-page/hero-section";
 import User from "@/frontend/modules/entities/User";
 import "../frontend/styles/home-page.css";
 import ServicesSection from "@/frontend/components/routes/home-page/services-section";
+import AboutSection from "@/frontend/components/routes/home-page/about-section";
 
 export default function HomePage() {
   console.log(User.user);
@@ -13,6 +14,7 @@ export default function HomePage() {
       <NavBar active="home" />
       <HeroSection />
       <ServicesSection />
+      <AboutSection />
     </>
   );
 }

@@ -82,6 +82,30 @@ class User {
     }
   }
 
+  /**
+   * Check whether user is loggedin or not
+   * @returns Boolean
+   */
+  isLoggedIn() {
+    if (this.user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Check whether user is a mentor or not
+   * @returns Boolean
+   */
+  isMentor() {
+    if (this.isLoggedIn && this.user.roles.includes("mentor")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async setSession(session) {
     const Supabase = createClient();
     try {

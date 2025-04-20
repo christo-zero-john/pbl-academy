@@ -44,7 +44,7 @@ export default function NavBar({ active }) {
             Support
           </Link>
           <Link
-            href="/auth/signup"
+            href="/auth"
             className={`nav-item nav-link ${active == "auth" && "active"}`}
           >
             Join Now

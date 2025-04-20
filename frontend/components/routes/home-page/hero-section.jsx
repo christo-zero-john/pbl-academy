@@ -81,7 +81,7 @@ export default function HeroSection() {
                       Read More
                     </Link>
                     <Link
-                      href="/register"
+                      href="/auth"
                       className="btn btn-light py-md-3 px-md-5 animated slideInRight"
                     >
                       Join Now

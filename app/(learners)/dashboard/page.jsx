@@ -17,7 +17,7 @@ export default function UserDashboard() {
     console.log(response);
     if (response.success) {
       window.confirm("Logged Out successfully");
-      redirect("/auth/login");
+      redirect("/auth#login");
     } else {
       window.confirm(response.error);
     }
@@ -63,6 +63,14 @@ export default function UserDashboard() {
         </button>
       ) : (
         "Not Mentor"
+      )}
+
+      {user?.user_metadata?.role.includes("learner") && (
+        <button className="">
+          <a href="/learner/dashboard" className="">
+            Mentor Dashboard
+          </a>
+        </button>
       )}
     </div>
   );

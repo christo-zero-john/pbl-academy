@@ -17,7 +17,7 @@ export async function POST(request) {
     );
 
     const loginStatus = await User.login(email, password);
-    // console.log(loginStatus);
+    console.log(loginStatus);
 
     if (!loginStatus.success) {
       return NextResponse.json(

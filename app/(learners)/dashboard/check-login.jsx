@@ -22,7 +22,7 @@ function CheckLogin({ children }) {
       <>
         <p className="">
           You are not logged in.{" "}
-          <Link href="/auth/login">Login to continue</Link>. If you already
+          <Link href="/auth">Login to continue</Link>. If you already
           logged in, wait for a few seconds and check your network connection
           speed...
         </p>

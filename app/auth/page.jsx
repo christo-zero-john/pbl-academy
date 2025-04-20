@@ -3,7 +3,7 @@
 import User from "@/frontend/modules/entities/User";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import "../../../frontend/styles/auth.css";
+import "../../frontend/styles/auth.css";
 import FormContainer from "@/frontend/components/routes/auth/form-container";
 
 export default function AuthenticationPage() {
@@ -18,10 +18,10 @@ export default function AuthenticationPage() {
 
     const loginStatus = await User.login(formData);
 
-    console.log(loginStatus);
+    // console.log(loginStatus);
 
     if (loginStatus.success) {
-      router.push("/dashboard");
+      window.location.href = "/dashboard";
     } else {
       console.log("Error while logging in: ", loginStatus.error);
       window.confirm(loginStatus.error);
@@ -43,7 +43,7 @@ export default function AuthenticationPage() {
     fetch("/api/auth/signup", request)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (!data.success) {
           console.log(data.error);
           window.confirm(data.error);

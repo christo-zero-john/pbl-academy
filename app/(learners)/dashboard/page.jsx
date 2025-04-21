@@ -2,7 +2,9 @@
 
 import MentorDasboard from "@/app/courses/mentor/page";
 import NavBar from "@/frontend/components/common/nav-bar";
+import AdminDashboard from "@/frontend/components/routes/dashboard/admin-dashboard";
 import DasboardOptions from "@/frontend/components/routes/dashboard/dasboard-options";
+import LearnerDashboard from "@/frontend/components/routes/dashboard/learner-dashboard";
 import User from "@/frontend/modules/entities/User";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,7 +53,7 @@ export default function UserDashboard() {
       <DasboardOptions option={option} setOption={setOption} />
       {option == "learner" && <LearnerDashboard />}
       {option == "mentor" && <MentorDasboard />}
-      {option == "admin" && <AdminD />}
+      {option == "admin" && <AdminDashboard />}
     </>
   );
 }

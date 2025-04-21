@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import Course from "../../../modules/entities/Course";
+import Dashboard from "../../modules/entities/Dashboard";
 
 /**
  * API Route to get all data to display in the dashboard for learner
@@ -15,19 +16,19 @@ export async function POST(request) {
       requestData.learner_id
     );
 
-    const getClassroomStatus = await Course.fetchClassrooms(
-      requestData.course_id
+    const getDashboardStatus = await Dashboard.getLearnerDashboardData(
+      requestData.learner_id
     );
 
-    if (getClassroomStatus.success) {
+    if (getDashboardStatus.success) {
       console.log(
-        "Successfully fetched classrooms of course ",
+        "Successfully fetched Dashboard data of learner ",
         requestData.course_id
       );
       return NextResponse.json(
         {
           success: true,
-          classrooms: getClassroomStatus.data,
+          Dashboards: getDashboardStatus.data,
         },
         { status: 200 }
       );
@@ -36,7 +37,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: false,
-          error: getClassroomStatus.error,
+          error: getDashboardStatus.error,
         },
         { status: 400 }
       );

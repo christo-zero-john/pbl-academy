@@ -2,6 +2,7 @@
  * Dasboard object in backend
  */
 
+import Enrollments from "./Enrollments";
 import { createClient } from "./Supabase";
 
 class Dasboard {
@@ -15,8 +16,11 @@ class Dasboard {
   async getLearnerDashboardData(learner_id) {
     try {
       const Supabase = await createClient();
-      const enrollmentsData = await 
-      if (error) {
+      const enrollmentsData = await Enrollments.getEnrollmentsOfLearner(
+        learner_id
+      );
+
+      if (enrollmentsData.error) {
         return {
           success: false,
           error: error,
@@ -24,7 +28,7 @@ class Dasboard {
       } else {
         return {
           success: true,
-          data: data,
+          data: enrollmentsData.data,
         };
       }
     } catch (error) {
@@ -45,6 +49,6 @@ class Dasboard {
 export default new Dasboard();
 
 /**
- * Get classroom data 
+ * Get classroom data
  *  enrolled classrooms, course details of each enrolled classrooms
  */

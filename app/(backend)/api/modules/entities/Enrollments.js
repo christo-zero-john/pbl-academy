@@ -17,7 +17,9 @@ class Enrollments {
       const Supabase = await createClient();
       await Supabase.auth.getSession();
       const { data, error } = await Supabase.from("enrollments")
-        .select(`*`)
+        .select(
+          `id, classrooms(id, courses(title, description, id), main_mentor(first_name, last_name), enrollment_price, total_seats)`
+        )
         .match({ learner_id: learner_id });
       if (error) {
         return {

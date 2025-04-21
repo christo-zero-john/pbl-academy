@@ -1,28 +1,31 @@
-export default function DasboardOptions({ setOption }) {
+import { Dropdown } from "react-bootstrap";
+import "../../../styles/dashboard.css";
+
+export default function DasboardOptions({ option, setOption }) {
+  const roles = ["mentor", "learner", "instructor"];
+
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <h1 className="text-center">Goto Dashboard</h1>
-      <p
-        onClick={setOption("mentor")}
-        className="d-block w-fit p-3 m-2 mx-auto rounded nav-link link-light bg-primary"
-        href="/mentor/dashboard"
+    <Dropdown className="btn btn-primary p-0 m-2 float-end">
+      <Dropdown.Toggle
+        id="dropdown-basic"
+        className="dashboard-options-dropdown-toggle text-capitalize"
       >
-        Mentor Dashboard
-      </p>
-      <p
-        onClick={setOption("learner")}
-        className="d-block w-fit p-3 m-2 mx-auto rounded nav-link link-light bg-success"
-        href="/dashboard"
-      >
-        Learner Dashboard
-      </p>
-      <p
-        onClick={setOption("admin")}
-        className="d-block w-fit p-3 m-2 mx-auto rounded nav-link link-danger bg-warning"
-        href="/admin/dashboard"
-      >
-        Admin Dashboard
-      </p>
-    </div>
+        {option}
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu className="dashboard-options-dropdown-menu">
+        {roles.map(
+          (role) =>
+            role != option && (
+              <Dropdown.Item
+                className="dashboard-options-dropdown-item text-capitalize"
+                onClick={() => setOption(role)}
+              >
+                {role}
+              </Dropdown.Item>
+            )
+        )}
+      </Dropdown.Menu>
+    </Dropdown>
   );
 }

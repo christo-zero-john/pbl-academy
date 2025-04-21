@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function UserDashboard() {
   const [user, setUser] = useState(null);
-  const [option, setOption] = useState("learner");
+  const [option, setOption] = useState("mentor");
 
   useEffect(() => {
     // console.log(User.user);

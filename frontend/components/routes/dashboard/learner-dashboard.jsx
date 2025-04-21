@@ -1,3 +1,7 @@
 export default function LearnerDashboard() {
-  return <div>LearnerDashboard</div>;
+  return (
+    <div>
+      <h1 className="text-center">Welcome Learner</h1>
+    </div>
+  );
 }

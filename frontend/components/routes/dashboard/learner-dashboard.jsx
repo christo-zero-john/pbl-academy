@@ -1,6 +1,13 @@
+import { useEffect, useState } from "react";
 import ClassroomItem from "../../courses/classrooms/classroom-item";
 
 export default function LearnerDashboard() {
+  const [classrooms, setClassrooms] = useState([]);
+
+  useEffect(() => {
+    
+  }, []);
+
   return (
     <div>
       <h1 className="text-center">Welcome Learner</h1>

@@ -48,6 +48,9 @@ export default function UserDashboard() {
     <>
       <NavBar />
       <DasboardOptions option={option} setOption={setOption} />
+      {
+        option=="learner"&&<LearnerDashboard/>
+      }      
     </>
   );
 }

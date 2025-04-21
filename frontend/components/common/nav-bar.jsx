@@ -1,6 +1,17 @@
+import User from "@/frontend/modules/entities/User";
 import Link from "next/link";
 
 export default function NavBar({ active }) {
+  async function logoutHandler() {
+    const response = await User.logout();
+    if (response.success) {
+      window.confirm("Logged Out successfully");
+      window.location.href = "/auth#login";
+    } else {
+      window.confirm(response.error);
+    }
+  }
+  
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top">
       <Link
@@ -43,12 +54,21 @@ export default function NavBar({ active }) {
           >
             Support
           </Link>
-          <Link
-            href="/auth"
-            className={`nav-item nav-link ${active == "auth" && "active"}`}
-          >
-            Join Now
-          </Link>
+          {User.user ? (
+            <p
+              onClick={logoutHandler}
+              className={`nav-item nav-link ${active == "auth" && "active"}`}
+            >
+              Logout
+            </p>
+          ) : (
+            <Link
+              href="/auth"
+              className={`nav-item nav-link ${active == "auth" && "active"}`}
+            >
+              Join Now
+            </Link>
+          )}
         </div>
       </div>
     </nav>

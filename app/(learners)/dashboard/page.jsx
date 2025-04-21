@@ -47,41 +47,7 @@ export default function UserDashboard() {
   return (
     <>
       <NavBar />
-      <div>
-        <h1 className="">
-          Welcome,{" "}
-          <span className="">
-            {user?.user_metadata.first_name || "First Name"}
-          </span>
-          &nbsp;
-          <span className="">
-            {user?.user_metadata.last_name || "Last Name"}
-          </span>
-        </h1>
-        <button className="" onClick={logoutHandler}>
-          Logout
-        </button>
-
-        {user?.user_metadata?.role.includes("mentor") ? (
-          <button className="">
-            <a href="/courses/mentor" className="">
-              Mentor Dashboard
-            </a>
-          </button>
-        ) : (
-          "Not Mentor"
-        )}
-
-        {user?.user_metadata?.role.includes("learner") && (
-          <button className="">
-            <a href="/learner/dashboard" className="">
-              Mentor Dashboard
-            </a>
-          </button>
-        )}
-      </div>
-
-      <DasboardOptions setOption={setOption} />
+      <DasboardOptions option={option} setOption={setOption} />
     </>
   );
 }

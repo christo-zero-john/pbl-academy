@@ -16,7 +16,7 @@ class Enrollments {
     try {
       const Supabase = await createClient();
       await Supabase.auth.getSession();
-      const { data, error } = await Supabase.from("courses")
+      const { data, error } = await Supabase.from("enrollments")
         .select(`*`)
         .match({ learner_id: learner_id });
       if (error) {

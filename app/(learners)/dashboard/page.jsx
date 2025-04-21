@@ -1,5 +1,6 @@
 "use client";
 
+import MentorDasboard from "@/app/courses/mentor/page";
 import NavBar from "@/frontend/components/common/nav-bar";
 import DasboardOptions from "@/frontend/components/routes/dashboard/dasboard-options";
 import User from "@/frontend/modules/entities/User";
@@ -48,9 +49,9 @@ export default function UserDashboard() {
     <>
       <NavBar />
       <DasboardOptions option={option} setOption={setOption} />
-      {
-        option=="learner"&&<LearnerDashboard/>
-      }      
+      {option == "learner" && <LearnerDashboard />}
+      {option == "mentor" && <MentorDasboard />}
+      {option == "admin" && <AdminD />}
     </>
   );
 }

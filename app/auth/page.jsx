@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "../../frontend/styles/auth.css";
 import FormContainer from "@/frontend/components/routes/auth/form-container";
+import NavBar from "@/frontend/components/common/nav-bar";
 
 export default function AuthenticationPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });

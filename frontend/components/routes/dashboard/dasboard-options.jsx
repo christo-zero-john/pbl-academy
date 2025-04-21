@@ -2,7 +2,7 @@ import { Dropdown } from "react-bootstrap";
 import "../../../styles/dashboard.css";
 
 export default function DasboardOptions({ option, setOption }) {
-  const roles = ["mentor", "learner", "instructor"];
+  const roles = ["mentor", "learner", "admin"];
 
   return (
     <Dropdown className="btn btn-primary p-0 m-2 float-end">

@@ -1,6 +1,6 @@
 "use client";
 
-import MentorDasboard from "@/app/courses/mentor/page";
+import MentorDasboard from "@/frontend/components/routes/dashboard/mentor-dashboard";
 import NavBar from "@/frontend/components/common/nav-bar";
 import AdminDashboard from "@/frontend/components/routes/dashboard/admin-dashboard";
 import DasboardOptions from "@/frontend/components/routes/dashboard/dasboard-options";

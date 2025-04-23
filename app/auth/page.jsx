@@ -22,7 +22,7 @@ export default function AuthenticationPage() {
     // console.log(loginStatus);
 
     if (loginStatus.success) {
-      window.location.href = "/dashboard";
+      window.location.href = "/courses";
     } else {
       console.log("Error while logging in: ", loginStatus.error);
       window.confirm(loginStatus.error);

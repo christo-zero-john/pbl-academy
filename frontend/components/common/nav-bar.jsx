@@ -11,7 +11,7 @@ export default function NavBar({ active }) {
       window.confirm(response.error);
     }
   }
-  
+
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top">
       <Link
@@ -55,12 +55,22 @@ export default function NavBar({ active }) {
             Support
           </Link>
           {User.user ? (
-            <p
-              onClick={logoutHandler}
-              className={`nav-item nav-link ${active == "auth" && "active"}`}
-            >
-              Logout
-            </p>
+            <>
+              <Link
+                  href="/dashboard"
+                  className={`nav-item nav-link ${
+                    active == "auth" && "active"
+                  }`}
+                >
+                  Goto Dashboard
+                </Link>
+              <p
+                onClick={logoutHandler}
+                className={`nav-item nav-link ${active == "auth" && "active"}`}
+              >
+                Logout
+              </p>
+            </>
           ) : (
             <Link
               href="/auth"

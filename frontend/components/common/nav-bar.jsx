@@ -36,24 +36,24 @@ export default function NavBar({ active }) {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             href="/about"
             className={`nav-item nav-link ${active == "about" && "active"}`}
           >
             About
-          </Link>
+          </Link> */}
           <Link
             href="/courses"
             className={`nav-item nav-link ${active == "courses" && "active"}`}
           >
             Courses
           </Link>
-          <Link
+          {/* <Link
             href="/support"
             className={`nav-item nav-link ${active == "support" && "active"}`}
           >
             Support
-          </Link>
+          </Link> */}
           {User.user ? (
             <>
               <Link

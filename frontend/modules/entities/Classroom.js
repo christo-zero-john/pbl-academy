@@ -166,11 +166,14 @@ class Classroom {
   optimizeCompletedTasks(data) {
     console.log(data);
 
-    if (!Array.isArray(data.completedTasks)) {
-      data.completed_tasks = JSON.parse(data.completed_tasks.completed_tasks);
-      console.log(data);
-    } else {
-      console.log("Completed tasks is arrray");
+    if (!Array.isArray(data.completed_tasks)) {
+      // If completed_tasks is not an array, try to parse it if it's a string
+      if (typeof data.completed_tasks === 'string') {
+        data.completed_tasks = JSON.parse(data.completed_tasks);
+      } else {
+        // If it's neither an array nor a string, initialize as empty array
+        data.completed_tasks = [];
+      }
     }
     return data;
   }

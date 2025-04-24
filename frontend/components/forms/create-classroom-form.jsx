@@ -25,6 +25,8 @@ export default function CreateClassroomForm({ course, show, setShow }) {
     );
     const createClassroomStatus = await Mentor.createClassroom(formData);
 
+    console.log(createClassroomStatus);
+
     if (createClassroomStatus.success) {
       window.confirm("Classroom created successfuly");
     } else {

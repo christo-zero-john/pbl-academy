@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import AddTaskForm from "../../../../../../frontend/components/forms/add-task-form";
 import DisplayTasks from "../../../../../../frontend/components/courses/display-tasks";
 import Mentor from "@/frontend/modules/entities/Mentor";
+import NavBar from "@/frontend/components/common/nav-bar";
 
 export default function ManageTasksOfCourse() {
   const params = useParams();
@@ -250,6 +251,7 @@ export default function ManageTasksOfCourse() {
 
   return (
     <>
+      <NavBar />
       <h2 className="text-center">
         Editing Tasks of course{" "}
         <span className="text-success">{course.title}</span>

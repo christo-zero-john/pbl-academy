@@ -8,6 +8,7 @@ import DisplayTasks from "../../../frontend/components/courses/display-tasks";
 import Tasks from "@/frontend/modules/entities/Tasks";
 import MentorActions from "../../../frontend/components/mentor/mentor-actions";
 import EnrollmentOptions from "@/frontend/components/courses/classrooms/enrollment-options";
+import NavBar from "@/frontend/components/common/nav-bar";
 
 /** comment
  *
@@ -72,47 +73,49 @@ export default function CourseItemPage() {
   }
 
   return (
-    <div className="">
-      <div className="header">
-        <h1 className="text-center">{course.title}</h1>
+    <>
+      <NavBar />
+      <div className="container-fluid">
+        <div className="header">
+          <h1 className="text-center">{course.title}</h1>
 
-        <p className="">
-          Created By: &nbsp;
-          <span className="text-success">
-            {course.created_by.first_name} {course.created_by.last_name}
-          </span>
-        </p>
-        <p className="">{course.created_at}</p>
-
-        <div className="duration">
-          <p className="d-inline-block mx-2">
-            Days: {course.tasks.length || "calculating..."}
-          </p>
-          <p className="d-inline-block mx-2">
-            Tasks: {Tasks.getCount(course.tasks) || "calculating..."}
+          <p className="">
+            Created By: &nbsp;
+            <span className="text-success">
+              {course.created_by.first_name} {course.created_by.last_name}
+            </span>
           </p>
 
-          <EnrollmentOptions
-            course={course}
-            show={showClassrooms}
-            setShow={setShowClassrooms}
-          />
+          <div className="duration">
+            <p className="d-inline-block mx-2">
+              Days: {course.tasks.length || "calculating..."}
+            </p>
+            <p className="d-inline-block mx-2">
+              Tasks: {Tasks.getCount(course.tasks) || "calculating..."}
+            </p>
+
+            <EnrollmentOptions
+              course={course}
+              show={showClassrooms}
+              setShow={setShowClassrooms}
+            />
+          </div>
+
+          {
+            // Display mentor settings if the course is being viewed by the course creator.
+            User.user.id == course.created_by.id && (
+              <MentorActions course={course} setCourse={setCourse} />
+            )
+          }
         </div>
 
-        {
-          // Display mentor settings if the course is being viewed by the course creator.
-          User.user.id == course.created_by.id && (
-            <MentorActions course={course} setCourse={setCourse} />
-          )
-        }
+        <div
+          className=""
+          dangerouslySetInnerHTML={{ __html: course.description }}
+        ></div>
+        <h3 className="text-center">Course Activities</h3>
+        <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
       </div>
-
-      <div
-        className=""
-        dangerouslySetInnerHTML={{ __html: course.description }}
-      ></div>
-      <h3 className="text-center">Course Activities</h3>
-      <DisplayTasks tasks={course.tasks} setCourse={setCourse} />
-    </div>
+    </>
   );
 }

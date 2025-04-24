@@ -44,6 +44,7 @@ export default function CreateCourse() {
 
   return (
     <div>
+      <NavBar />
       <h1 className="text-center">Create New Course</h1>
       <form className="p-3" onSubmit={createCourceHandler}>
         <label htmlFor="title" className="d-block">

@@ -69,16 +69,16 @@ export default function EnrollmentOptions({ course, mentor = false }) {
         key={index}
       >
         <div className="w-fit">
-          <span className="d-block  fs-6">Cohort from</span>
-          <span className="d-block text-success fw-600">
+          <span className="d-block  fs-6 pb-2">From</span>
+          <span className="d-block text-success fw-600 pb-2">
             {classroom.start_date.split("-").reverse().join("-")} to{" "}
             {classroom.end_date.split("-").reverse().join("-")}
           </span>
-          <span className="fw-700">Seats: {classroom.total_seats}</span>
-          <span className="d-block">
+          <span className="fw-700 pb-2">Seats: {classroom.total_seats}</span>
+          {/* <span className="d-block pb-2">
             Led By{" "}
             <span className="text-success fw-500">{classroom.created_by}</span>
-          </span>
+          </span> */}
         </div>
         <EnrollToClassroom classroom={classroom} course={course} />
         {mentor && <ManageClassroomItem__Mentor classroom={classroom} />}

@@ -1,5 +1,6 @@
 "use client";
 
+import NavBar from "@/frontend/components/common/nav-bar";
 import TextEditor from "@/frontend/components/text-editor/text-editor";
 import Course from "@/frontend/modules/entities/Course";
 import Mentor from "@/frontend/modules/entities/Mentor";
@@ -105,6 +106,7 @@ export default function EditCoursePage() {
 
   return (
     <div className="">
+      <NavBar />
       <h1 className="text-center">Edit Course Details</h1>
 
       <button

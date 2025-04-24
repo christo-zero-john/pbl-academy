@@ -1,4 +1,3 @@
-
 export default function AboutSection() {
   return (
     <div className="container-xxl py-5">
@@ -9,13 +8,7 @@ export default function AboutSection() {
             data-wow-delay="0.1s"
             style={{ minHeight: "400px" }}
           >
-            <div className="position-relative h-100">
-              <img
-                className="img-fluid position-absolute w-100 h-100"
-                src="../../../assets/img/home-page/about.jpg"
-                alt=""
-              />
-            </div>
+            <div className="position-relative h-100"></div>
           </div>
           <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
             <h6 className="section-title bg-white text-start text-primary pe-3">

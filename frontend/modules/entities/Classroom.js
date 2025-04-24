@@ -164,9 +164,11 @@ class Classroom {
   }
 
   optimizeCompletedTasks(data) {
+    console.log(data);
+
     if (!Array.isArray(data.completedTasks)) {
       data.completed_tasks = JSON.parse(data.completed_tasks.completed_tasks);
-      // console.log(data);
+      console.log(data);
     } else {
       console.log("Completed tasks is arrray");
     }

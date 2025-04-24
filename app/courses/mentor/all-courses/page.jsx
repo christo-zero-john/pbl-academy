@@ -5,6 +5,7 @@ import User from "@/frontend/modules/entities/User";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import DisplayCourses from "../../../../frontend/components/courses/display-courses";
+import NavBar from "@/frontend/components/common/nav-bar";
 
 function AllCoursesOfMentor() {
   const router = useRouter();
@@ -28,15 +29,15 @@ function AllCoursesOfMentor() {
     })();
   }, []);
 
-  if (courses == null) {
-    return <div>Fetching Courses...</div>;
-  } else {
-    if (courses.length == 0) {
-      return <div>No Courses Found</div>;
-    } else {
-      return <DisplayCourses courses={courses} />;
-    }
-  }
+  return (
+    <>
+      <NavBar />
+      {(!courses && <div>Fetching Courses...</div>) ||
+        (courses.length == 0 && <div>0 Published Courses Found</div>) || (
+          <DisplayCourses courses={courses} />
+        )}
+    </>
+  );
 }
 
 export default AllCoursesOfMentor;

@@ -1,5 +1,6 @@
 "use client";
 
+import NavBar from "@/frontend/components/common/nav-bar";
 import TextEditor from "@/frontend/components/text-editor/text-editor";
 import Mentor from "@/frontend/modules/entities/Mentor";
 import { useRouter } from "next/navigation";
